@@ -34,7 +34,7 @@
             <a href="{{ '/' | relative_url }}" class="btn back"><i class="fas fa-chevron-circle-left"></i> Back</a>
         {% endif %}
         {% if page.id != 'about' %}
-            <a href="{{ '/about/' | relative_url }}" class="btn">About</a>
+            <a href="{{ '/about/' | relative_url }}" class="btn">About <i class="fas fa-info-circle"></i></a>
         {% endif %}
     </div>
     <h1 class="project-name">{{ page.title | default: site.title | default: site.github.repository_name }}</h1>
