@@ -20,6 +20,7 @@ gem 'jekyll-theme-cayman', '~> 0.1.1'
 # If you have any plugins, put them here!
 group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.6"
+  gem 'jekyll-paginate-v2', '~> 2.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -35,5 +36,3 @@ gem "wdm", "~> 0.1.0", :install_if => Gem.win_platform?
 # for gist tag
 gem 'jekyll-gist', '~> 1.5'
 
-# pagination
-gem 'jekyll-paginate-v2', '~> 2.0'
