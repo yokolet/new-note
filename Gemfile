@@ -34,3 +34,6 @@ gem "wdm", "~> 0.1.0", :install_if => Gem.win_platform?
 
 # for gist tag
 gem 'jekyll-gist', '~> 1.5'
+
+# pagination
+gem 'jekyll-paginate-v2', '~> 2.0'
