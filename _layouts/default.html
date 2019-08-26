@@ -21,7 +21,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#157878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/all.css?v=' | append: site.github.build_revision | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     {% if site.favicon %}
         <link rel="icon" type="image/ico" href="{{ site.favicon_location | relative_url }}">
     {% endif %}
@@ -30,7 +31,7 @@
 <header class="page-header" role="banner">
     <div class="nav">
         {% if page.id != 'index' %}
-            <a href="{{ '/' | relative_url }}" class="btn back"> Back</a>
+            <a href="{{ '/' | relative_url }}" class="btn back"><i class="fas fa-chevron-circle-left"></i> Back</a>
         {% endif %}
         {% if page.id != 'about' %}
             <a href="{{ '/about/' | relative_url }}" class="btn">About</a>
