@@ -5,15 +5,21 @@ permalink: /about/
 id: about
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+# About Yokolet's Notelets
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
+Hi! Thank you for reading my blog posts!
 
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
+The posts here are for myself to remember things.
+So, each post is nothing special, can be found a similar writing elsewhere.
+Writing and shaping ideas by my own words help me to understand things better.
+
+The update will be random. When I'm impressed by something, I wrote a new post.
 
 
-[jekyll-organization]: https://github.com/jekyll
+## About Me
+
+Doing various stuffs in computer programming world.
+
+[LinkedIn Profile](https://www.linkedin.com/in/yokolet/)
+
+![about]({{ '../assets/image/about.jpg' | relative_utl }})
