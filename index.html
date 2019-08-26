@@ -13,7 +13,7 @@ pagination:
     <div class="post-header">Posts</div>
     <div class="post-list">
         <ul>
-        {% for post in site.posts %}
+        {% for post in paginator.posts %}
             <li class="post-item">
                 <span class="post-item-title">
                     <a class="post-item-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
@@ -21,6 +21,36 @@ pagination:
                 <span class="post-item-time"><time>{{ post.date | date: '%B %d, %Y '}}</time></span>
             </li>
         {% endfor %}
+        </ul>
+    </div>
+    <!-- Pagination links -->
+    <div>
+        <ul class="pagination">
+            {% if paginator.previous_page %}
+                <li><a href="{{ paginator.previous_page_path | prepend: site.baseurl }}"><i class="fas fa-angle-double-left"></i></a></li>
+            {% else %}
+                <li><a><i class="fas fa-angle-double-left"></i></a></li>
+            {% endif %}
+            {% for p in (1..paginator.total_pages) %}
+                {% if p == paginator.page %}
+                    {% if p == 1 %}
+                        <li><a class="active" href="{{ '/' | prepend: site.baseurl }}">{{ p }}</a></li>
+                    {% else %}
+                        <li><a class="active" href="{{ site.paginate_path | prepend: site.baseurl | replace: ':num', ''}}/{{ p }}">{{ p }}</a></li>
+                    {% endif %}
+                {% else %}
+                    {% if p == 1 %}
+                        <li><a href="{{ '/' | prepend: site.baseurl }}">{{ p }}</a></li>
+                    {% else %}
+                        <li><a href="{{ site.paginate_path | prepend: site.baseurl | replace: ':num', ''}}/{{ p }}">{{ p }}</a></li>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            {% if paginator.next_page %}
+                <li><a href="{{ paginator.next_page_path | prepend: site.baseurl }}"><i class="fas fa-angle-double-right"></i></a></li>
+            {% else %}
+                <li><a><i class="fas fa-angle-double-right"></i></a></li>
+            {% endif %}
         </ul>
     </div>
 </div>

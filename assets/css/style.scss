@@ -56,3 +56,31 @@
   color: #d4d4d4;
   float: right;
 }
+
+.pagination {
+  display: inline-block;
+  padding-top: 2rem;
+  margin: auto;
+  width: 50%;
+}
+
+.pagination li {
+  display: inline;
+}
+
+.pagination a {
+  border-radius: 5px;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination a.active {
+  border-radius: 5px;
+  background-color: #4caf50;
+  color: white;
+}
+
+.pagination a:hover:not(.active) {
+  background-color: #d4d4d4;
+}
