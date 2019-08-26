@@ -1,0 +1,24 @@
+---
+# Feel free to add content and custom Front Matter to this file.
+# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
+
+layout: default
+title: yokolet's notelets
+permalink: /
+id: index
+---
+<div class="content container">
+    <div class="post-header">Posts</div>
+    <div class="post-list">
+        <ul>
+        {% for post in site.posts %}
+            <li class="post-item">
+                <span class="post-item-title">
+                    <a class="post-item-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+                </span>
+                <span class="post-item-time"><time>{{ post.date | date: '%B %d, %Y '}}</time></span>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
