@@ -51,7 +51,7 @@ For a reference, it's worth writing a memo what kind of problems are out there.
     ```
     n  counts  patterns
     0  1       *
-    1  1       XY 
+    1  1       XY
     2  2       XXYY XYXY
     3  5       XXXYYY XYXXYY XYXYXY XXYYXY XXYXYY
     ```
@@ -112,7 +112,7 @@ For a reference, it's worth writing a memo what kind of problems are out there.
     3  5           ↑        ↑         ↑        ↑          ↑
                    ↑        ↑      ↑ →      ↑ →           ↑
                    ↑   ↑ → →    ↑ →         ↑         ↑ →
-              → → →   →        →         → →      → → 
+              → → →   →        →         → →      → →
     ```
 
     Note: If → and ↑ are mapped to ( and ), the problem is the same as the
