@@ -159,3 +159,9 @@ However, when problem asks accumulation of patterns such as:
 - HackerRank: [Popsicle Stick Mountains](https://www.hackerrank.com/contests/walmart-codesprint-algo/challenges/popsicle-stick-mountains)
 
 the second DP solution works to avoid repetition.
+
+#### Resources
+
+- Wikipedia: [Catalan number](https://en.wikipedia.org/wiki/Catalan_number)
+- Tom Davis: [Catalan Numbers](http://www.geometer.org/mathcircles/catalan.pdf)
+- GeeksforGeeks: [Program for nth Catalan Number](https://www.geeksforgeeks.org/program-nth-catalan-number/)
