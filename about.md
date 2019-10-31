@@ -22,4 +22,4 @@ Doing various stuffs in computer programming world.
 
 [LinkedIn Profile](https://www.linkedin.com/in/yokolet/)
 
-![about]({{ '../assets/image/about.jpg' | relative_utl }})
+![about]({{ '../assets/image/about.jpg' | relative_url }})
