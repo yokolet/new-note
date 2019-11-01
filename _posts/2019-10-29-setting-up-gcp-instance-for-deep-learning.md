@@ -444,6 +444,11 @@ This section is about to use `Pipenv` on the GCP instance.
     (env) jupyter@my-tf2-instance:~/intro-to-deep-learning$ jupyter nbextensions_configurator enable --user
     ```
 
+    Be careful about extensions, especially labextension.
+    The installed extensions may load Python 3.5.
+    As a result, whole notebook will use Python 3.5 even though the Python to
+    start `jupyter notebook` is 3.7.
+
 6. Start `jupyter notebook`
 
     Everything is ready. Let's start up the `jupyter notebook`.
@@ -510,8 +515,18 @@ When you continue to work on another day, what to do is much less.
     ```bash
     (env) jupyter@my-tf2-instance:~/intro-to-deep-learning$ jupyter notebook 
     ```
- 
-5. After the work
+
+5. Add SSH from the instance to GitHub
+
+    When you login to the instance, the SSH identity to access GitHub repos is not saved.
+    Startup ssh authentication agent and add identity.
+
+    ```bash
+    jupyter@my-tf2-instance:~$ eval "$(ssh-agent -s)"
+    jupyter@my-tf2-instance:~$ ssh-add ~/.ssh/id_rsa
+    ```
+
+6. After the work
 
     Shutdown the notebook, deactivate the virtual environment, and exit the shell.
     Don't forget to stop the instance.
