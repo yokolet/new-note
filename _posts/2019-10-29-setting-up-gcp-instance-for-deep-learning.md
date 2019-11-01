@@ -444,11 +444,6 @@ This section is about to use `Pipenv` on the GCP instance.
     (env) jupyter@my-tf2-instance:~/intro-to-deep-learning$ jupyter nbextensions_configurator enable --user
     ```
 
-    Be careful about extensions, especially labextension.
-    The installed extensions may load Python 3.5.
-    As a result, whole notebook will use Python 3.5 even though the Python to
-    start `jupyter notebook` is 3.7.
-
 6. Start `jupyter notebook`
 
     Everything is ready. Let's start up the `jupyter notebook`.
@@ -459,6 +454,11 @@ This section is about to use `Pipenv` on the GCP instance.
 
     Above may raise some errors since newly installed jupyter doesn't have some extensions installed.
     However, the notebook itself starts running.
+
+    Be careful about installing extensions, especially labextension.
+    The installed extensions may load Python 3.5.
+    As a result, whole notebook will use Python 3.5 even though the Python to
+    start `jupyter notebook` is 3.7.
 
 7. Connect to `jupyter notebook`
 
