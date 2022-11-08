@@ -4,17 +4,17 @@ title: "Construct Binary Tree"
 description: ""
 category: 
 tags: []
+hero_height: is-small
 ---
 
-#### Serialize/Deserialize ####
-
+Serialize, Deserialize a binary tree are a popular algorithm questions
 It depends on a programming language, but in most cases,
 a binary tree is expressed by an object tree.
 Each node can have at most two children: left node and right node.
 Once the binary tree is constructed, it is not language neutral anymore.
 
-What is programming language independent form?
-A string would be the answer.
+What is a programming language independent form?
+A *string* would be the answer.
 Sometime, creating a string from binary tree is called *serialize*.
 On the contrary, constructing binary tree is sometime called *deserialize*.
 
@@ -61,14 +61,14 @@ the string `4(2(-3)(1))(6(5))` should be returned.
 
 #### The idea to construct from/to a string with parens ####
 
-Construcing the tree comes first.
+Constructing the tree comes first.
 Here, what I need to care about are:
 
 - an index to point a specific character in a given string
 - left or right to add a new node.
 
 Since this is a binary tree, recursive approach would work like traversing the binary tree.
-The point is when go right while increamenting the index.
+The point is when go right while incrementing the index.
 At first, it should go left as far as encountering opening parens.
 Then, coming back from deeper process, check opening parens again.
 This time, the opening paren indicates the tree should go right.
@@ -99,7 +99,7 @@ The result is:
 
 Given a string with markers ($s), construct a binary tree.
 For example, `4,2,-3,$,$,1,$,$,6,5,$,$,$` is given,
-the constrcuted tree should be:
+the constructed tree should be:
 
 <pre>
 
@@ -127,7 +127,7 @@ Sicne each values are separated by a comma, finding a value portion from the str
 is easy as well.
 
 Constructing a string from tree is also easier then previous style.
-Here again, simply traversing in the preorder creats a string.
+Here again, simply traversing in the preorder creates a string.
 While a node is there, add a value and delimiter.
 When it comes to children of leaf node, a marker will be added.
 
@@ -147,9 +147,9 @@ The result is:
 
 #### Problem Description - A Combination of Preorder and Inorder Traversal ####
 
-Given two arrays of integers, preoder and inorder, construct a binary tree.
+Given two arrays of integers, preorder and inorder, construct a binary tree.
 For example, preorder `[4, 2, -3, 1, 6, 5]`, inorder `[-3, 2, 1, 4, 5, 6]`
-are given, the constrcuted tree should be:
+are given, the constructed tree should be:
 
 <pre>
 
@@ -181,7 +181,7 @@ preorder [|4|, 2, -3, 1, 6, 5], inorder [-3, 2, 1, |4|, 5, 6]
 
 </pre>
 
-Now, I will look at the left substree only.
+Now, I will look at the left subtree only.
 The arrays are preorder `[2, -3, 1]`, inorder `[-3, 2, 1]`.
 Again, the first element in preorder divides inorder into left and right subtrees.
 
@@ -194,7 +194,7 @@ preorder [|2|, -3, 1], inorder [-3, |2|, 1]
 
 </pre>
 
-The same division happens in the right subtree, preoder `[6, 5]` and inorder `[5, 6]`.
+The same division happens in the right subtree, preorder `[6, 5]` and inorder `[5, 6]`.
 
 <pre>
 preorder [|6|, 5], inorder [5, |6|]
@@ -224,7 +224,7 @@ The result is:
 
 Given two arrays of integers, inorder and postorder, construct a binary tree.
 For example, inorder `[-3, 2, 1, 4, 5, 6]`, postorder `[-3, 1, 2, 5, 6, 4]`
-are given, the constrcuted tree should be:
+are given, the constructed tree should be:
 
 <pre>
 
@@ -273,7 +273,7 @@ inorder [5, |6|], postorder [5, |6|]
 
 </pre>
 
-As in the previsou section, recursively applying this idea constructs the binary tree.
+As in the previous section, recursively applying this idea constructs the binary tree.
 
 #### Java code for constructing a binary tree from inorder and postorder traversal ####
 

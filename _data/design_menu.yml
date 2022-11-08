@@ -1,0 +1,26 @@
+- label: Algorithm / Design
+  items:
+    - name: Binary Search Tree Iterator
+      link: /algo/design/2022-09-30-binary-search-tree-iterator
+    - name: Design Circular Queue
+      link: /algo/design/2022-09-25-design-circular-queue
+    - name: Design Hit Counter
+      link: /algo/design/2022-09-26-design-hit-counter
+    - name: Design Log Storage System
+      link: /algo/design/2022-10-17-design-log-storage-system
+    - name: Design Snake Game
+      link: /algo/design/2022-10-31-design-snake-game
+    - name: Find Median from Data Stream
+      link: /algo/design/2022-09-24-find-median-from-data-stream
+    - name: Logger Rate Limiter
+      link: /algo/design/2022-10-17-logger-rate-limiter
+    - name: LRU Cache
+      link: /algo/design/2022-09-09-lru-cache
+    - name: My Calendar I
+      link: /algo/design/2022-10-07-my-calendar-i
+    - name: My Calendar II
+      link: /algo/design/2022-10-07-my-calendar-ii
+    - name: My Calendar III
+      link: /algo/design/2022-10-07-my-calendar-iii
+    - name: Time Based Key-Value Store
+      link: /algo/design/2022-10-06-time-based-key-value-store

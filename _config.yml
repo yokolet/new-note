@@ -16,50 +16,58 @@
 title: yokolet's notelets
 email: yokolet@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Notes about programming
+  Blog site mostly for programming topics.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+domain: yokolet.com
+url: https://yokolet.github.io
 twitter_username: yokolet
 github_username:  yokolet
 google_analytics: UA-761764-8
 
-github:
-  is_project_page: true
-  repository_url: https://github.com/yokolet/yokolet.github.com
-  repository_name: yokolet.com
-  owner_url: https://github.com/yokolet
-  owner_name: Yoko Harada
-
-favicon: true
-favicon_location: "/assets/image/favicon.ico"
-
 # Build settings
 markdown: kramdown
-theme: jekyll-theme-cayman
+
+# disable default syntax highlighter
+highlighter: none
+kramdown:
+  syntax_highlighter_opts:
+    disable: true
+
+#theme: minima
+#theme: bulma-clean-theme
+remote_theme: chrisrhymes/bulma-clean-theme
 plugins:
   - jekyll-feed
-  - jekyll-gist
-  - jekyll-paginate-v2
+  - jekyll-bulma-tabs
 
-# pagination settings
-pagination:
-  enabled: true
-  collection: 'posts'
-  per_page: 12
-  permalink: '/page/:num/'
-  sort_reverse: true
-  sort_field: 'date'
-  trail:
-    before: 2
-    after: 2
+# bulma-clean-theme settings
+fixed_navbar: top
+hide_share_buttons: true
+paginate: 5
+paginate_path: "/blog/page:num"
+defaults:
+  -
+    scope:
+      path: ""
+      type: "pages"
+    values:
+      show_sidebar: false
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      author: "Yoko Harada"
+      layout: post
+      show_sidebar: true
+
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
-exclude:
-   - Gemfile
-   - Gemfile.lock
-   - tmp
+# exclude:
+#   - Gemfile
+#   - Gemfile.lock
 #   - node_modules
 #   - vendor/bundle/
 #   - vendor/cache/

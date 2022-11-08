@@ -2,9 +2,8 @@
 layout: post
 title: Setting Up GCP Instance for Deep Learning
 date: 2019-10-29 17:40 -0700
+hero_height: is-small
 ---
-
-### About this blog post
 
 This post is going to be very different from what I write here.
 The content is a memo how I create a GCP (Google Cloud Platform) instance for Deep Learning.
@@ -220,7 +219,7 @@ You may need to choose the project whose name is the one you set during the conf
 Then, click the hamburger icon (navigation menu) on the top left, Compute Engine, VM instances.
 You'll see your instance is running.
 
-![vm instance]({{ '/assets/image/vm-instance.png' }})
+![vm instance]({{ '/assets/img/vm-instance.png' }})
 
 Don't forget to stop the instance.
 To stop the instance, click three dots icon on the right side and choose Stop.
@@ -260,7 +259,7 @@ At the same time, jupyter notebook is available to use on a local machine.
 Go to the web browser and hit the URL, `http://localhost:8080/tree`.
 The jupyter notebook below shows up.
 
-![jupyter notebook]({{ '/assets/image/notebook.png' }})
+![jupyter notebook]({{ '/assets/img/notebook.png' }})
 
 ### Access Github Repositories
 
@@ -391,7 +390,7 @@ This section is about to use `Pipenv` on the GCP instance.
 
     The command above lists services controlled by the system.
 
-    ![systemctl output]({{ '/assets/image/systemctl-output.png' }})
+    ![systemctl output]({{ '/assets/img/systemctl-output.png' }})
 
     The `jupyter.service` is among them.
 

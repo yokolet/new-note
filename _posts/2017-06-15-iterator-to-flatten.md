@@ -4,10 +4,10 @@ title: "Iterator To Flatten It"
 description: ""
 category: 
 tags: []
+hero_height: is-small
 ---
 
-#### Iterator Revisited ####
-
+Let's revisit the Iterator pattern.
 "Iterator" is one of design patterns in object-oriented programming (OOP).
 Needless to say, extremely famous Gang of Four (Erich Gamma, Richard Helm, Ralph Johnson and John Vlissides) are creators.
 As in the Wikipedia's [Iterator pattern](https://en.wikipedia.org/wiki/Iterator_pattern),

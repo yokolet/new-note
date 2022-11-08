@@ -4,9 +4,8 @@ title: "Trapping Rain Water"
 description: ""
 category: 
 tags: []
+hero_height: is-small
 ---
-
-#### One of famous bar problems, again ####
 
 "Trapping Rain Water" is one more famous algorithm problem using bars, like
 [Skyline Problem](http://yokolet.github.io/2017/05/26/skyline-problem.html) or

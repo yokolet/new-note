@@ -2,11 +2,12 @@
 layout: post
 title: HackerRank Code Testing by Clojure
 date: 2019-08-28 16:20 -0700
+hero_height: is-small
 ---
 
-#### HackerRank Code Testing by Clojure ####
-
 Recently, I decided to give Clojure a try.
+This post is about testing HackerRank problems on a local env. 
+
 I used to write Clojure code for my day job, however, no Clojure at all for two years.
 Instead, almost all were done by Python.
 I became familiar with Python's functional programming world now.

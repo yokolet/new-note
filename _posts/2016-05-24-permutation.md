@@ -4,10 +4,10 @@ title: "Permutation"
 description: ""
 category: 
 tags: []
+hero_height: is-small
 ---
 
-#### How bad naive implementation of generating permutation ####
-
+Well, how bad naive implementation of generating permutation?
 Permutation is a well-known problem in mathematics as well as
 programming. If a set of three characters, {A, B, C}, its permutation
 is:
@@ -62,7 +62,7 @@ Steps of the algorithm are:
 
 The sorted version of permutation in Java will be something like this:
 
-{% highlight java linenos %}
+{% highlight java %}
 import java.util.Arrays;
 
 public class AllPermutations {

@@ -4,11 +4,11 @@ title: "Weird Puzzle Questions - Egg and Celebrity"
 description: ""
 category: 
 tags: []
+hero_height: is-small
 ---
 
-#### Weird Questions (At Least to Me) ####
-
 I'm going to write about two weird algorithm problems.
+Those seem quite weired at least to me, yet famous as algorithm questions.
 One is so-called egg dropping, another is finding a celebrity.
 I see these two problems here and there.
 From that, I guess those two are famous algorithm questions.

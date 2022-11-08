@@ -2,10 +2,10 @@
 layout: post
 title: Catalan number
 date: 2019-09-08 12:41 -0700
+hero_height: is-small
 ---
 
-#### What is __Catalan number__
-
+What is __Catalan number__ ?
 The Catalan number belongs to the domain of combinatorial mathematics.
 It is a sequence of natural numbers such that:
 `1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, 16796, 58786, 208012, 742900, 2674440, 9694845, 35357670, 129644790, 477638700, 1767263190, ...`

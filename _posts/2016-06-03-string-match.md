@@ -4,11 +4,10 @@ title: "String Match"
 description: ""
 category: 
 tags: []
+hero_height: is-small
 ---
 
-#### String Match Algorithm ####
-
-The topic here is not a regular expression but string search algorithm.
+The topic here is string search algorithm and not a regular expression.
 For example, find the position(s) of matched patterns in a loooong text.
 
 The easiest implementation is:
@@ -59,7 +58,7 @@ information, we can safely skip useless comparisons.
 
 Here's the code to calculate prefix function:
 
-{% highlight java linenos %}
+{% highlight java %}
 static int[] computePrefixFunction(char[] pattern) {
     int m = pattern.length;
     int[] p = new int[m];
@@ -100,7 +99,7 @@ This part absolutely use the given text. The rule is:
 
 Below is the code to search the pattern:
 
-{% highlight java linenos %}
+{% highlight java %}
 static void kmp(char[] text, char[] pattern) {
     List<Integer> indexes = new ArrayList<>();
     int n = text.length;
@@ -133,7 +132,7 @@ static void kmp(char[] text, char[] pattern) {
 All parts are ready. It's time to run the code and see the result.
 
 
-{% highlight java linenos %}
+{% highlight java %}
 public static void main(String[] args) {
     char[] pat = "ababaca".toCharArray();
     char[] text = "bacbababaabcbab".toCharArray();

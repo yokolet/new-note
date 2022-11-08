@@ -4,11 +4,10 @@ title: "Digital Root"
 description: ""
 category: 
 tags: []
+hero_height: is-small
 ---
 
-#### What is Digital Root ####
-
-Suppose you are given some digits, say 123456, the digital root will
+What is digital root? Suppose you are given some digits, say 123456, the digital root will
 be calculated like this:
 
 {% highlight java %}

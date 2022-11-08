@@ -4,11 +4,10 @@ title: "Let's try(:english) at Sapporo RubyKaigi 2012"
 description: ""
 category: 
 tags: [ruby, english]
+hero_height: is-small
 ---
 
 Dear Sapporo RubyKaigi Attendees!!
-
-
 [Sapporo RubyKaigi 2012](http://sapporo.rubykaigi.org/2012/en/) is just around the corner.
 It will open on September 14-16th, less than a month away. In this occasion,
 I'll organize a meetup, which is an attempt to cut down a barrier between English speaking

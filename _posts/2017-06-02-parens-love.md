@@ -4,14 +4,16 @@ title: "Parentheses Love"
 description: ""
 category: 
 tags: []
+hero_height: is-small
 ---
 
-#### Simple Problem Yet Complicated Solution ####
-
-As a lisp family language programmer, I used to write a lot of paretheses.
+As a lisp family language programmer, I used to write a lot of parentheses.
 Specifically, `(` and `)`.
-However, in an algorithm world, in a problem description, *parentheses* often includes
-other brackets as well, such as `{}` or `[]`.
+In an algorithm world, *parentheses* often includes
+other brackets as well, such as `{}` or `[]`, but that's it.
+At most three types of pairs are there, some problems are much complicated to find a solution.
+This post is about such problems.
+
 Out of my curiosity, I googled names of so-called parentheses.
 According Wikipedia's [Bracket](https://en.wikipedia.org/wiki/Bracket), it looks those
 have their own names with a lot of variants. Probably, famous ones are these.
@@ -23,7 +25,7 @@ have their own names with a lot of variants. Probably, famous ones are these.
 | round brackets | square brackets | curly brackets | angle brackets |
 
 
-In terms of algoritm problems, differences in names don't matter so much.
+In terms of algorithm problems, differences in names don't matter so much.
 Even the shape doesn't matter so much.
 For example, "`(()), ()()`" has the same meaning as "`\\//, \/\/`", "`##!!, #!#!`", etc.
 Among such symbols, parens are look nice and familiar to programmer's eyes.
@@ -33,7 +35,7 @@ To express parens love, I'm going to write about three parens-y problems:
 
 - valid parentheses
 - generate parentheses
-- remove invalid parenthese
+- remove invalid parentheses
 
 
 #### Problem Description - Valid Parentheses ####
@@ -74,7 +76,7 @@ For example, n = 3, the answer will be:
 
 #### The idea to generate valid parentheses   ####
 
-Despite the simple problem descriptoin and simple input (only one integer),
+Despite the simple problem description and simple input (only one integer),
 This problem needs some considerations.
 If I draw pictures of n = 2 and n = 3, parens trees look like this:
 
@@ -112,11 +114,11 @@ n = 3
 
 While I was drawing, I cared three conditions:
 
-- how many opening parans are left
+- how many opening parens are left
 - how many closing parens are left
 - available opening parens < available closing parens
 
-As in the pcitures above, the parens can be expressed as a tree.
+As in the pictures above, the parens can be expressed as a tree.
 To track down to all leaf nodes, Depth First Search (DFS) style algorithm would work.
 Going deeper in the tree while caring three conditions will find all combinations.
 

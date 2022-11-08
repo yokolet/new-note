@@ -4,11 +4,11 @@ title: "Count Smaller By BST"
 description: ""
 category: 
 tags: []
+hero_height: is-small
 ---
 
-#### Count Smaller on the Right in an Array ####
-
-The problem is: given an array of integers, count integers smaller than the index i,
+Let's count smaller on the right in an array.
+More precisely, the problem is: given an array of integers, count integers smaller than the index i,
 also, located on the right of index i. So, the answer will be also an array of the integers.
 Apparently, the answer to the last element is 0.
 

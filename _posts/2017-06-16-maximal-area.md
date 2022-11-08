@@ -4,9 +4,9 @@ title: "Maximal Square and Rectangle"
 description: ""
 category: 
 tags: []
+hero_height: is-small
 ---
 
-#### Maximal Siblings ####
 
 A bunch of algorithm questions take a style of "maximum is a good thing."
 Maximal sum, maximal length or maximal size are examples.
@@ -59,7 +59,7 @@ The answer will be 4.
 
 #### The idea to find maximal square ####
 
-This is a dynamic programming quesition, so optimal substructure exists:
+This is a dynamic programming question, so optimal substructure exists:
 
 1. include the current cell to form a square
 2. exclude the current call

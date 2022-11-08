@@ -4,21 +4,21 @@ title: "Palindromic Substring"
 description: ""
 category: 
 tags: []
+hero_height: is-small
 ---
 
-#### Palindromic Substring Problems ####
-
-Palindrome is, like "racecar," a reversed and the original are exactly the same string.
-I see many types of palindrome related problems.
+We often see problems related to a palindrome or palindromic something.
+Palindrome is, like "racecar," a reversed and original are exactly the same string.
+We see really many types of palindrome related problems.
 Sometime, problems are based on palindromic *substrings*.
 Sometime, those are palindromic *subsequences*.
 
 The most typical problem is asking the longest palindromic substring or subsequence.
-However, not just the longest, asking paritions is another popular problem.
+However, not just the longest, asking partitions is another popular problem.
 As for partition problems, palindromes should be substrings.
 This kind of problems can be solved by a dynamic programming.
 The dynamic programming solution creates a truthy table which will have trues
-when the index i to j is a palindrom.
+when the index i to j is a palindrome.
 
 I'm going to write down three types of palindromic substring related problems:
 the longest, minimum cuts, and printing all palindromic partitions.

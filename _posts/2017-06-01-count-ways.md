@@ -4,16 +4,15 @@ title: "Count Ways to Do [something]"
 description: ""
 category: 
 tags: []
+hero_height: is-small
 ---
 
-#### Count Ways Problems ####
-
-"Count how may ways to do ..." is one type of alogrithm questions.
+"Count how may ways to do ..." is one type of algorithm questions.
 For example, count ways to climb up stairs, count ways to make sum by given coins, 
 or count ways to reach from top left to bottom right corner.
 
 For this type of problem, recursion and dynamic programming are often used.
-The recursion is an instintictive solution and understandable.
+The recursion is an instinctive and understandable solution.
 However, sometime, its performance goes really worse, say, exponential.
 While the dynamic programming solution stays on O(n^2) time complexity.
 
@@ -192,7 +191,7 @@ I used auxiliary table to save states.
 The auxiliary table (`memo`) has a size [m] x [n].
 In this case, plus one doesn't need since the first row and column can be
 initialized without any previous state.
-Movments are only right and down.
+Movements are only right and down.
 Given that, the first row are all 1 since from left is the only one way.
 The first columns are all 1 as well since from above is the only one way.
 Then, fill the rest of the table by expanding the path one by one, right or down.

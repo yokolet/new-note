@@ -4,15 +4,15 @@ title: "Math Without Operator To Do It"
 description: ""
 category: 
 tags: []
+hero_height: is-small
 ---
 
-#### Division/Power Without Exact Operators ####
-
-I see this sort of questions among algorithm problems.
+Do division or power calculation without language provided operators --
+we see this sort of questions among algorithm problems.
 I wrote [Addtion without +/- operators](http://yokolet.github.io/2017/05/24/you-can-do-it-by-xor.html#addition-without-----operators) in the post about XOR related questions.
-"Divide without divison" and "power without its operator or function" are examples as well.
+"Divide without division" and "power without its operator or function" are examples as well.
 
-Not like the addition, a divison and power need to repeat.
+Not like the addition, a division and power need to repeat.
 Intuitive implementations would be simply repeat subtraction or multiplication.
 Those calculates correctly, however, time complexity tends to be O(n).
 Better ways are out there.
@@ -27,7 +27,7 @@ Math-y stuff without exact operators to divide/power.
 without divide and modulo operators."
 
 The division itself is nothing special.
-An answer will be integer when diviend is devidend by divisor.
+An answer will be an integer when the dividend is divided by divisor.
 
 For example, given 10 (dividend) and -3 (divisor),
 the answer will be -3.
@@ -115,7 +115,7 @@ This step goes like in the manual calculation.
 1 - ... (no more)
 </pre>
 
-This divison's time complexity turns to O(log(n)) .
+This division's time complexity turns to O(log(n)) .
 
 
 
@@ -131,9 +131,9 @@ The result is:
 </pre>
 
 
-#### Problem Description - Impelemnt Power ####
+#### Problem Description - Implement Power ####
 
-Given two integers, x and y, implmenet a function (method) to
+Given two integers, x and y, implement a function (method) to
 calculate `x ^ y`.
 
 I believe every computer language provides a way to
@@ -146,12 +146,12 @@ existing feature.
 
 Also, there's a simple solution.
 Repeating multiplication y times gives me the answer.
-The perfomrance of this simple solution will be O(n) (n = y).
+The performance of this simple solution will be O(n) (n = y).
 
 There's a way to improve this.
 
-The improvied version calculates `x ^ (y / 2)` recursively.
-While returning, calcuate `(x ^ (y / 2)) * (x ^ (y / 2))`.
+The improved version calculates `x ^ (y / 2)` recursively.
+While returning, calculate `(x ^ (y / 2)) * (x ^ (y / 2))`.
 If y is odd, multiply x.
 
 <pre>

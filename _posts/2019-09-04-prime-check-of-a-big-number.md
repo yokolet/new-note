@@ -2,9 +2,8 @@
 layout: post
 title: Prime Check of a Big Number
 date: 2019-09-04 21:05 -0700
+hero_height: is-small
 ---
-
-#### The Problem
 
 "Given an integer `n`, find whether `n` is a prime number or not" -- This is a typical
 algorithm question.

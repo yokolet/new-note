@@ -4,15 +4,15 @@ title: "Online Algorithm - mean and median"
 description: ""
 category: 
 tags: []
+hero_height: is-small
 ---
 
-#### What is Online Algorithm ####
-
+This post discusses so-called Online Algorithm.
 If fixed number of integers (or real numbers) are given, it's easy to find
 a mean or median.
-Summing up all, then deviding by a number of given values gives me the mean.
+Summing up all, then dividing by a number of given values gives us the mean.
 For a median, sorting the given values then finding center index (indices)
-would be the almost all.
+would be the all.
 
 What if input is not limited? say, a stream of data?
 

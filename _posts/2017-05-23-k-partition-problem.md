@@ -4,11 +4,11 @@ title: "K Partition Problem"
 description: ""
 category: 
 tags: []
+hero_height: is-small
 ---
 
-#### Divide an array of integers into K fair amount groups ####
-
-The problem is: given an array of integers, divide into k subarrays
+Let's think how we can divide an array of integers into K fair amount groups.
+The problem description is: given an array of integers, divide into k subarrays
 so that the differences of sum of each subarray will be minimized.
 Keep the order of the given array.
 

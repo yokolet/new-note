@@ -4,7 +4,11 @@ title: "You can do it by XOR"
 description: ""
 category: 
 tags: []
+hero_height: is-small
 ---
+
+This post is about XOR bit manipulations.
+XOR is surprisingly capable of solving various algorithm problems.
 
 #### XOR basics ####
 

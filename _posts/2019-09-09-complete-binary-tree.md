@@ -2,9 +2,8 @@
 layout: post
 title: Complete Binary Tree
 date: 2019-09-09 21:19 -0700
+hero_height: is-small
 ---
-
-#### What is __Complete Binary Tree__
 
 Problems which ask a binary tree traverse, add/delete nodes, etc. are popular in algorithm questions.
 The binary trees are often just a binary tree or binary search tree.

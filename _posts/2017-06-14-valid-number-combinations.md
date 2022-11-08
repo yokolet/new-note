@@ -4,19 +4,18 @@ title: "Valid Combinations of Numbers"
 description: ""
 category: 
 tags: []
+hero_height: is-small
 ---
 
-#### Splitting a String in Valid Ways ####
-
-Various types of String related problems exist.
+Various types of string related problems exist.
 Among them, splitting it to make something valid would be a typical one.
-For example, a string of numbers is givne, "make valid IP addresses" is the example.
+For example, a string of numbers is given, "make valid IP addresses" is the example.
 Very similar problem is "make valid lottery numbers."
 
 When the given string is made by alphabetical characters,
 the problem may ask word breaks with a dictionary.
 
-"Vallid IP addresses" and "valid lottery numbers" are quite similar problems.
+"Valid IP addresses" and "valid lottery numbers" are quite similar problems.
 I'm going to write a memo about these two here.
 
 
@@ -93,13 +92,13 @@ For example, "4938532894754" is given, the answer will be ["49 38 53 28 9 47 54"
 
 The problem description sometimes starts from "uncle, Morty."
 
-> Your facorite uncle, Morty, is crazy about the lottery and
+> Your favorite uncle, Morty, is crazy about the lottery and
 > even crazier about how he picks his "lucky" numbers...
 
 
 Like the IP address problem, there are some constraints to make it valid.
 
-- valid lottery numbeers should have 7 parts separated by " "(space).
+- valid lottery numbers should have 7 parts separated by " "(space).
 - each digits must be between 1 and 59
 - all digits are unique
 - must use all characters in the same order
@@ -110,9 +109,9 @@ Like the IP address problem, there are some constraints to make it valid.
 This is almost identical to valid IP address problem.
 The small differences are from four parts to seven, from dot to space,
 and from 0-255 to 1-59.
-Relaitvely big difference is, in lottery problem, each digit is unique.
+Relatively big difference is, in lottery problem, each digit is unique.
 
-To check uniqueness, I added a set in the DFS interation:
+To check uniqueness, I added a set in the DFS interaction:
 add the number to set when going deeper, remove the number when coming back.
 
 Except the differences above, the code is the same as valid IP addresses.

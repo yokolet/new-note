@@ -1,0 +1,28 @@
+- label: Algorithm
+  items:
+    - name: Arrays
+      link: /algo/arrays/
+    - name: Strings
+      link: /algo/strings/
+    - name: Linked lists
+      link: /algo/linked_lists/
+    - name: Stacks and Queues
+      link: /algo/stacks_and_queues/
+    - name: Trees
+      link: /algo/trees/
+    - name: Graphs
+      link: /algo/graphs/
+    - name: Dynamic Programming
+      link: /algo/dynamic_programming/
+    - name: Backtracking
+      link: /algo/backtracking/
+    - name: Sorting and searching
+      link: /algo/sorting_and_searching/
+    - name: Design
+      link: /algo/design
+    - name: Others
+      link: /algo/others
+    - name: Stocks
+      link: /algo/stocks
+    - name: Minimize Maximum
+      link: /algo/minimize_maximum/

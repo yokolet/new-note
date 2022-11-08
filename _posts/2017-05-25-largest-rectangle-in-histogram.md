@@ -4,9 +4,8 @@ title: "Largest Rectangle in a Histogram"
 description: ""
 category: 
 tags: []
+hero_height: is-small
 ---
-
-#### One of famous bar problems ####
 
 "Find the largest rectangular area in a histogram" is a famous algorithm
 problem using bars.

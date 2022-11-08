@@ -4,9 +4,8 @@ title: "Skyline Problem"
 description: ""
 category: 
 tags: []
+hero_height: is-small
 ---
-
-#### One of famous bar problems, also ####
 
 The skyline problem is another famous algorithm problem using bars, like
 [Lagest Rectangle in a Histogram](http://yokolet.github.io/2017/05/25/largest-rectangle-in-histogram.html).
