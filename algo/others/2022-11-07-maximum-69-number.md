@@ -100,18 +100,6 @@ var maximum69Number  = function(num) {
     };
 ```
 {% endtab %}
-/**
-* @param {number} num
-* @return {number}
-  */
-  var maximum69Number  = function(num) {
-  let s = num.toString();
-  let found = s.indexOf("6");
-  if (found >= 0) {
-  s = s.replace('6', '9');
-  }
-  return parseInt(s);
-  };
 
 {% tab solution Python %}
 ```python
