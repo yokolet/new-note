@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Minimum Number of Moves to Make Palindrome
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Hard

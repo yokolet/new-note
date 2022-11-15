@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Push Dominoes
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Medium

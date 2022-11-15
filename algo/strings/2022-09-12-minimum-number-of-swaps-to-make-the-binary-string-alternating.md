@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Minimum Number of Swaps to Make the Binary String Alternating
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Medium

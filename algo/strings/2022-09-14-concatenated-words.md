@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Concatenated Words
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Hard

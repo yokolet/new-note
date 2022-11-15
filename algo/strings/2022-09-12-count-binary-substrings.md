@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Count Binary Substrings
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Easy

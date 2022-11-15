@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Longest Palindrome by Concatenating Two Letter Words
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Medium

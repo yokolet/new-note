@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Optimal Partition of String
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Medium

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Verifying an Alien Dictionary
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Easy

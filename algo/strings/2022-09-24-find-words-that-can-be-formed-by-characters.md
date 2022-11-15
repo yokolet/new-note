@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Find Words That Can Be Formed by Characters
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Easy
