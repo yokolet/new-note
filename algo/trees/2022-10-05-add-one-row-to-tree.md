@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Add One Row to Tree
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Medium

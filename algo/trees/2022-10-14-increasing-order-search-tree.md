@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Increasing Order Search Tree
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Easy

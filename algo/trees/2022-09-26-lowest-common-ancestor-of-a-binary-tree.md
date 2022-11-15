@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Lowest Common Ancestor of a Binary Tree
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Medium

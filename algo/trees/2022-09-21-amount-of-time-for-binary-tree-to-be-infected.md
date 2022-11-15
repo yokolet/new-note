@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Amount of Time for Binary Tree to Be Infected
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Medium

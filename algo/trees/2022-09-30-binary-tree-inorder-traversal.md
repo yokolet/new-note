@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Binary Tree Inorder Traversal
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Easy
