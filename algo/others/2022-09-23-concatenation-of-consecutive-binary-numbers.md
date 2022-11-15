@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Concatenation of Consecutive Binary Numbers
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Medium

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Find Triangular Sum of an Array
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Medium

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Robot Bounded In Circle
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Medium

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Maximum 69 Number
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Easy
