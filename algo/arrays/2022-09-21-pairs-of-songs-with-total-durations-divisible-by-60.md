@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Pairs of Songs With Total Durations Divisible by 60
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Medium

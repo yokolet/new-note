@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Minimum Adjacent Swaps to Make a Valid Array
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Medium

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Check if Every Row and Column Contains All Numbers
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Easy

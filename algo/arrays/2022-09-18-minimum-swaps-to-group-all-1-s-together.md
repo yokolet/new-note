@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Minimum Swaps to Group All 1's Together
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Medium

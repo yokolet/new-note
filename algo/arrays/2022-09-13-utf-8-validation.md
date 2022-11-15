@@ -1,6 +1,7 @@
 ---
 layout: post
 title: UTF-8 Validation
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Medium

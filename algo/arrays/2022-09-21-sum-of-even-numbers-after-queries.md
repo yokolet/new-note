@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Sum of Even Numbers After Queries
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Medium

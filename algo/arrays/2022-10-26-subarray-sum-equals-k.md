@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Subarray Sum Equals K
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Medium

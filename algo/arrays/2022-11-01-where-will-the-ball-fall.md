@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Where Will the Ball Fall
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Medium

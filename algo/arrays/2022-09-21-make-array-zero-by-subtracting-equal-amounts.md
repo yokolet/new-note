@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Make Array Zero by Subtracting Equal Amounts
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Easy

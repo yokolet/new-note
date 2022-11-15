@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Minimum Health to Beat Game
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Medium

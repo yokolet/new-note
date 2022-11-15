@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Partition Array Such That Maximum Difference Is K
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Medium
