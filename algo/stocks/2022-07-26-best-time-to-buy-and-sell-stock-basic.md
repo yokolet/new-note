@@ -2,6 +2,7 @@
 layout: post
 title: Best Time to Buy and Sell Stock -- Basic
 date: 2022-07-26 15:50 +0900
+algo_menubar: algo_menu
 hero_height: is-small
 tags: [Easy, Array, DP]
 ---

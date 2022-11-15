@@ -2,6 +2,7 @@
 layout: post
 title: Best Time to Buy and Sell Stock -- with Cooldown
 date: 2022-07-27 21:29 +0900
+algo_menubar: algo_menu
 hero_height: is-small
 tags: [Medium, Array, DP]
 ---

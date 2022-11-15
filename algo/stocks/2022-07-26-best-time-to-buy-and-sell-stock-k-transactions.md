@@ -2,6 +2,7 @@
 layout: post
 title: Best Time to Buy and Sell Stock -- At Most K Transactions
 date: 2022-07-26 23:09 +0900
+algo_menubar: algo_menu
 hero_height: is-small
 tags: [Hard, Array, DP]
 ---
