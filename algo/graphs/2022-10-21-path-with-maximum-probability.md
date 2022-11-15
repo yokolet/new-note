@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Path with Maximum Probability
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Medium

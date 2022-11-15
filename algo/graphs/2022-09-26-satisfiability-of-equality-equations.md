@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Satisfiability of Equality Equations
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Medium

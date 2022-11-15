@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Shortest Path in a Grid with Obstacles Elimination
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Hard
