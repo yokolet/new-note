@@ -2,6 +2,7 @@
 layout: post
 title: Minimize Maximum -- Koko Eating Bananas
 date: 2022-07-25 23:26 +0900
+algo_menubar: algo_menu
 hero_height: is-small
 tags: [Medium, Binary Search, Array]
 ---

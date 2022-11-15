@@ -2,6 +2,7 @@
 layout: post
 title: Minimize Maximum -- Cutting Ribbons
 date: 2022-07-24 16:30 +0900
+algo_menubar: algo_menu
 hero_height: is-small
 tags: [Medium, Binary Search, Array]
 ---

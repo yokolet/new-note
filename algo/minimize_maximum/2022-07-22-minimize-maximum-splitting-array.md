@@ -2,6 +2,7 @@
 layout: post
 title: Minimize Maximum -- Splitting Array
 date: 2022-07-22 16:08 +0900
+algo_menubar: algo_menu
 hero_height: is-small
 tags: [Hard, Binary Search, Array, DP, Greedy]
 ---

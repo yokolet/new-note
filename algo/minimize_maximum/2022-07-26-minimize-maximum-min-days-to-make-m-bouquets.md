@@ -2,6 +2,7 @@
 layout: post
 title: Minimize Maximum -- Minimum Number of Days to Make m Bouquets
 date: 2022-07-26 13:52 +0900
+algo_menubar: algo_menu
 hero_height: is-small
 tags: [Medium, Binary Search, Array]
 ---

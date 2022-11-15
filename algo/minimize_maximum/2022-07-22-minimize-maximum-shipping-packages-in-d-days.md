@@ -2,6 +2,7 @@
 layout: post
 title: Minimize Maximum -- Shipping Packages in D Days
 date: 2022-07-22 17:27 +0900
+algo_menubar: algo_menu
 hero_height: is-small
 tags: [Medium, Binary Search, Array]
 ---

@@ -2,6 +2,7 @@
 layout: post
 title: Minimize Maximum -- Divide Chocolate
 date: 2022-07-22 23:30 +0900
+algo_menubar: algo_menu
 hero_height: is-small
 tags: [Hard, Binary Search, Array]
 ---
