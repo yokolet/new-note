@@ -1,0 +1,28 @@
+{% assign menus = site.data.[page.algo_menubar] %}
+
+<aside class="menu accordion">
+    {% for menu in menus %}
+    <div class="menu-list">
+        {% for item in menu.items %}
+        <div class="container">
+            <a class="menu-label">
+                {{ item.name }}
+            </a>
+            <ul class="content">
+                {% assign submenus = site.data.[item.list] %}
+                {% for submenu in submenus %}
+                    {% for subitem in submenu.items %}
+                    <li>
+                        <a href="{{ subitem.link | relative_url }}"
+                           class="submenu">
+                            {{ subitem.name }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+</aside>

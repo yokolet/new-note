@@ -1,28 +1,28 @@
 - label: Algorithm
   items:
     - name: Arrays
-      link: /algo/arrays/
+      list: arrays_menu
     - name: Strings
-      link: /algo/strings/
+      list: strings_menu
     - name: Linked lists
-      link: /algo/linked_lists/
+      list: linked_lists_menu
     - name: Stacks and Queues
-      link: /algo/stacks_and_queues/
+      list: stacks_and_queues_menu
     - name: Trees
-      link: /algo/trees/
+      list: trees_menu
     - name: Graphs
-      link: /algo/graphs/
+      list: graphs_menu
     - name: Dynamic Programming
-      link: /algo/dynamic_programming/
+      list: dp_menu
     - name: Backtracking
-      link: /algo/backtracking/
+      list: backtracking_menu
     - name: Sorting and searching
-      link: /algo/sorting_and_searching/
+      list: sorting_and_searching_menu
     - name: Design
-      link: /algo/design
+      list: design_menu
     - name: Others
-      link: /algo/others
+      list: others_menu
     - name: Stocks
-      link: /algo/stocks
+      list: stocks_menu
     - name: Minimize Maximum
-      link: /algo/minimize_maximum/
+      list: minimize_maximum_menu

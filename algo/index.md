@@ -1,7 +1,8 @@
 ---
 layout: page
 title: Algorithm
-menubar: algo_menu
+algo_menubar: algo_menu
+hero_height: is-small
 hero_image: /assets/img/fall_pond.jpeg
 show_sidebar: false
 ---
