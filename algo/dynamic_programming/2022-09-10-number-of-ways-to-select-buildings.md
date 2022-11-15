@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Number of Ways to Select Buildings
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Medium

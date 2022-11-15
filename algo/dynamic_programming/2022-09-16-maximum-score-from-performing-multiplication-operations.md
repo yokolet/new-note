@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Maximum Score from Performing Multiplication Operations
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Medium

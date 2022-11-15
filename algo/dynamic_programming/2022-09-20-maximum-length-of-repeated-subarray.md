@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Maximum Length of Repeated Subarray
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Medium

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Maximum Length of Subarray With Positive Product
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Medium

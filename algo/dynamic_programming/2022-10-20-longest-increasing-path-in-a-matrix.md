@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Longest Increasing Path in a Matrix
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Hard

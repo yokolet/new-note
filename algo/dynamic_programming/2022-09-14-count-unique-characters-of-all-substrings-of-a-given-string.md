@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Count Unique Characters of All Substrings of a Given String
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Hard
