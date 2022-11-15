@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Maximum Number of Robots Within Budget
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Hard

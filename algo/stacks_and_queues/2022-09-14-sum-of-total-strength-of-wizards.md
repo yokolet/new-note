@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Sum of Total Strength of Wizards
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Hard

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Minimum Remove to Make Valid Parentheses
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Medium
