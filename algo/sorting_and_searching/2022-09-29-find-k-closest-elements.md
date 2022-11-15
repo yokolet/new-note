@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Find K Closest Elements
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Medium

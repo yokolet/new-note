@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Divide Intervals Into Minimum Number of Groups
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Medium

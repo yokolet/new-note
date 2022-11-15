@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Find K-th Smallest Pair Distance
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Hard

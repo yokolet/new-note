@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Analyze User Website Visit Pattern
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Medium

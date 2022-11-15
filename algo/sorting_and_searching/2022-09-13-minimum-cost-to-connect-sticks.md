@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Minimum Cost to Connect Sticks
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Medium

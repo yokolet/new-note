@@ -1,6 +1,7 @@
 ---
 layout: post
 title: K Closest Points to Origin
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Medium
