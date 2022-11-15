@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Delete Node in a Linked List
+algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Medium
