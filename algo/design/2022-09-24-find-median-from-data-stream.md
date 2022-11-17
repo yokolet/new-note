@@ -12,11 +12,6 @@ tags:
 - Two Pointers
 date: 2022-09-24 20:15 +0900
 ---
-## Introduction
-A stream of data is the input for this problem.
-In such a case, how to maintain the input data so far is a key to solve the problem.
-The approach take here is two heaps which maintain smaller and bigger values compared to the median.
-When a query comes, the heap data structure is able to return the answer by O(1).
 
 ## Problem Description
 > The median is the middle value in an ordered integer list.
@@ -57,24 +52,125 @@ medianFinder.addNum(3);    // arr[1, 2, 3]
 medianFinder.findMedian(); // return 2.0
 ```
 
-## Analysis
-The class has two heaps: max heap to maintain smaller values than median,
+## How to solve
+A stream of data is the input for this problem.
+In such a case, how to maintain the input data so far is a key to solve the problem.
+The approach taken here is two heaps which maintain smaller and bigger values compared to the median.
+When a query comes in, the heap data structure is able to return the answer by O(1).
+
+The solution has two heaps: max heap to maintain smaller values than median,
 min heap to maintain bigger values then median.
-The naming of heaps comes from Python's heap nature.
-Python's heap is always non-decreasing order and no way around.
-A common practice is save (-1)*value to make it non-increasing order.
+In Python, the heap is always non-decreasing order and no way around.
+A common practice is save (-1) * value to make it non-increasing order.
 
 We want to make min heap (bigger number) to larger or equal to max heap (smaller number).
 If two heaps have the same size, min heap should have a new value.
-At first, push -num to max heap, then pop from max heap. Finally, push (-1)*value to min heap.
+At first, push -num to max heap, then pop from max heap. Finally, push (-1) * value to min heap.
 If not (min heap is larger), max heap should have a new value.
-At first, push num to min heap, then pop from min heap. Finally, push (-1)*value to max heap.
+At first, push num to min heap, then pop from min heap. Finally, push (-1) * value to max heap.
 
-To answer the query, check how main data came in so far.
+To answer the query, check how many values came in so far.
 If it is odd, min heap top has the median.
 If it is even, the average of min and max heap's top values is the median.
 
 ## Solution
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+class MedianFinder {
+private:
+    int count = 0;
+    priority_queue<int> max_heap;
+    priority_queue<int, vector<int>, greater<int>> min_heap;
+
+public:
+    MedianFinder() {}
+
+    void addNum(int num) {
+        if (max_heap.size() == min_heap.size()) {
+            max_heap.push(num);
+            min_heap.push(max_heap.top());
+            max_heap.pop();
+        } else {
+            min_heap.push(num);
+            max_heap.push(min_heap.top());
+            min_heap.pop();
+        }
+        ++count;
+    }
+
+    double findMedian() {
+        return count % 2 == 1 ? (float) min_heap.top() : (min_heap.top() + max_heap.top()) / 2.0;
+    }
+};
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+import java.util.*;
+
+class MedianFinder {
+    private int count = 0;
+    private Queue<Integer> min_heap = new PriorityQueue<>();
+    private Queue<Integer> max_heap = new PriorityQueue<>(Collections.reverseOrder());
+
+    public MedianFinder() {}
+
+    public void addNum(int num) {
+        if (min_heap.size() == max_heap.size()) {
+            max_heap.add(num);
+            min_heap.add(max_heap.poll());
+        } else {
+            min_heap.add(num);
+            max_heap.add(min_heap.poll());
+        }
+        ++count;
+    }
+
+    public double findMedian() {
+        return count % 2 == 1 ? (double) min_heap.peek() : (min_heap.peek() + max_heap.peek()) / 2.0;
+    }
+}
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+var MedianFinder = function() {
+    this.count = 0;
+    this.min_heap = new MinPriorityQueue(); // already included by leetcode
+    this.max_heap = new MaxPriorityQueue(); // already included by leetcode
+};
+
+/**
+ * @param {number} num
+ * @return {void}
+ */
+MedianFinder.prototype.addNum = function(num) {
+    if (this.max_heap.size() == this.min_heap.size()) {
+        this.max_heap.enqueue(num);
+        this.min_heap.enqueue(this.max_heap.dequeue().element);
+    } else {
+        this.min_heap.enqueue(num);
+        this.max_heap.enqueue(this.min_heap.dequeue().element);
+    }
+    this.count++;
+};
+
+/**
+ * @return {number}
+ */
+MedianFinder.prototype.findMedian = function() {
+    return this.count % 2 == 1 ?
+        this.min_heap.front().element.toFixed(1) :
+        (this.min_heap.front().element + this.max_heap.front().element) / 2.0;
+};
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class MedianFinder:
 
@@ -98,6 +194,47 @@ class MedianFinder:
         else:
             return (-self.maxheap[0] + self.minheap[0]) / 2.0
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+# This solution gets Time Limit Exceeded, so doesn't pass
+require 'algorithms'
+
+class MedianFinder
+  def initialize()
+    @count = 0
+    @min_heap = Containers::MinHeap.new
+    @max_heap = Containers::MaxHeap.new
+  end
+
+=begin
+    :type num: Integer
+    :rtype: Void
+=end
+  def add_num(num)
+    if @min_heap.size == @max_heap.size
+      @max_heap.push(num)
+      @min_heap.push(@max_heap.pop)
+    else
+      @min_heap.push(num)
+      @max_heap.push(@min_heap.pop)
+    end
+    @count += 1
+  end
+
+=begin
+    :rtype: Float
+=end
+  def find_median()
+    @count % 2 == 1 ? @min_heap.min.to_f : (@min_heap.min + @max_heap.max) / 2.0
+  end
+end
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
 - Time: addNum: `O(log(n))`, findMedian: `O(1)`

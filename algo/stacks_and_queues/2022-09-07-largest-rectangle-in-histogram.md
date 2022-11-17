@@ -89,4 +89,3 @@ class LargestRectangleInHistogram:
 ## Complexities
 - Time: `O(n)`
 - Space: `O(n)`
- 

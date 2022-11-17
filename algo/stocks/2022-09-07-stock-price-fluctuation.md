@@ -126,4 +126,3 @@ class StockPrice:
 ## Complexities
 - Time: `O(nlog(n))`
 - Space: `O(n)`
-- 
