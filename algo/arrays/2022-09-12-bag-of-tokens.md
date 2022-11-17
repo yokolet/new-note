@@ -10,9 +10,6 @@ tags:
 - Greedy
 date: 2022-09-12 13:08 +0900
 ---
-## Introduction
-Since the order of the given array doesn't matter, start from sorting the array.
-The greedy approach can be applied.
 
 ## Problem Description
 > You have an initial power of `power`, an initial score of `0`, and
@@ -61,16 +58,100 @@ Explanation: Play the tokens in this order to get a score of 2:
 4. Play the 2nd token (300) face up, your power becomes 0 and score becomes 2.
 ```
 
-## Analysis
-Since the order doesn't matter, start from sorting the token array.
-Take smaller token to get a score, then take bigger token to gain power.
-The process lose opposites, power for more scores, scores for more power.
+## How to Solve
+Since the order of the given array doesn't matter, start from sorting the array.
+Then, the greedy approach by two pointers works in this case.
+
+The idea is to take smaller token to get a score or take bigger token to gain power.
+The process lose opposites: power for more scores, scores for more power.
 Use two pointers, low and high.
 As the low pointer proceeds, it gains the score and loses power.
 When the power becomes lower than the current token, the high pointer starts working.
 When the score becomes 0, it's back to low pointer to get more scores.
 
 ## Solution
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+class BagOfTokens {
+public:
+    int bagOfTokensScore(vector<int>& tokens, int power) {
+        sort(tokens.begin(), tokens.end());
+        int score = 0, low = 0, high = tokens.size() - 1;
+        while (low <= high) {
+            if (power >= tokens[low]) {
+                power -= tokens[low];
+                ++score;
+                ++low;
+            } else if (low < high && score > 0) {
+                power += tokens[high];
+                --score;
+                --high;
+            } else {
+                break;
+            }
+        }
+        return score;
+    }
+};
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+class BagOfTokens {
+    public int bagOfTokensScore(int[] tokens, int power) {
+        Arrays.sort(tokens);
+        int score = 0, low = 0, high = tokens.length - 1;
+        while (low <= high) {
+            if (power >= tokens[low]) {
+                power -= tokens[low];
+                ++score;
+                ++low;
+            } else if (low < high && score > 0) {
+                power += tokens[high];
+                --score;
+                --high;
+            } else {
+                break;
+            }
+        }
+        return score;
+    }
+}
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+/**
+ * @param {number[]} tokens
+ * @param {number} power
+ * @return {number}
+ */
+var bagOfTokensScore = function(tokens, power) {
+  tokens.sort((a, b) => { return a - b; });
+  let score = 0, low = 0, high = tokens.length - 1;
+  while (low <= high) {
+    if (power >= tokens[low]) {
+      power -= tokens[low];
+      ++score;
+      ++low;
+    } else if (low < high && score > 0) {
+      power += tokens[high];
+      --score;
+      --high;
+    } else {
+      break;
+    }
+  }
+  return score;
+};
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class BagOfTokens:
     def bagOfTokensScore(self, tokens: List[int], power: int) -> int:
@@ -90,7 +171,37 @@ class BagOfTokens:
                 break
         return score
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+# @param {Integer[]} tokens
+# @param {Integer} power
+# @return {Integer}
+def bag_of_tokens_score(tokens, power)
+    tokens.sort!
+    score, low, high = 0, 0, tokens.size - 1
+    while low <= high
+        if power >= tokens[low]
+            power -= tokens[low]
+            score += 1
+            low += 1
+        elsif low < high && score > 0
+            power += tokens[high]
+            score -= 1
+            high -= 1
+        else
+            break
+        end
+    end
+    score
+end
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
-- Time: `O(nlog(n))`
+- Time: `O(n*log(n))`
 - Space: `O(1)`
