@@ -3,7 +3,7 @@ layout: page
 title: Algorithm
 algo_menubar: algo_menu
 hero_height: is-small
-hero_image: /assets/img/fall_pond.jpeg
+hero_image: /assets/img/peach-camellia.jpeg
 show_sidebar: false
 ---
 

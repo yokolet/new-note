@@ -2,7 +2,7 @@
 layout: page
 title: About
 menubar: about_menu
-hero_image: /assets/img/small_pond.jpeg
+hero_image: /assets/img/persimmon.jpeg
 show_sidebar: false
 ---
 
