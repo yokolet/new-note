@@ -34,8 +34,8 @@ kramdown:
     disable: true
 
 #theme: minima
-#theme: bulma-clean-theme
-remote_theme: chrisrhymes/bulma-clean-theme
+theme: bulma-clean-theme
+#remote_theme: chrisrhymes/bulma-clean-theme
 plugins:
   - jekyll-feed
   - jekyll-bulma-tabs
