@@ -10,9 +10,6 @@ tags:
 - Binary Tree
 date: 2022-10-05 14:13 +0900
 ---
-## Introduction
-Both of depth-first search with/without stack and the breadth-first search work.
-Once the level to add new nodes is found, just create two new nodes and set those in the tree.
 
 ## Problem Description
 > Given the `root` of a binary tree and two integers `val` and `depth`, add a row of nodes with value `val` at
@@ -80,14 +77,77 @@ Output:
 3        1
 ```
 
-## Analysis
-As the problem describes, only when depth is 1, it needs a special treatment.
-The solution taken here is the breadth-first search approach and level order traversal.
-In each level, the depth is decremented.
-When the depth becomes 1, create two new nodes and add those to the current parent.
+## How to Solve
+Both of depth-first search with/without stack and the breadth-first search work.
+Once the level to add new nodes is found, just create two new nodes and set those in the tree.
+
+We should be careful when depth is 1. It needs a special treatment.
+The solution taken here is the breadth-first search approach.
+The node and depth pair is saved in a queue.
+When the current depth - 1 is the given depth, create two new nodes and add those to the current parent.
 The new nodes' children are current parent's children.
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* addOneRow(TreeNode* root, int val, int depth) {
+        if (depth == 1) {
+            return new TreeNode(val, root, nullptr);
+        }
+        queue<pair<TreeNode*, int>> q;
+        q.push({root, 1});
+        while (!q.empty()) {
+            auto [cur, d] = q.front();
+            q.pop();
+            if (d == depth - 1) {
+                TreeNode* left = cur->left;
+                TreeNode* right = cur->right;
+                cur->left = new TreeNode(val, left, nullptr);
+                cur->right = new TreeNode(val, nullptr, right);
+            } else {
+                if (cur->left) {
+                    q.push({cur->left, d + 1});
+                }
+                if (cur->right) {
+                    q.push({cur->right, d + 1});
+                }
+            }
+        }
+        return root;
+    }
+};
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 # Definition for a binary tree node.
 # class TreeNode:
@@ -95,28 +155,34 @@ The new nodes' children are current parent's children.
 #         self.val = val
 #         self.left = left
 #         self.right = right
-class AddOneRowToTree:
+class Solution:
     def addOneRow(self, root: Optional[TreeNode], val: int, depth: int) -> Optional[TreeNode]:
         if depth == 1:
             return TreeNode(val=val, left=root)
-        queue = [root]
-        while queue:
-            q_len = len(queue)
-            depth -= 1
-            for _ in range(q_len):
-                cur = queue.pop(0)
-                if depth == 1:
-                    left = TreeNode(val=val, left=cur.left)
-                    right = TreeNode(val=val, right=cur.right)
-                    cur.left,cur.right = left, right
+        q = [(root, 1)]
+        while q:
+            cur, d = q.pop(0)
+            if d == depth - 1:
+                left, right = cur.left, cur.right
+                cur.left = TreeNode(val, left, None)
+                cur.right = TreeNode(val, None, right)
+            else:
                 if cur.left:
-                    queue.append(cur.left)
+                    q.append((cur.left, d + 1))
                 if cur.right:
-                    queue.append(cur.right)
-            if depth == 1:
-                break
+                    q.append((cur.right, d + 1))
         return root
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
 - Time: `O(n)`

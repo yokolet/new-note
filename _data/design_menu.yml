@@ -12,6 +12,8 @@
       link: /algo/design/2022-10-31-design-snake-game
     - name: Find Median from Data Stream
       link: /algo/design/2022-09-24-find-median-from-data-stream
+    - name: Insert Delete GetRandom O(1)
+      link: /algo/design/2022-12-01-insert-delete-getrandom-o-1
     - name: Logger Rate Limiter
       link: /algo/design/2022-10-17-logger-rate-limiter
     - name: LRU Cache
