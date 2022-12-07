@@ -72,7 +72,7 @@ As the problem describes, if the root value is between low and high inclusive, a
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-class Solution {
+class RangeSumOfBST {
 public:
     int rangeSumBST(TreeNode* root, int low, int high) {
         queue<TreeNode*> q({root});
@@ -120,7 +120,7 @@ public:
 #         self.val = val
 #         self.left = left
 #         self.right = right
-class Solution:
+class RangeSumOfBST:
     def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int:
         queue = [root]
         total = 0

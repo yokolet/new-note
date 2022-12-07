@@ -104,7 +104,7 @@ The new nodes' children are current parent's children.
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-class Solution {
+class AddOneRowToTree {
 public:
     TreeNode* addOneRow(TreeNode* root, int val, int depth) {
         if (depth == 1) {
@@ -155,7 +155,7 @@ public:
 #         self.val = val
 #         self.left = left
 #         self.right = right
-class Solution:
+class AddOneRowToTree:
     def addOneRow(self, root: Optional[TreeNode], val: int, depth: int) -> Optional[TreeNode]:
         if depth == 1:
             return TreeNode(val=val, left=root)

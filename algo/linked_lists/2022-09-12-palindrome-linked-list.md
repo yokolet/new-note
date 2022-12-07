@@ -51,7 +51,7 @@ The comparison ends when revered pointer reaches to the end.
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
-class Solution:
+class PalindromeLinkedList:
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
         fast, slow, rev = head, head, None
         while fast and fast.next:

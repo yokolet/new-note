@@ -73,7 +73,7 @@ If the current node's value is in the set, the combination is found.
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-class Solution {
+class TwoSum4BST {
 public:
     bool findTarget(TreeNode* root, int k) {
         if (!root) {
@@ -120,7 +120,7 @@ public:
 #         self.val = val
 #         self.left = left
 #         self.right = right
-class Solution:
+class TwoSum4BST:
     def findTarget(self, root: Optional[TreeNode], k: int) -> bool:
         if not root:
             return False

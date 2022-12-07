@@ -69,7 +69,7 @@ The answer is the odd head pointer.
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
-class Solution {
+class OddEvenLinkedList {
 public:
     ListNode* oddEvenList(ListNode* head) {
         if (!head || !head->next) {
@@ -110,7 +110,7 @@ public:
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
-class Solution:
+class OddEvenLinkedList:
     def oddEvenList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         if not head or not head.next:
             return head

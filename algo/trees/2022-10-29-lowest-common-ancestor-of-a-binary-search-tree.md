@@ -9,13 +9,6 @@ tags:
 - Binary Search Tree
 date: 2022-10-29 14:02 +0900
 ---
-## Introduction
-This is a popular LCA problem of the binary search tree (BST).
-The binary tree's LCS is [Lowest Common Ancestor of a Binary Tree](/algo/trees/2022-09-26-lowest-common-ancestor-of-a-binary-tree).
-Either of DFS or BFS works to find the solution.
-Compare to the binary tree, the BST can find the answer quickly in general.
-That's because BST can check the node value and decide which subtree to go deeper.
-However, assuming the BST is balanced, we can say BST can find the answer quickly.
 
 ## Problem Description
 > Given a binary search tree (BST), find the lowest common ancestor (LCA) node of two given nodes in the BST.
@@ -68,12 +61,63 @@ Input: root = [2,1], p = 2, q = 1
 Output: 2
 ```
 
-## Analysis
-It is a BST, so if the root value lies between p and q node values, it is a lca.
+## How to Solve
+This is a popular LCA problem of the binary search tree (BST).
+The binary tree's LCA solution is [Lowest Common Ancestor of a Binary Tree](/algo/trees/2022-09-26-lowest-common-ancestor-of-a-binary-tree).
+Either of DFS or BFS works to find the solution.
+Compare to the binary tree, the BST can find the answer quickly in general.
+That's because BST can check the node value and decide which subtree to go deeper.
+The solution here took the DFS approach.
 If both p and q values are smaller than root value, it should check left subtree.
 Otherwise, go right subtree.
+If the root value lies between p and q node values, it is a lca.
 
 ## Solution
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+
+class LowestCommonAncestorOfABinarySearchTree {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if (!root) {
+            return root;
+        }
+        if (p->val < root->val && q->val < root->val) {
+            return lowestCommonAncestor(root->left, p, q);
+        } else if (root->val < p->val && root->val < q->val){
+            return lowestCommonAncestor(root->right, p, q);
+        } else {
+            return root;
+        }
+    }
+};
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 # Definition for a binary tree node.
 # class TreeNode:
@@ -84,14 +128,26 @@ Otherwise, go right subtree.
 
 class LowestCommonAncestorOfABinarySearchTree:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        if not root or root == p or root == q or\
-            p.val < root.val < q.val or q.val < root.val < p.val:
+        if not root:
             return root
         if p.val < root.val and q.val < root.val:
             return self.lowestCommonAncestor(root.left, p, q)
-        else:
+        elif root.val < p.val and root.val < q.val:
             return self.lowestCommonAncestor(root.right, p, q)
+        else:
+            return root
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+
+```
+{% endtab %}
+
+{% endtabs %}
+
+
 
 ## Complexities
 - Time: `O(n)` -- if the BST is well balanced, this can be log(n)

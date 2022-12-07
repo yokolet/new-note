@@ -9,9 +9,6 @@ tags:
 - Depth-First Search
 date: 2022-09-26 17:37 +0900
 ---
-## Introduction
-This is a popular LCA problem.
-The depth-first search by recursion is a common solution.
 
 ## Problem Description
 > Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.
@@ -65,13 +62,60 @@ Input: root = [1,2], p = 1, q = 2
 Output: 1
 ```
 
-## Analysis
+## How to Solve
+This is a popular LCA problem.
+The depth-first search by recursion is a common solution.
 The recursion's base case is, whether root is None, p or q.
 If both left and right subtree return nodes, the current root is the LCA.
 If one of left or right subtree returns the node, the current root is on the path to LCA.
 In such a case, return the node comes from the subtree.
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class LCA {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if (!root || root == p || root == q)
+            return root;
+        TreeNode *left = lowestCommonAncestor(root->left, p, q);
+        TreeNode *right = lowestCommonAncestor(root->right, p, q);
+        if (left && right)
+            return root;
+        else if (left)
+            return left;
+        else
+            return right;
+    }
+};
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 # Definition for a binary tree node.
 # class TreeNode:
@@ -90,6 +134,17 @@ class LCA:
             return root
         return left or right
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+
+```
+{% endtab %}
+
+{% endtabs %}
+
+
 
 ## Complexities
 - Time: `O(n)`

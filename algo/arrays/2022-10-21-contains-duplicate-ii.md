@@ -57,7 +57,7 @@ If it is less than or equals to k, the answer is True.
 
 ## Solution
 ```python
-class Solution:
+class ContainsDuplicate2:
     def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
         counts = {}
         for idx, v in enumerate(nums):

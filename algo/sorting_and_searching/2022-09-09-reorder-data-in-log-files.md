@@ -64,7 +64,7 @@ With this custom comparator, just soring the log gives us the answer.
 
 ## Solution
 ```python
-class Solution:
+class ReorderDataInLogFiles:
     def reorderLogFiles(self, logs: List[str]) -> List[str]:
         def comp(log):
             id_, rest = log.split(' ', 1)
