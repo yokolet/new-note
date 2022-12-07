@@ -20,5 +20,7 @@
       link: /algo/trees/2022-09-24-path-sum-ii
     - name: Pseudo-Palindromic Paths in a Binary Tree
       link: /algo/trees/2022-09-14-pseudo-palindromic-paths-in-a-binary-tree
+    - name: Range Sum of BST
+      link: /algo/trees/2022-12-07-range-sum-of-bst
     - name: Two Sum IV - Input is a BST
       link: /algo/trees/2022-12-06-two-sum-iv-input-is-a-bst
