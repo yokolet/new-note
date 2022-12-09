@@ -12,6 +12,8 @@
       link: /algo/strings/2022-09-12-flip-string-to-monotone-increasing
     - name: Integer to Roman
       link: /algo/strings/2022-10-20-integer-to-roman
+    - name: License Key Formatting
+      link: /algo/strings/2022-12-09-license-key-formatting
     - name: Longest Palindrome
       link: /algo/strings/2022-11-03-longest-palindrome
     - name: Longest Palindrome by Concatenating Two Letter Words
