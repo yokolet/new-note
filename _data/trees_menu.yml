@@ -6,6 +6,8 @@
       link: /algo/trees/2022-09-21-amount-of-time-for-binary-tree-to-be-infected
     - name: Binary Tree Inorder Traversal
       link: /algo/trees/2022-09-30-binary-tree-inorder-traversal
+    - name: Binary Tree Maximum Path Sum
+      link: /algo/trees/2022-12-10-binary-tree-maximum-path-sum
     - name: Increasing Order Search Tree
       link: /algo/trees/2022-10-14-increasing-order-search-tree
     - name: Inorder Successor in BST
