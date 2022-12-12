@@ -2,6 +2,8 @@
   items:
     - name: Bag of Tokens
       link: /algo/arrays/2022-09-12-bag-of-tokens
+    - name: Check if All the Integers in a Range Are Covered
+      link: /algo/arrays/2022-12-12-check-if-all-the-integers-in-a-range-are-covered
     - name: Check if Every Row and Column Contains All Numbers
       link: /algo/arrays/2022-09-27-check-if-every-row-and-column-contains-all-numbers
     - name: Contains Duplicate II
