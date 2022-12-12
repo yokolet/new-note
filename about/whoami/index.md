@@ -3,7 +3,7 @@ layout: page
 menubar: about_menu
 title: Who am I
 subtitle: Software Developer
-hero_image: /assets/img/small_pond.jpeg
+hero_image: /assets/img/persimmon.jpeg
 show_sidebar: false
 toc: true
 ---
@@ -22,5 +22,5 @@ toc: true
 - Java
 - Bash
 - SQL
-- JavaScript
+- JavaScript/TypeScript
 - C++

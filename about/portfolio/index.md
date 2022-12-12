@@ -3,7 +3,7 @@ layout: page
 menubar: about_menu
 title: Portfolio
 subtitle: My projects
-hero_image: /assets/img/small_pond.jpeg
+hero_image: /assets/img/persimmon.jpeg
 show_sidebar: false
 toc: true
 ---
@@ -49,5 +49,3 @@ toc: true
 - [https://github.com/yokolet/traffic-simulation](https://github.com/yokolet/traffic-simulation)
 - Traffic simulation
 - Thread management
-
-
