@@ -3,7 +3,8 @@ layout: page
 title: Algorithm
 subtitle: Stacks and Queues
 menubar: stacks_and_queues_menu
-hero_image: /assets/img/fall_pond.jpeg
+hero_height: is-small
+hero_image: /assets/img/peach-camellia.jpeg
 show_sidebar: false
 ---
 
