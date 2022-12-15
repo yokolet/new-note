@@ -9,15 +9,6 @@ tags:
 - Design
 date: 2022-10-07 17:48 +0900
 ---
-## Introduction
-This problem is one of my calendar series and easier one.
-The start and end time pair can be saved in a single array.
-In such a case, the array will have values: `[start[0], end[0], start[1], end[1], ...]`.
-The start times are always on the even indices, while the end times are on odd indices.
-Using Python's bisect search, the insertion point can be found.
-If the start time insertion point is not on even index, the range overlaps to some of existing events.
-This way, we can check a double booking.
-
 
 ## Problem Description
 > You are implementing a program to use as your calendar. We can add a new event if adding the event will not
@@ -55,15 +46,58 @@ myCalendar.book(20, 30); // return True, The event can be booked, as the first e
                             but not including 20.
 ```
 
-## Analysis
-The solution here uses a single array, which has the values like, `[start[0], end[0], start[1], end[1], ...]`.
-The even indices are start times, while odd indices are end times.
-When the book method is called, it finds the insertion point by Python's bisect search.
-If the index for start is not even, the range overlaps.
-If the index for end is not the same as start, the range overlaps.
-If it is not a double booking, insert the start and end at the insertion point.
+## How to Solve
+This problem is one of the calendar series and a relatively easy one.
+The key to solve this problem is a data structure choice.
+It can be solved by saving all start/end pair in an array and checking all those ranges, however it is not efficient.
+
+In this solution, the start and end time pair is saved in a single flat array.
+The array will have values: `[start[0], end[0], start[1], end[1], ...]`.
+The start times are always on the even indices, while the end times are on odd indices.
+If the start time insertion point is not on even index, the range overlaps to some of existing events.
+If the end time insertion point is not the same as the start time insertion point, the range overlaps also.
+This way, we can check a double booking.
+If it is not a double booking, insert the start and end range at the insertion point.
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+class MyCalendar {
+private:
+    vector<int> bookings;
+
+public:
+    MyCalendar() {}
+
+    bool book(int start, int end) {
+        vector<int> cur{start, end};
+        int left = upper_bound(bookings.begin(), bookings.end(), start) - bookings.begin();
+        if (left % 2 == 1) { return false; }
+        int right = lower_bound(bookings.begin(), bookings.end(), end) - bookings.begin();
+        if (left != right) { return false; }
+        bookings.insert(bookings.begin() + left, cur.begin(), cur.end());
+        return true;
+    }
+};
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class MyCalendar:
 
@@ -72,8 +106,6 @@ class MyCalendar:
         
 
     def book(self, start: int, end: int) -> bool:
-        if end <= start:
-            return False
         left = bisect.bisect_right(self.bookings, start)
         if left % 2 == 1:
             return False
@@ -83,6 +115,16 @@ class MyCalendar:
         self.bookings[left:left] = [start, end]
         return True
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
 - Time: `O(n + log(n))`
