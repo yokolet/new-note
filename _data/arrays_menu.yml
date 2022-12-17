@@ -1,5 +1,7 @@
 - label: Algorithm / Arrays
   items:
+    - name: Amount of New Area Painted Each Day
+      link: /algo/arrays/2022-12-17-amount-of-new-area-painted-each-day
     - name: Bag of Tokens
       link: /algo/arrays/2022-09-12-bag-of-tokens
     - name: Check if All the Integers in a Range Are Covered
