@@ -46,6 +46,7 @@ Output: -1
 Explanation: We need to eliminate at least two obstacles to find such a walk.
 ```
 
+
 ## How to Solve
 If this problem doesn't have a condition, "at most k obstacles elimination,"
 it is a typical breadth-first search problem.
@@ -77,7 +78,7 @@ public:
         q.push({0, make_tuple(0, 0, k)});
         vector<vector<int>> seen(rows, vector<int>(cols, -1));
         seen[0][0] = k;
-        vector<pair<int, int>> dirs = {{-1, 0}, {0, -1}, {0, 1}, {1, 0}};
+        vector<pair<int, int>> dirs = { {-1, 0}, {0, -1}, {0, 1}, {1, 0} };
         while (!q.empty()) {
             auto [dist, tpl] = q.front();
             auto [r, c, k] = tpl;
@@ -146,6 +147,7 @@ class ShortestPathInAGridWithObstaclesElimination:
 {% endtabs %}
 
 
+
 ## Complexities
-- Time: `O(n*k)` -- n: number of cells in the grid, k: obstacle eliminate limit
-- Space: `O(n*k)`
+- Time: `O(n * k)` -- n: number of cells in the grid, k: obstacle eliminate limit
+- Space: `O(n * k)`
