@@ -8,6 +8,8 @@
       link: /algo/trees/2022-09-30-binary-tree-inorder-traversal
     - name: Binary Tree Maximum Path Sum
       link: /algo/trees/2022-12-10-binary-tree-maximum-path-sum
+    - name: Find Leaves of Binary Tree
+      link: /algo/trees/2022-12-18-find-leaves-of-binary-tree
     - name: Increasing Order Search Tree
       link: /algo/trees/2022-10-14-increasing-order-search-tree
     - name: Inorder Successor in BST
