@@ -9,12 +9,6 @@ tags:
 - Design
 date: 2022-10-17 14:49 +0900
 ---
-## Introduction
-This logger problem is given the integer timestamp.
-We don't need a specific effort about the timestamp.
-How to keep the log needs a bit of idea.
-The problem asks unique messaged based timestamp management.
-Based on that, the solution here saves it in a hash table with the message as a key.
 
 ## Problem Description
 > Design a logger system that receives a stream of messages along with their timestamps. Each unique message
@@ -55,29 +49,81 @@ logger.shouldPrintMessage(10, "foo"); // 10 < 11, return false
 logger.shouldPrintMessage(11, "foo"); // 11 >= 11, return true, next allowed timestamp for "foo" is 11 + 10 = 21
 ```
 
-## Analysis
-The log is saved in the hash table, log id as a key and timestamp as a value.
-When the some unique message is accessed, the timestamp value will be updated with plus 10.
-This is when the message should be printed.
-Next time, when the same message is accessed, compare the current and saved timestamps.
-If the saved timestamp is less than the current, the logger should print it.
-This is all for this logger.
+## How to Solve
+When it comes to a design problem, the choice of a data structure is a key to solve the problem.
+In this case, messages will be given with different timestamps.
+Each message's timestamp different is what we should focus on.
+Based on that, the hash table is a good data structure to use here.
+
+The next to think about is how to maintain the hash table.
+When a new message comes in, save message and timestamp pair in the hash table.
+When an existing messages comes in, compare the timestamps.
+If the previous timestamp is older more than 10 seconds, replace it with the new timestamp plus 10.
+When the timestamp needs to be updated, the log should be printed.
+That is all for this logger.
+
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+class Logger {
+private:
+    unordered_map<string, int> messages;  // message: timestamp
+public:
+    Logger() {}
+
+    bool shouldPrintMessage(int timestamp, string message) {
+        if (messages.find(message) == messages.end() || messages[message] <= timestamp) {
+            messages[message] = timestamp + 10;
+            return true;
+        } else {
+            return false;
+        }
+    }
+};
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class Logger:
 
     def __init__(self):
-        self.d = {} # id: timestamp
+        self.messages = {} # message: timestamp
 
 
     def shouldPrintMessage(self, timestamp: int, message: str) -> bool:
-        if message not in self.d or self.d[message] <= timestamp:
-            self.d[message] = timestamp + 10
+        if message not in self.messages or self.messages[message] <= timestamp:
+            self.messages[message] = timestamp + 10
             return True
         else:
             return False
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
 - Time: `O(1)`
