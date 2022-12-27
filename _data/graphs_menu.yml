@@ -2,6 +2,8 @@
   items:
     - name: Cheapest Flights Within K Stops
       link: /algo/graphs/2022-10-21-cheapest-flights-within-k-stops
+    - name: Detonate the Maximum Bombs
+      link: /algo/graphs/2022-12-27-detonate-the-maximum-bombs
     - name: Evaluate Division
       link: /algo/graphs/2022-10-20-evaluate-division
     - name: Network Delay Time
