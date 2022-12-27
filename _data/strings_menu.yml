@@ -40,6 +40,8 @@
       link: /algo/strings/2022-11-04-reverse-vowels-of-a-string
     - name: Subdomain Visit Count
       link: /algo/strings/2022-09-24-subdomain-visit-count
+    - name: Sum of Prefix Scores of Strings
+      link: /algo/strings/2022-12-26-sum-of-prefix-scores-of-strings
     - name: Text Justification
       link: /algo/strings/2022-09-23-text-justification
     - name: Total Appeal of A String
