@@ -10,6 +10,8 @@
       link: /algo/design/2022-10-17-design-log-storage-system
     - name: Design Snake Game
       link: /algo/design/2022-10-31-design-snake-game
+    - name: Detect Squares
+      link: /algo/design/2022-12-29-detect-squares
     - name: Find Median from Data Stream
       link: /algo/design/2022-09-24-find-median-from-data-stream
     - name: Insert Delete GetRandom O(1)
