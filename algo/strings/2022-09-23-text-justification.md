@@ -10,9 +10,6 @@ tags:
 - Array
 date: 2022-09-23 15:10 +0900
 ---
-## Introduction
-Since this problem asks to create a fully justified result, actual simulation should be done.
-When and how to add spaces in-between or right end are the point we should consider.
 
 ## Problem Description
 > Given an array of strings `words` and a width `maxWidth`, format the text such that each line has
@@ -80,13 +77,83 @@ Output:
 ]
 ```
 
-## Analysis
+## How to Solve
+Since this problem asks to create a fully justified result, actual simulation should be done.
+When and how to add spaces in-between and right-end are the point we should consider.
+
 The solution here consists of two steps.
 For the first step, it creates words list for each lines.
+To create a line array, it sums up:
+- a number of characters so far
+- current word length
+- current array size (before adding current word) for spaces between words
+
 The second step calculates and adds spaces between words or right end if it is the last line.
+Count number of spaces left from a total word length and given maxWidth.
+Then, find how many gaps are there and how many spaces should be put.
+The solution here adds spaces to each word, then concatenate those words to one string.
 The two step approach would be easier to reach to the answer.
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+class TextJustification {
+public:
+    vector<string> fullJustify(vector<string>& words, int maxWidth) {
+        vector<string> line;
+        vector<vector<string>> lines;
+        int cur = 0;
+        for (string &word : words) {
+            if (cur + word.size() + line.size() <= maxWidth) {
+                line.push_back(word);
+                cur += word.size();
+            } else {
+                lines.push_back(line);
+                line = {word};
+                cur = word.size();
+            }
+        }
+        lines.push_back(line);
+        vector<string> result;
+        auto join = [](string &a, string &b) { return a.empty() ? b : a + b; };
+        for (int i = 0; i < lines.size() - 1; ++i) {
+            vector<string> &ws = lines[i];
+            int spaces = maxWidth;
+            for (auto w : ws) {
+                spaces -= w.size();
+            }
+            int gaps = max(1, (int)ws.size() - 1);
+            auto [cnt, rem] = div(spaces, gaps);
+            for (int j = 0; j < gaps; ++j) {
+                ws[j] += string(cnt, ' ') + (j < rem ? " " : "");
+            }
+            result.push_back(accumulate(ws.begin(), ws.end(), string(), join));
+        }
+        auto join2 = [](string &a, string &b) { return a.empty() ? b : a + " " + b; };
+        result.push_back(accumulate(lines.back().begin(), lines.back().end(), string(), join2));
+        result[result.size() - 1] += string(maxWidth - result.back().size(), ' ');
+        return result;
+    }
+};
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class TextJustification:
     def fullJustify(self, words: List[str], maxWidth: int) -> List[str]:
@@ -111,6 +178,16 @@ class TextJustification:
         lines[-1] = ' '.join(lines[-1]).ljust(maxWidth)
         return lines
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
 - Time: `O(m + n)` -- m: number of words, n: number of lines
