@@ -6,6 +6,8 @@
       link: /algo/strings/2022-10-18-count-and-say
     - name: Count Binary Substrings
       link: /algo/strings/2022-09-12-count-binary-substrings
+    - name: Counting Words With a Given Prefix
+      link: /algo/strings/2023-01-12-counting-words-with-a-given-prefix
     - name: Find Words That Can Be Formed by Characters
       link: /algo/strings/2022-09-24-find-words-that-can-be-formed-by-characters
     - name: Flip String to Monotone Increasing
