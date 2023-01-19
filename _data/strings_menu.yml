@@ -20,6 +20,8 @@
       link: /algo/strings/2022-11-03-longest-palindrome
     - name: Longest Palindrome by Concatenating Two Letter Words
       link: /algo/strings/2022-11-03-longest-palindrome-by-concatenating-two-letter-words
+    - name: Longest String Chain
+      link: /algo/strings/2023-01-19-longest-string-chain
     - name: Maximum Length of a Concatenated String with Unique Characters
       link: /algo/strings/2022-10-24-maximum-length-of-a-concatenated-string-with-unique-characters
     - name: Minimum Genetic Mutation
