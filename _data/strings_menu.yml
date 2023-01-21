@@ -6,6 +6,8 @@
       link: /algo/strings/2022-10-18-count-and-say
     - name: Count Binary Substrings
       link: /algo/strings/2022-09-12-count-binary-substrings
+    - name: Count Words Obtained After Adding a Letter
+      link: /algo/strings/2023-01-21-count-words-obtained-after-adding-a-letter
     - name: Counting Words With a Given Prefix
       link: /algo/strings/2023-01-12-counting-words-with-a-given-prefix
     - name: Find Words That Can Be Formed by Characters
