@@ -32,6 +32,8 @@
       link: /algo/design/2022-12-28-random-pick-with-weight
     - name: Range Module
       link: /algo/design/2022-12-19-range-module
+    - name: Snapshot Array
+      link: /algo/design/2023-01-22-snapshot-array
     - name: Stock Price Fluctuation
       link: /algo/design/2022-09-07-stock-price-fluctuation
     - name: Time Based Key-Value Store
