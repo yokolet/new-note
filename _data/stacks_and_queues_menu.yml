@@ -14,6 +14,8 @@
       link: /algo/stacks_and_queues/2022-09-07-minimum-remove-to-make-valid-parentheses
     - name: Odd Even Jump
       link: /algo/stacks_and_queues/2022-12-09-odd-even-jump
+    - name: Remove Duplicate Letters
+      link: /algo/stacks_and_queues/2023-01-23-remove-duplicate-letters
     - name: Sum of Subarray Minimums
       link: /algo/stacks_and_queues/2022-09-13-sum-of-subarray-minimums
     - name: Sum of Subarray Ranges
