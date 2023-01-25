@@ -16,8 +16,12 @@
       link: /algo/dynamic_programming/2022-09-19-maximum-number-of-books-you-can-take
     - name: Maximum Score from Performing Multiplication Operations
       link: /algo/dynamic_programming/2022-09-16-maximum-score-from-performing-multiplication-operations
+    - name: Minimum Swaps To Make Sequences Increasing
+      link: /algo/dynamic_programming/2023-01-25-minimum-swaps-to-make-sequences-increasing
     - name: Number of Ways to Select Buildings
       link: /algo/dynamic_programming/2022-09-10-number-of-ways-to-select-buildings
+    - name: Sentence Screen Fitting
+      link: /algo/dynamic_programming/2023-01-25-sentence-screen-fitting
     - name: Student Attendance Record II
       link: /algo/dynamic_programming/2023-01-13-student-attendance-record-ii
     - name: Substring With Largest Variance
