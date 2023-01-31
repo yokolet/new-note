@@ -28,6 +28,8 @@
       link: /algo/design/2022-10-07-my-calendar-iii
     - name: Online Stock Span
       link: /algo/design/2022-11-09-online-stock-span
+    - name: Peeking Iterator
+      link: /algo/design/2023-01-31-peeking-iterator
     - name: Random Pick with Weight
       link: /algo/design/2022-12-28-random-pick-with-weight
     - name: Range Module
