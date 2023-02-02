@@ -10,9 +10,6 @@ tags:
 - Greedy
 date: 2022-09-14 22:31 +0900
 ---
-## Introduction
-The problem title uses the word "move," but it is a "swap" actually.
-If the problem asks about swap characters, it's good to think a two pointer solution.
 
 ## Problem Description
 > You are given a string `s` consisting only of lowercase English letters.
@@ -44,37 +41,85 @@ Output: 2
 Explanation: "letelt" -> "letetl" -> "lettel"
 ```
 
-## Analysis
-Start from leftmost and rightmost characters.
-If those don't match, swap right two characters until the same character to the left is found.
-When it is only one character, the two pointers meet at the same index.
-A single character should go to the center, so swap it to right character at the moment.
-When same two characters are on the different indices, swap the right side.
+## How to Solve
+The problem title uses the word "move," but it is a "swap" actually.
+If the problem asks about swap something, think the two pointers approach.
+
+The solution here is a slight deviation of the two pointers.
+One points the rightmost character, while another points the leftmost same character.
+To make the string palindrome, the leftmost-same-character-index times swaps are required.
+At this stage, two characters are assumed to be arranged, so delete those for the next iteration.
+
+The special case is the rightmost character's same character is also the rightmost.
+It means the only one character exists.
+The only one character should be on the center of the string to make it palindrome.
+In this case, `index / 2` times swaps are required.
+
+When all characters are eliminated, we get the answer.
 
 ## Solution
-```python
-class MinimumNumberOfMovesToMakePalindrome:
-    def minMovesToMakePalindrome(self, s: str) -> int:
-        n = len(s)
-        s = list(s)
-        left, right, count = 0, n - 1, 0
-        while left < right:
-            l, r = left, right
-            while s[l] != s[r]:
-                r -= 1
-            if l == r:
-                s[r], s[r + 1] = s[r + 1], s[r]
-                count += 1
-                continue
-            else:
-                while r < right:
-                    s[r], s[r + 1] = s[r + 1], s[r]
-                    r += 1
-                    count += 1
-            left += 1
-            right -= 1
-        return count
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+class Solution {
+public:
+    int minMovesToMakePalindrome(string s) {
+        int result = 0;
+        while (s.size()) {
+            int idx = s.find(s.back());
+            if (idx == s.size() - 1) {
+                result += idx / 2;
+            } else {
+                result += idx;
+                s.erase(idx, 1);
+            }
+            s.pop_back();
+        }
+        return result;
+    }
+};
 ```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+
+```
+{% endtab %}
+
+{% tab solution Python %}
+```python
+class Solution:
+    def minMovesToMakePalindrome(self, s: str) -> int:
+        result = 0
+        while len(s):
+            idx, n = s.find(s[-1]), len(s)
+            if idx == n - 1:
+                result += idx // 2
+                s = s[:-1]
+            else:
+                result += idx
+                s = s[0:idx] + s[idx + 1:-1]
+        return result
+```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
 - Time: `O(n^2)`
