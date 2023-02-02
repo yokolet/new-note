@@ -9,11 +9,6 @@ tags:
 - Design
 date: 2022-09-26 22:08 +0900
 ---
-## Introduction
-The key to solve this problem is how to maintain hits' timestamp.
-Since the timestamp is monotonically increasing -- sorted already,
-the binary search to find an answer looks a good approach.
-However, it can be much simple -- keep only hits from 300 seconds before.
 
 ## Problem Description
 > Design a hit counter which counts the number of hits received in the past 5 minutes (i.e., the past 300 seconds).
@@ -55,7 +50,12 @@ hitCounter.getHits(300); // get hits at timestamp 300, return 4.
 hitCounter.getHits(301); // get hits at timestamp 301, return 3.
 ```
 
-## Analysis
+## How to Solve
+The key to solve this problem is how to maintain hits' timestamp.
+Since the timestamp is monotonically increasing -- sorted already,
+the binary search to find an answer looks a good approach.
+However, it can be much simpler -- keep only hits from 300 seconds before.
+
 The solution here creates a queue for timestamps.
 Both, `hit` and `getHits` maintains the values in queue.
 If the values are less than or equals to given timestamp - 300,
@@ -63,6 +63,72 @@ it deletes all hits before timestamp - 300.
 The method, `gitHits`, returns the length of the queue. That's all.
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+class HitCounter {
+private:
+    queue<int> q;
+
+public:
+    HitCounter() {}
+
+    void hit(int timestamp) {
+        q.push(timestamp);
+        while (q.front() <= timestamp - 300) {
+            q.pop();
+        }
+    }
+
+    int getHits(int timestamp) {
+        while (!q.empty() && q.front() <= timestamp - 300) {
+            q.pop();
+        }
+        return q.size();
+    }
+};
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+var HitCounter = function() {
+    this.queue = []
+};
+
+/**
+ * @param {number} timestamp
+ * @return {void}
+ */
+HitCounter.prototype.hit = function(timestamp) {
+    this.queue.push(timestamp);
+    while (this.queue[0] <= timestamp - 300) {
+        this.queue.shift();
+    }
+};
+
+/**
+ * @param {number} timestamp
+ * @return {number}
+ */
+HitCounter.prototype.getHits = function(timestamp) {
+    while (this.queue[0] <= timestamp - 300) {
+        this.queue.shift();
+    }
+    return this.queue.length;
+};
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class HitCounter:
 
@@ -79,6 +145,16 @@ class HitCounter:
             self.queue.pop(0)
         return len(self.queue)
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
 - Time: `O(1)`
