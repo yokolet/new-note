@@ -8,9 +8,6 @@ tags:
 - Monotonic Stack
 date: 2022-09-07 17:30 +0900
 ---
-## Introduction
-
-At a glance, it looks a sorting problem. However, this is a monotonic stack problem.
 
 ## Problem Description
 > There are `n` buildings in a line.
@@ -51,15 +48,50 @@ Output: [3]
 Explanation: Only building 3 has an ocean view.
 ```
 
-## Analysis
+## How to Solve
 
-If we keep monotonically decreasing stack, the solution is not complicated.
+At a glance, it looks a sorting problem, however this is a monotonic stack problem.
+Create a monotonically decreasing stack from the given array to solve this.
 The values in the stack are indices.
-Staring from the value of index 0, keep popping or pushing indices one by one
-to keep monotonically decreasing stack index.
-The stack itself is the answer.
+Staring from index 0, repeat popping or pushing indices one by one to keep monotonically decreasing index stack.
+When all values in the given array is checked, the stack itself will be the answer.
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+class BuildingWithAnOceanView {
+public:
+    vector<int> findBuildings(vector<int>& heights) {
+        vector<int> indices;
+        indices.push_back(0);
+        for (int i = 1; i < heights.size(); ++i) {
+            while (!indices.empty() && heights[indices.back()] <= heights[i]) {
+                indices.pop_back();
+            }
+            indices.push_back(i);
+        }
+        return indices;
+    }
+};
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class BuildingWithAnOceanView:
     def findBuildings(self, heights: List[int]) -> List[int]:
@@ -73,6 +105,16 @@ class BuildingWithAnOceanView:
             stack.append(i)
         return stack
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
 - Time: `O(n)`
