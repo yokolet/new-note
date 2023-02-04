@@ -10,14 +10,6 @@ tags:
 - Design
 date: 2022-10-06 14:33 +0900
 ---
-## Introduction
-A design problem always requires a consideration on what data structure(s) to save input data.
-This problem needs a key-value store (hash table) since get method needs key access.
-However, even though the same key is used, the get result depends on the timestamp.
-Given that, it needs another hash table to save timestamps.
-Conveniently, the timestamp is given chronologically to set method, which means it is sorted.
-If the array is sorted, the binary search can be used to find the answer.
-In this problem, the same index of timestamps can be used to get a value.
 
 ## Problem Description
 > Design a time-based key-value data structure that can store multiple values for the same key
@@ -68,15 +60,62 @@ Output
 [null,null,null,"","high","high","low","low"]
 ```
 
-## Analysis
-The solution here uses two dictionaries to save values and timestamps.
-The index is the same for both values and timestamps.
-When a timestamp is given to get method and whose index is i, the corresponding value's index is also i.
-The timestamps associated to the key is sorted.
-If the timestamp is given to get method, use the binary search to find the index in timestamps array.
+## How to Solve
+
+A design problem always requires a consideration on what data structure(s) to save input data.
+This problem needs a key-value store (hash table) since get method needs key access.
+However, even though the same key is used, the get result depends on the timestamp.
+The solution here uses another hash table to save timestamps.
+Given a key for the hash tables, the index is the same for both values and timestamps array.
+
+Conveniently, the timestamp is given chronologically to the set method, which means it is sorted.
+If the array is sorted, the binary search can be used to find the answer.
+When the timestamp is given to get method, use the binary search to find the index in timestamps array.
 The same index in values array is the answer.
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+class TimeMap {
+private:
+    unordered_map<string, vector<string>> values;
+    unordered_map<string, vector<int>> timestamps;
+    int idx;
+
+public:
+    TimeMap() {}
+
+    void set(string key, string value, int timestamp) {
+        values[key].push_back(value);
+        timestamps[key].push_back(timestamp);
+    }
+
+    string get(string key, int timestamp) {
+        if (timestamps.find(key) == timestamps.end()) { return ""; }
+        if (timestamp < timestamps[key][0]) { return ""; }
+        idx = upper_bound(timestamps[key].begin(), timestamps[key].end(), timestamp) - timestamps[key].begin();
+        return idx > 0 ? values[key][idx - 1] : "";
+    }
+};
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class TimeMap:
 
@@ -99,6 +138,16 @@ class TimeMap:
         idx = bisect.bisect_right(ts, timestamp)
         return self.values[key][idx - 1] if idx else ''
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
 - Time: set -- `O(1)`, get -- `O(log(n))`: n is a number of timestamps associated to a key
