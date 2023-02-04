@@ -10,11 +10,6 @@ tags:
 - Design
 date: 2022-10-17 14:33 +0900
 ---
-## Introduction
-When a problem is related to logging, how to handle timestamp is a key to solve the problem.
-Sometime it is already an integer, float, but sometime is is given as a string.
-Whether the timestamp string should be converted to specific datetime object or not is a design decision.
-In this case, using it just as a string makes the code simpler.
 
 ## Problem Description
 > You are given several logs, where each log contains a unique ID and timestamp. Timestamp is a string that has
@@ -68,18 +63,74 @@ logSystem.retrieve("2016:01:01:01:01:01", "2017:01:01:23:00:00", "Year");
 logSystem.retrieve("2016:01:01:01:01:01", "2017:01:01:23:00:00", "Hour");
 ```
 
-## Analysis
+## How to Solve
+
+When a problem is related to logging, how to handle timestamp is a key to solve the problem.
+Sometime it is already a numeric, but sometime it is given as a string.
+Whether the timestamp string should be converted to actual datetime object or not is a design decision.
+In this case, using it just as a string makes the code simpler.
+
 The given timestamp strings are like: 'yyyy:mm:dd:hh:MM:ss' always.
 Additionally, all are zero padded.
 This means comparison by string is easy.
 The granularity parameter specified the length of string comparison.
 If it is 'Year', the first 4 letters should be compared.
 If it is 'Hour', the first 13 letters should be compared.
-Given that, the solution here has a granularity to index table.
+And so on.
+Given that, the solution here has a granularity to length (C++) / index (Python) table.
 To retrieve the ids in the range, timestamp strings are compared up to the granularity index.
 The answer is straightforward.
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+class LogSystem {
+private:
+    vector<pair<int, string>> logs;
+    unordered_map<string, int> lengths = {
+        {"Year", 4}, {"Month", 7}, {"Day", 10},
+        {"Hour", 13}, {"Minute", 16}, {"Second", 19}
+    };
+
+public:
+    LogSystem() {}
+
+    void put(int id, string timestamp) {
+        logs.push_back({id, timestamp});
+    }
+
+    vector<int> retrieve(string start, string end, string granularity) {
+        string s = start.substr(0, lengths[granularity]);
+        string e = end.substr(0, lengths[granularity]);
+        vector<int> result;
+        for (auto log : logs) {
+            string tm = log.second.substr(0, lengths[granularity]);
+            if (s <= tm && tm <= e) {
+                result.push_back(log.first);
+            }
+        }
+        return result;
+    }
+};
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class LogSystem:
 
@@ -90,16 +141,24 @@ class LogSystem:
             'Hour': 14, 'Minute': 17, 'Second': 20
         }
 
-
     def put(self, id: int, timestamp: str) -> None:
         self.logs.append((id, timestamp))
-        
 
     def retrieve(self, start: str, end: str, granularity: str) -> List[int]:
         idx = self.indices[granularity]
         s, e = start[:idx], end[:idx]
         return [id_ for id_, timestamp in self.logs if s <= timestamp[:idx] <= e]
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
 - Time: put -- `O(1)`, retrieve -- `O(n)`: n is a total number of logs
