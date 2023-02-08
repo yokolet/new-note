@@ -48,12 +48,13 @@ Explanation: Nodes 6, 7, and 10 are in the range [6, 10]. 6 + 7 + 10 = 23.
 ## How to Solve
 This problem can be solved in multiple ways such that the breadth-first search, depth-first search, post-order or
 in-order traversal.
-The solution here took the breadth-first search approach.
+The solution here took the depth-first search (recursion) approach.
 Since the tree is BST, a direction to go left or right depends on the root value.
-When the root value is between low and high, it goes both directions.
-If the root value is greater than high, it goes to left.
-If the root value is less than low, it goes to right.
-As the problem describes, if the root value is between low and high inclusive, add it up to the total.
+In another word, if the root value is smaller than low, no need to go left any further.
+Same as right subtree, if the root value is greater than high, no need to go right any further.
+Rather than controlling the flow by the root value comparison, the solution here sets null to the left or right node.
+When the recursion go deeper, it returns 0 if the root is null.
+When the root value is between low and high, the root value is added to the result from left and right subtrees.
 
 ## Solution
 
@@ -75,26 +76,12 @@ As the problem describes, if the root value is between low and high inclusive, a
 class RangeSumOfBST {
 public:
     int rangeSumBST(TreeNode* root, int low, int high) {
-        queue<TreeNode*> q({root});
-        int total = 0;
-        while (!q.empty()) {
-            TreeNode *cur = q.front();
-            q.pop();
-            if (low <= cur->val && cur->val <= high) {
-                total += cur->val;
-                if (cur->left) {
-                    q.push(cur->left);
-                }
-                if (cur->right) {
-                    q.push(cur->right);
-                }
-            } else if (high < cur->val && cur->left) {
-                q.push(cur->left);
-            } else if (cur->val < low && cur->right) {
-                q.push(cur->right);
-            }
-        }
-        return total;
+        if (!root) return 0;
+        if (root->val < low) { root->left = nullptr; }
+        if (root-> val > high) { root->right = nullptr; }
+        return rangeSumBST(root->left, low, high) +
+                rangeSumBST(root->right, low, high) +
+                (low <= root->val && root->val <= high ? root->val : 0);
     }
 };
 ```
@@ -108,7 +95,28 @@ public:
 
 {% tab solution JavaScript %}
 ```js
-
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {number} low
+ * @param {number} high
+ * @return {number}
+ */
+var rangeSumBST = function(root, low, high) {
+    if (root == null) { return 0; }
+    if (root.val < low) { root.left = null; }
+    if (root.val > high) { root.high = null; }
+    return rangeSumBST(root.left, low, high) +
+            rangeSumBST(root.right, low, high) +
+            (low <= root.val && root.val <= high ? root.val : 0);
+};
 ```
 {% endtab %}
 
@@ -122,21 +130,12 @@ public:
 #         self.right = right
 class RangeSumOfBST:
     def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int:
-        queue = [root]
-        total = 0
-        while queue:
-            cur = queue.pop(0)
-            if low <= cur.val <= high:
-                total += cur.val
-                if cur.left:
-                    queue.append(cur.left)
-                if cur.right:
-                    queue.append(cur.right)
-            elif high < cur.val and cur.left:
-                queue.append(cur.left)
-            elif cur.val < low and cur.right:
-                queue.append(cur.right)
-        return total
+        if not root: return 0
+        if root.val < low: root.left = None
+        if root.val > high: root.high = None
+        return self.rangeSumBST(root.left, low, high) + \
+                self.rangeSumBST(root.right, low, high) + \
+                (root.val if low <= root.val <= high else 0)
 ```
 {% endtab %}
 
@@ -152,4 +151,4 @@ class RangeSumOfBST:
 
 ## Complexities
 - Time: `O(n)`
-- Space: `O(n)`
+- Space: `O(h)` -- h: height of a tree
