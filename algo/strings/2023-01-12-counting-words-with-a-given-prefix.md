@@ -69,7 +69,20 @@ public:
 
 {% tab solution JavaScript %}
 ```js
-
+/**
+ * @param {string[]} words
+ * @param {string} pref
+ * @return {number}
+ */
+var prefixCount = function(words, pref) {
+    let result = 0;
+    for (const w of words) {
+        if (w.startsWith(pref)) {
+            result++;
+        }
+    }
+    return result;
+};
 ```
 {% endtab %}
 
