@@ -68,7 +68,7 @@ The amount of new area painted on day 1 is 0.
 ```
 
 ## How to Solve
-As this problem is categorized to the hard, it is a hard problem.
+As this problem is categorized to the hard, it is really a hard problem.
 Easy solution such that all range checks will get the time limit exceeded error.
 The problem requires an effective solution.
 Various approaches are there to solve this problem,
@@ -76,14 +76,13 @@ for example, interval merges, binary search, ordered set, segment tree and more.
 
 Among those, the solution here took the hash table approach.
 If the given start and end range doesn't exist in the hash table,
-save all values from start to end (end is not included) will be added to the hash table
+save all values from start to end (end is not included) as a key to the hash table
 with the end as a value.
 If the given start and end range overlaps to the existing range(s),
-update the end value by a bigger one.
+update the end value to a bigger one.
 Also, skip the check to the original end value.
+When a single work check is completed, add the work sum to the worklog array.
 
-In the inner loop, the start value shifts one by one, so the work will grow one by one.
-When the all values between start and end are checked, add the work to the worklog array.
 
 ## Solution
 
@@ -126,7 +125,29 @@ public:
 
 {% tab solution JavaScript %}
 ```js
-
+/**
+ * @param {number[][]} paint
+ * @return {number[]}
+ */
+var amountPainted = function(paint) {
+  let painted = new Map(), worklog = [];
+  for (let [start, end] of paint) {
+    let work = 0;
+    while (start < end) {
+      if (painted.has(start)) {
+        let prev_end = painted.get(start);
+        painted.set(start, Math.max(prev_end, end));
+        start = prev_end;
+      } else {
+        painted.set(start, end);
+        start++;
+        work++;
+      }
+    }
+    worklog.push(work);
+  }
+  return worklog;
+};
 ```
 {% endtab %}
 
