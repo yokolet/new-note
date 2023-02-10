@@ -8,10 +8,6 @@ tags:
 - String
 date: 2022-10-18 15:30 +0900
 ---
-## Introduction
-This is a relatively straightforward problem.
-Just count the same character and add count + character to the result.
-Both iterative and recursion work to get the final answer.
 
 ## Problem Description
 > The count-and-say sequence is a sequence of digit strings defined by the recursive formula:
@@ -52,13 +48,80 @@ countAndSay(3) = say "11" = two 1's = "21"
 countAndSay(4) = say "21" = one 2 + one 1 = "12" + "11" = "1211"
 ```
 
-## Analysis
+## How to Solve
+This is a relatively straightforward problem.
+Just count the same character and add count + character to the result.
+Both iterative and recursion work to get the final answer.
+
 The solution here took an iterative approach.
 Check the current character is the same as the previous one.
-If it is the same, count up. If not, update the result and initialize parameters.
+If it is the same, count up. If not, update the result and initialize the counter.
 This repeats n - 1 times. Then, we get the answer.
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+class CountAndSay {
+public:
+    string countAndSay(int n) {
+        string result = "1";
+        for (int k = 0; k < n - 1; ++k) {
+            char prev = '\0';
+            string cur;
+            int cnt = 0;
+            for (int i = 0; i < result.size(); ++i) {
+                if (prev && prev != result[i]) {
+                    cur += (to_string(cnt) + prev);
+                    cnt = 0;
+                }
+                prev = result[i];
+                cnt++;
+            }
+            cur += (to_string(cnt) + prev);
+            result = cur;
+        }
+        return result;
+    }
+};
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+/**
+ * @param {number} n
+ * @return {string}
+ */
+var countAndSay = function(n) {
+  let result = "1";
+  for (let k = 0; k < n - 1; k++) {
+    let prev = '', cur = '', cnt = 0;
+    for (let i = 0; i < result.length; i++) {
+      if (prev && prev != result[i]) {
+        cur += (cnt.toString() + prev);
+        cnt = 0;
+      }
+      prev = result[i];
+      cnt++;
+    }
+    cur += (cnt.toString() + prev);
+    result = cur;
+  }
+  return result;
+};
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class CountAndSay:
     def countAndSay(self, n: int) -> str:
@@ -75,6 +138,16 @@ class CountAndSay:
             result = cur
         return result
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
 - Time: `O(4^(n/3))`
