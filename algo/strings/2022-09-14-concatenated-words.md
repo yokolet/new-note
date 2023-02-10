@@ -65,7 +65,7 @@ If thr dfs returns truthy, add the word to the result array.
 
 {% tab solution C++ %}
 ```cpp
-class Solution {
+class ConcatenatedWords {
 private:
     bool dfs(unordered_set<string> &word_set, vector<int> &memo, string &word, int idx) {
         if (idx == word.size()) { return 1; }

@@ -71,7 +71,7 @@ When the number of groups becomes 1, the answer is there.
 
 {% tab solution C++ %}
 ```cpp
-class Solution {
+class TheEarliestMomentWhenEveryoneBecomeFriends {
 private:
     vector<int> groups;
 
@@ -123,7 +123,7 @@ public:
 
 {% tab solution Python %}
 ```python
-class Solution:
+class TheEarliestMomentWhenEveryoneBecomeFriends:
     def earliestAcq(self, logs: List[List[int]], n: int) -> int:
         groups = [i for i in range(n)]
 

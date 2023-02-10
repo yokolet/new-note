@@ -75,7 +75,7 @@ and returns it. Ruby solution uses an instance variable. C++ solution passes a r
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-class Solution {
+class BinaryTreeMaximumPathSum {
 public:
     int traverse(TreeNode *root, int &max_v)
     {
@@ -116,7 +116,7 @@ public:
 #         self.val = val
 #         self.left = left
 #         self.right = right
-class Solution:
+class BinaryTreeMaximumPathSum:
     def maxPathSum(self, root: Optional[TreeNode]) -> int:
       def traverse(root: Optional[TreeNode], max_v: int):
         if not root:

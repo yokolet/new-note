@@ -63,7 +63,7 @@ When all characters are eliminated, we get the answer.
 
 {% tab solution C++ %}
 ```cpp
-class Solution {
+class MinimumNumberOfMovesToMakePalindrome {
 public:
     int minMovesToMakePalindrome(string s) {
         int result = 0;
@@ -97,7 +97,7 @@ public:
 
 {% tab solution Python %}
 ```python
-class Solution:
+class MinimumNumberOfMovesToMakePalindrome:
     def minMovesToMakePalindrome(self, s: str) -> int:
         result = 0
         while len(s):

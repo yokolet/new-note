@@ -84,7 +84,7 @@ This way, we can find the answer.
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-class Solution {
+class StepByStepDirectionsFromABinaryTreeNodeToAnother {
 private:
     bool dfs(TreeNode *root, int val, stack<string> &path) {
         if (root->val == val) {

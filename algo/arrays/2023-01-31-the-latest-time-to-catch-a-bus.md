@@ -83,7 +83,7 @@ When the result time becomes unique, we find the answer.
 
 {% tab solution C++ %}
 ```cpp
-class Solution {
+class TheLatestTimeToCatchABus {
 public:
     int latestTimeCatchTheBus(vector<int>& buses, vector<int>& passengers, int capacity) {
         sort(buses.begin(), buses.end());
@@ -120,7 +120,7 @@ public:
 
 {% tab solution Python %}
 ```python
-class Solution:
+class TheLatestTimeToCatchABus:
     def latestTimeCatchTheBus(self, buses: List[int], passengers: List[int], capacity: int) -> int:
         buses.sort()
         passengers.sort()

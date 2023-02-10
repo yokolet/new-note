@@ -68,7 +68,7 @@ Insert the root value to the array of the level index.
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-class Solution {
+class FindLeavesOfBinaryTree {
 private:
     int traverse(TreeNode *root, vector<vector<int>> &levels) {
         if (!root) { return -1; }

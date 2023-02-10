@@ -65,7 +65,7 @@ If the matching word is found in start words, count up.
 
 {% tab solution C++ %}
 ```cpp
-class Solution {
+class CountWordsObtainedAfterAddingALetter {
 public:
     int wordCount(vector<string>& startWords, vector<string>& targetWords) {
         unordered_set<string> starts;
@@ -103,7 +103,7 @@ public:
 
 {% tab solution Python %}
 ```python
-class Solution:
+class CountWordsObtainedAfterAddingALetter:
     def wordCount(self, startWords: List[str], targetWords: List[str]) -> int:
         starts = set()
         for word in startWords:
