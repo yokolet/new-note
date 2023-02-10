@@ -82,7 +82,27 @@ public:
 
 {% tab solution JavaScript %}
 ```js
-
+/**
+ * @param {number[][]} ranges
+ * @param {number} left
+ * @param {number} right
+ * @return {boolean}
+ */
+var isCovered = function(ranges, left, right) {
+  for (let i = left; i <= right; i++) {
+    let found = false;
+    for (const [s, e] of ranges) {
+      if (s <= i && i <= e) {
+        found = true;
+        break;
+      }
+    }
+    if (!found) {
+      return false;
+    }
+  }
+  return true;
+};
 ```
 {% endtab %}
 
@@ -104,7 +124,25 @@ class CheckIfAllTheIntegersInARangeAreCovered:
 
 {% tab solution Ruby %}
 ```ruby
-
+# @param {Integer[][]} ranges
+# @param {Integer} left
+# @param {Integer} right
+# @return {Boolean}
+def is_covered(ranges, left, right)
+    (left..right).each do |i|
+        found = false
+        ranges.each do |s, e|
+            if s <= i && i <= e
+                found = true
+                break
+            end
+        end
+        if (!found)
+            return false
+        end
+    end
+    return true
+end
 ```
 {% endtab %}
 
