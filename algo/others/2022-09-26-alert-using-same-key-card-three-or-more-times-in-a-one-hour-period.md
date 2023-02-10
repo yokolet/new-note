@@ -10,11 +10,6 @@ tags:
 - Sorting
 date: 2022-09-26 14:30 +0900
 ---
-## Introduction
-The problem asks individual's 3 consecutive time differences.
-Sorting is the first to be done.
-We should focus on 3 consecutive time differences, so the approach would be a sliding window or two pointers.
-In the end, names should be sorted to meet the requirement.
 
 ## Problem Description
 > LeetCode company workers use key-cards to unlock office doors.
@@ -56,34 +51,121 @@ Output: ["bob"]
 Explanation: "bob" used the keycard 3 times in a one-hour period ("21:00","21:20", "21:30").
 ```
 
-## Analysis
-The first step is to sort by name and time.
-Then check each person's 3 consecutive time records.
-If the first and last time difference is less than or equal to 60, add the name to the list.
-The first of three should be popped out since next three set of time records will be used next time.
-At last, sort the names as the problem requested.
+## How to Solve
+The problem asks individual's 3 consecutive time differences.
+The hash table is a good data structure to save name and a list of key times pair.
+Then, sort times of each person and compare.
+
+The comparison will be made for each person's 3 consecutive time records.
+It means the time of index i and i + 2 should be check whether the difference is less than or equal to 60 minutes.
+If it is bigger, add the name to the result list.
+At last, sort the names in the result list as the problem requires.
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+class SameKeyCardAlert {
+private:
+    int getMins(string &time) {
+        return stoi(time.substr(0, 2)) * 60 + stoi(time.substr(3));
+    }
+
+public:
+    vector<string> alertNames(vector<string>& keyName, vector<string>& keyTime) {
+        unordered_map<string, vector<int>> workers;
+        vector<string> alerts;
+        for (int i = 0; i < keyName.size(); ++i) {
+            workers[keyName[i]].push_back(getMins(keyTime[i]));
+        }
+        for (auto const &worker : workers) {
+            vector<int> times = worker.second;
+            sort(times.begin(), times.end());
+            for (int idx = 0; idx < times.size() - 2; ++idx) {
+                if (times[idx + 2] - times[idx] <= 60) {
+                    alerts.push_back(worker.first);
+                    break;
+                }
+            }
+        }
+        sort(alerts.begin(), alerts.end());
+        return alerts;
+    }
+};
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+/**
+ * @param {string[]} keyName
+ * @param {string[]} keyTime
+ * @return {string[]}
+ */
+var alertNames = function(keyName, keyTime) {
+  const getMin = function(time) {
+    return parseInt(time.substring(0, 2)) * 60 + parseInt(time.substring(3));
+  }
+  let workers = new Map();
+  let alerts = new Array();
+  for (let i = 0; i < keyName.length; i++) {
+    let times = workers.has(keyName[i]) ? workers.get(keyName[i]) : new Array();
+    times.push(getMin(keyTime[i]));
+    workers.set(keyName[i], times);
+  }
+  workers.forEach((times, name) => {
+    times.sort((a, b) => { return a - b; });
+    for (let idx = 0; idx < times.length - 2; idx++) {
+      if (times[idx + 2] - times[idx] <= 60) {
+        alerts.push(name);
+        break;
+      }
+    }
+  })
+  alerts.sort();
+  return alerts;
+};
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class SameKeyCardAlert:
     def alertNames(self, keyName: List[str], keyTime: List[str]) -> List[str]:
-        def getMins(t):
-            hour, minute = t.split(':')
+        def getMins(time):
+            hour, minute = time[:2], time[3:]
             return int(hour) * 60 + int(minute)
-        
-        workers, alerts = collections.defaultdict(list), set()
-        for name, time in sorted(zip(keyName, keyTime)):
-            if name in alerts:
-                continue
-            workers[name].append(getMins(time))
-            if len(workers[name]) == 3:
-                prev_t = workers[name].pop(0)
-                if (workers[name][-1] - prev_t) <= 60:
-                    alerts.add(name)
 
-        return sorted(list(alerts))
+        workers, alerts = defaultdict(list), []
+        for name, time in zip(keyName, keyTime):
+            workers[name].append(getMins(time))
+        for name in workers:
+            times = sorted(workers[name])
+            for idx, time in enumerate(times):
+                if idx + 2 < len(times) and times[idx + 2] - time <= 60:
+                    alerts.append(name)
+                    break;
+        return sorted(alerts)
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
-- Time: `O(n)` -- n: size of input arrays
-- Space: `O(m)` -- m: number of unique workers
+- Time: `O(n + m)` -- n: size of input arrays, m: number of unique workers
+- Space: `O(m)`
