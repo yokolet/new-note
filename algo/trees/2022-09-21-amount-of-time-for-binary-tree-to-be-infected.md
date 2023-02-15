@@ -90,7 +90,8 @@ In the end, we get the answer.
 #include <vector>
 
 using namespace std;
-class Solution {
+
+class AmountOfTimeForBinaryTreeToBeInfected {
 private:
     unordered_map<int, vector<int>> graph;
     void buildGraph(TreeNode *root) {
