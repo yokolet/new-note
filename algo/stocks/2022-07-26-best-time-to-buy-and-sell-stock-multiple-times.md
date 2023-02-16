@@ -1,14 +1,11 @@
 ---
 layout: post
-title: Best Time to Buy and Sell Stock -- Multiple Times
+title: Best Time to Buy and Sell Stock II -- Multiple Times
 date: 2022-07-26 16:10 +0900
 algo_menubar: algo_menu
 hero_height: is-small
 tags: [Medium, Array, DP, Greedy]
 ---
-## Introduction
-This is the second buy-sell-stock problem which has a slight variation to the basic one.
-In this problem, we can buy and sell stock as many times we want.
 
 ## Problem Description
 > You are given an integer array `prices` where `prices[i]` is the price of a given stock on the i-th day.
@@ -18,7 +15,12 @@ In this problem, we can buy and sell stock as many times we want.
 > However, you can buy it then immediately sell it on the same day.
 >
 > Find and return the maximum profit you can achieve.
-> 
+>
+>
+> Constraints:
+> - `1 <= prices.length <= 3 * 10**4`
+> - `0 <= prices[i] <= 10**4`
+>
 > [https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/)
 
 ## Examples
@@ -43,38 +45,121 @@ Answer: 0
 Explanation: the array value is ever descreasing. There is no profit available.
 ```
 
-## Analysis
-This is an interesting problem. It looks we should find multiple minimums and compare profits.
-It might easily go to O(n^2), brute force solution.
-However, if we look at the difference of each day, we should add up every day's profit unless it it not negative.
-This can be done because we can sell and buy at the same day.
-It turns out, the solution is simple.
+## How to Solve
+This is the second buy-sell-stock problem which has a slight variation to the basic one.
+In this problem, we can buy and sell stock as many times we want.
+
+It is an interesting problem. It looks we should find multiple minimums and compare profits.
+The brute force solution easily goes to O(n^2) time complexity.
+However, if we look at the difference of each day, we should simply add up every day's profit unless it it not negative.
+This is because we can sell and buy at the same day.
+It turns out, the solution is not complicated.
+
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
 ```cpp
 #include <vector>
 #include <iostream>
+
 using namespace std;
 
 class BestTimeToBuyAndSellStockTwo
 {
 public:
-  int maxProfit(vector<int> &prices)
-  {
-    if (prices.empty())
-      return 0;
-    int max_v = 0;
-    for (int i = 1; i <prices.size(); ++i)
-    {
-      if (prices[i] > prices[i - 1])
-      {
-        max_v += prices[i] - prices[i - 1];
-      }
+  public:
+    int maxProfit(vector<int>& prices) {
+        if (prices.empty()) { return 0; }
+        int profit = 0;
+        for (int i = 1; i <prices.size(); ++i)
+        {
+          if (prices[i] > prices[i - 1])
+          {
+            profit += prices[i] - prices[i - 1];
+          }
+        }
+        return profit;
     }
-    return max_v;
-  }
 };
 ```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+class Solution {
+    public int maxProfit(int[] prices) {
+        if (prices.length == 0) { return 0; }
+        int profit = 0;
+        for (int i = 1; i < prices.length; ++i) {
+            if (prices[i] > prices[i - 1]) {
+              profit += prices[i] - prices[i - 1];
+            }
+        }
+        return profit;
+    }
+}
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+/**
+ * @param {number[]} prices
+ * @return {number}
+ */
+var maxProfit = function(prices) {
+    if (prices.length == 0) { return 0; }
+    let profit = 0;
+    for (let i = 1; i < prices.length; i++) {
+        if (prices[i] > prices[i - 1]) {
+            profit += (prices[i] - prices[i - 1]);
+        }
+    }
+    return profit;
+};
+```
+{% endtab %}
+
+{% tab solution Python %}
+```python
+from typing import List
+
+class BestTimeToBuyAndSellStockTwo:
+    def maxProfit(self, prices: List[int]) -> int:
+        if not prices:
+            return 0
+        profit = 0
+        for i in range(1, len(prices)):
+            if prices[i] > prices[i - 1]:
+                profit += prices[i] - prices[i - 1]
+        return profit
+```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+# @param {Integer[]} prices
+# @return {Integer}
+def max_profit(prices)
+    if prices.empty?
+      return 0
+    end
+    profit = 0
+    (1...prices.length).each do |i|
+      if prices[i] > prices[i - 1]
+        profit += prices[i] - prices[i - 1]
+      end
+    end
+    profit
+end
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
 - Time: O(n) – n: length of the input array.
