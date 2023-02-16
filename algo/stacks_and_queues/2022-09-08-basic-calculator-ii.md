@@ -10,10 +10,6 @@ tags:
 - Math
 date: 2022-09-08 14:38 +0900
 ---
-## Introduction
-This is the simplest basic calculator problem.
-The given string doesn't include parentheses, so the precedence handling is straightforward.
-The problem can be solved using a stack which saves values.
 
 ## Problem Description
 > Given a string `s` which represents an expression, evaluate this expression and return its value.
@@ -54,20 +50,109 @@ Input: s = " 3+5 / 2 "
 Output: 5
 ```
 
-## Analysis
-We should handle just 4 types of operators.
-Apparently, those operators need 2 values,
-so the process goes one step behind compared to currently looking at operator.
-It starts from saving current digits in a variable.
-When one of the operator is found, perform previous operator. Its default is `+`.
-At the very first operator in the string,
-saves the digits in the stack and operator in the variable.
-The second operator pops out the previous value from the stack and apply previous operator.
-The calculation result is pushed to the stack.
+## How to Solve
+This is the simplest problem among the basic calculator series.
+The given string doesn't include parentheses, so the precedence handling is straightforward.
+Operators are just four which need only two values apparently.
+The calculation goes one step behind to the currently saved operator.
+
+The problem can be solved using a stack which saves values.
+The solution here starts from saving current digits in a variable.
+When one of the operator is found, perform the previous operation.
+Pop out the previous value from the stack and apply previous operator.
+Then, save the calculation result to the stack and update the operator.
 
 In the end, take sum of values in the stack, which is the answer.
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+#include <algorithm>
+#include <stack>
+
+using namespace std;
+
+class BasicCalculatorTwo {
+public:
+    int calculate(string s) {
+        s.erase(remove(s.begin(), s.end(), ' '), s.end());
+        stack<int> st;
+        int digits = 0;
+        char op = '+';
+        int x;
+        for (int i = 0; i < s.size(); ++i) {
+            if (isdigit(s[i])) {
+                digits = digits * 10 + (s[i] - '0');
+            }
+            if (!isdigit(s[i]) || i == s.size() - 1) {
+                if (op == '+') {
+                    st.push(digits);
+                } else if (op == '-') {
+                    st.push(-digits);
+                } else if (op == '*') {
+                    x = st.top();
+                    st.pop();
+                    st.push(x * digits);
+                } else {
+                    x = st.top();
+                    st.pop();
+                    st.push(x / digits);
+                }
+                digits = 0, op = s[i];
+            }
+        }
+        int result = 0;
+        while (!st.empty()) {
+            result += st.top();
+            st.pop();
+        }
+        return result;
+    }
+};
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var calculate = function(s) {
+  s = s.replaceAll(" ", "");
+  let op = "+", digits = 0, stack = new Array();
+  for (let i  = 0; i < s.length; i++) {
+    if ('0' <= s[i] && s[i] <= '9') {
+      digits = digits * 10 + Number(s[i]);
+    }
+    if (s[i] < '0' || '9' < s[i] || i == s.length - 1) {
+      if (op === "+") {
+        stack.push(digits);
+      } else if (op === "-") {
+        stack.push(-digits);
+      } else if (op === "*") {
+        stack.push(stack.pop() * digits);
+      } else {
+        stack.push(Math.trunc(stack.pop() / digits));
+      }
+      digits = 0, op = s[i];
+    }
+  }
+  return stack.reduce((acc, cur) => acc + cur, 0);
+};
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class BasicCalculatorTwo:
     def calculate(self, s: str) -> int:
@@ -91,8 +176,17 @@ class BasicCalculatorTwo:
                 digits, op = '', c
         return sum(stack)
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
 - Time: `O(n)`
 - Space: `O(n)`
- 

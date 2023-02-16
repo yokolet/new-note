@@ -1,6 +1,6 @@
 - label: Algorithm / Stacks and Queues
   items:
-    - name: Basic Calculator -- Simple
+    - name: Basic Calculator II
       link: /algo/stacks_and_queues/2022-09-08-basic-calculator-ii
     - name: Buildings With an Ocean View
       link: /algo/stacks_and_queues/2022-09-07-buildings-with-an-ocean-view
