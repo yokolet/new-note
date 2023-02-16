@@ -1,17 +1,11 @@
 ---
 layout: post
-title: Best Time to Buy and Sell Stock -- At Most K Transactions
+title: Best Time to Buy and Sell Stock IV -- At Most K Transactions
 date: 2022-07-26 23:09 +0900
 algo_menubar: algo_menu
 hero_height: is-small
 tags: [Hard, Array, DP]
 ---
-## Introduction
-This is the fourth buy-sell-stock problem which has another variation to the basic one.
-In this problem, we can buy and sell stock at most given k times.
-This is not an easy problem.
-It looks just an extension of at most two transactions problem.
-However, bi-directional profit calculation doesn't work any more.
 
 ## Problem Description
 > You are given an integer array `prices` where `prices[i]` is the price of a given stock on the i-th day, and an integer `k`.
@@ -37,7 +31,13 @@ buy: index 1, sell: index 2, profit: 4
 buy: index 4, sell: index 5, profit: 3
 ```
 
-## Analysis
+## How to Solve
+This is the fourth buy-sell-stock problem which has another variation to the basic one.
+In this problem, we can buy and sell stock at most given k times.
+This is not an easy problem.
+It looks just an extension of at most two transactions problem.
+However, bi-directional profit calculation doesn't work any more.
+
 In general, this kind of problems can be solved by DP.
 For a memoization, the solution uses a matrix of k + 1 * n (n is a size of prices).
 Starting from smaller k, calculate larger k one by one.
@@ -50,24 +50,10 @@ In the end, the answer will be bottom right of the memoization matrix.
 
 
 ## Solution
-- Python
 
-```python
-class BestTimeToBuyAndSellStockFour:
-    def maxProfit(self, k: int, prices: List[int]) -> int:
-        n = len(prices)
-        if n == 0:
-            return 0
-        memo = [[0 for _ in range(n)] for _ in range(k + 1)]
-        for i in range(1, k + 1):
-            prev = float('-inf')
-            for j in range(1, n):
-                prev = max(prev, memo[i - 1][j - 1] - prices[j - 1])
-                memo[i][j] = max(memo[i][j - 1], prev + prices[j])
-        return memo[k][n - 1]
-```
-- C++
+{% tabs solution is-boxed %}
 
+{% tab solution C++ %}
 ```cpp
 #include <vector>
 #include <iostream>
@@ -96,6 +82,64 @@ public:
   }
 };
 ```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+/**
+ * @param {number} k
+ * @param {number[]} prices
+ * @return {number}
+ */
+var maxProfit = function(k, prices) {
+  const n = prices.length;
+  if (n === 0) { return 0; }
+  const zeros = (m, n) => [...Array(m)].map(e => Array(n).fill(0));
+  const memo = zeros(k + 1, n);
+  let prev;
+  for (let i = 1; i <= k; i++) {
+    prev = Number.MIN_SAFE_INTEGER;
+    for (let j = 1; j < n; j++) {
+      prev = Math.max(prev, memo[i - 1][j - 1] - prices[j - 1]);
+      memo[i][j] = Math.max(memo[i][j - 1], prev + prices[j]);
+    }
+  }
+  return memo[k][n - 1];
+};
+```
+{% endtab %}
+
+{% tab solution Python %}
+```python
+class BestTimeToBuyAndSellStockFour:
+    def maxProfit(self, k: int, prices: List[int]) -> int:
+        n = len(prices)
+        if n == 0:
+            return 0
+        memo = [[0 for _ in range(n)] for _ in range(k + 1)]
+        for i in range(1, k + 1):
+            prev = float('-inf')
+            for j in range(1, n):
+                prev = max(prev, memo[i - 1][j - 1] - prices[j - 1])
+                memo[i][j] = max(memo[i][j - 1], prev + prices[j])
+        return memo[k][n - 1]
+```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
 - Time: O(kn) – n: length of the input array.
