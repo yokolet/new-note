@@ -11,7 +11,12 @@ tags: [Hard, Array, DP]
 > You are given an integer array `prices` where `prices[i]` is the price of a given stock on the i-th day, and an integer `k`.
 >
 > Find the maximum profit you can achieve. You may complete at most `k` transactions.
-> 
+>
+> Constraints:
+> - `1 <= k <= 100`
+> - `1 <= prices.length <= 1000`
+> - `0 <= prices[i] <= 1000`
+>
 > [https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/)
 
 ## Examples
