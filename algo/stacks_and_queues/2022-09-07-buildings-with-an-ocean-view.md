@@ -50,11 +50,11 @@ Explanation: Only building 3 has an ocean view.
 
 ## How to Solve
 
-At a glance, it looks a sorting problem, however this is a monotonic stack problem.
-Create a monotonically decreasing stack from the given array to solve this.
+At a glance, it looks a sorting problem, however this can be solved by a monotonic stack.
 The values in the stack are indices.
+Create a monotonically decreasing stack from the given array since the ocean is on the right, back of the given array.
 Staring from index 0, repeat popping or pushing indices one by one to keep monotonically decreasing index stack.
-When all values in the given array is checked, the stack itself will be the answer.
+When all values in the given array is checked, the stack itself is the answer.
 
 ## Solution
 
@@ -62,11 +62,14 @@ When all values in the given array is checked, the stack itself will be the answ
 
 {% tab solution C++ %}
 ```cpp
+#include <vector>
+
+using namespace std;
+
 class BuildingWithAnOceanView {
 public:
     vector<int> findBuildings(vector<int>& heights) {
-        vector<int> indices;
-        indices.push_back(0);
+        vector<int> indices{0};
         for (int i = 1; i < heights.size(); ++i) {
             while (!indices.empty() && heights[indices.back()] <= heights[i]) {
                 indices.pop_back();
@@ -81,22 +84,52 @@ public:
 
 {% tab solution Java %}
 ```java
+import java.util.ArrayList;
+import java.util.List;
 
+class BuildingWithAnOceanView {
+    public int[] findBuildings(int[] heights) {
+        List<Integer> indices = new ArrayList<Integer>();
+        indices.add(0);
+        for (int i = 1; i < heights.length; ++i) {
+            while (!indices.isEmpty() && heights[indices.get(indices.size() - 1)] <= heights[i]) {
+                indices.remove(indices.size() - 1);
+            }
+            indices.add(i);
+        }
+        int[] result = new int[indices.size()];
+        for (int i = 0; i < indices.size(); ++i) { result[i] = indices.get(i); }
+        return result;
+    }
+}
 ```
 {% endtab %}
 
 {% tab solution JavaScript %}
 ```js
-
+/**
+ * @param {number[]} heights
+ * @return {number[]}
+ */
+var findBuildings = function(heights) {
+  const indices = [0];
+  for (let i = 1; i < heights.length; i++) {
+    while (indices.length > 0 && heights[indices.slice(-1)] <= heights[i]) {
+      indices.pop();
+    }
+    indices.push(i);
+  }
+  return indices;
+};
 ```
 {% endtab %}
 
 {% tab solution Python %}
 ```python
+from typing import List
+
 class BuildingWithAnOceanView:
     def findBuildings(self, heights: List[int]) -> List[int]:
-        if not heights:
-            return []
         n, stack = len(heights), []
         stack.append(0)
         for i in range(1, n):
@@ -109,7 +142,18 @@ class BuildingWithAnOceanView:
 
 {% tab solution Ruby %}
 ```ruby
-
+# @param {Integer[]} heights
+# @return {Integer[]}
+def find_buildings(heights)
+    indices = [0]
+    (1...heights.size).each do |i|
+        while !indices.empty? && heights[indices[-1]] <= heights[i]
+            indices.pop
+        end
+        indices << i
+    end
+    return indices
+end
 ```
 {% endtab %}
 
