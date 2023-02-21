@@ -76,7 +76,22 @@ public:
 
 {% tab solution Java %}
 ```java
-
+class CheckIfAllTheIntegersInARangeAreCovered {
+    public boolean isCovered(int[][] ranges, int left, int right) {
+        for (int i = left; i <= right; ++i) {
+            boolean found = false;
+            for (int[] range : ranges) {
+                int s = range[0], e = range[1];
+                if (s <= i && i <= e) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) { return false; }
+        }
+        return true;
+    }
+}
 ```
 {% endtab %}
 
