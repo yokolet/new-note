@@ -71,13 +71,37 @@ public:
 
 {% tab solution Java %}
 ```java
-
+class ClimbingStairs {
+    public int climbStairs(int n) {
+        if (n <= 2) { return n; }
+        int prevprev = 1, prev = 2, cur = 0;
+        for (int i = 2; i < n; ++i) {
+            cur = prevprev + prev;
+            prevprev = prev;
+            prev= cur;
+        }
+        return cur;
+    }
+}
 ```
 {% endtab %}
 
 {% tab solution JavaScript %}
 ```js
-
+/**
+ * @param {number} n
+ * @return {number}
+ */
+var climbStairs = function(n) {
+    if (n <= 2) { return n; }
+    let prevprev = 1, prev = 2, cur = 0;
+    for (let i = 2; i < n; i++) {
+        cur = prevprev + prev;
+        prevprev = prev;
+        prev = cur;
+    }
+    return cur;
+};
 ```
 {% endtab %}
 
@@ -99,7 +123,20 @@ class ClimbingStairs:
 
 {% tab solution Ruby %}
 ```ruby
-
+# @param {Integer} n
+# @return {Integer}
+def climb_stairs(n)
+    if n <= 2
+        return n
+    end
+    prevprev, prev, cur = 1, 2, 0
+    (2...n).each do |_|
+        cur = prevprev + prev
+        prevprev = prev
+        prev = cur
+    end
+    return cur
+end
 ```
 {% endtab %}
 
