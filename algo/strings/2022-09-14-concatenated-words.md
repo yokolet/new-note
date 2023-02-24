@@ -98,7 +98,35 @@ public:
 
 {% tab solution Java %}
 ```java
+class ConcatenatedWords {
+    private int dfs(Set<String> word_set, int[] memo, String word, int idx) {
+        if (idx == word.length()) { return 1; }
+        if (memo[idx] != -1) { return memo[idx]; }
+        int ret = 0;
+        for (int i = 1; i <= word.length() - idx - (idx == 0 ? 1 : 0); ++i) {
+            if (word_set.contains(word.substring(idx, idx + i))) {
+                ret = dfs(word_set, memo, word, idx + i);
+                if (ret == 1) { break; }
+            }
+        }
+        memo[idx] = ret;
+        return ret;
+    }
 
+    public List<String> findAllConcatenatedWordsInADict(String[] words) {
+        Set<String> word_set = new HashSet<>();
+        for (String w : words) { word_set.add(w); }
+        List<String> result = new ArrayList<>();
+        for (String word : words) {
+            int[] memo = new int[word.length()];
+            for (int i = 0; i < word.length(); ++i) { memo[i] = -1; }
+            if (dfs(word_set, memo, word, 0) == 1) {
+                result.add(word);
+            }
+        }
+        return result;
+    }
+}
 ```
 {% endtab %}
 
@@ -167,7 +195,43 @@ class ConcatenatedWords:
 
 {% tab solution Ruby %}
 ```ruby
+require 'set'
 
+# @param {String[]} words
+# @return {String[]}
+def find_all_concatenated_words_in_a_dict(words)
+  word_set = Set.new(words)
+
+  dfs = lambda do |memo, word, idx|
+    n = word.length
+    if idx == n
+      return 1
+    end
+    if memo[idx] != -1
+      return memo[idx]
+    end
+    ret = 0
+    (1...(n - idx - (idx == 0 ? 1 : 0) + 1)).each do |i|
+      if word_set.include?(word[idx...idx + i])
+        ret = dfs.call(memo, word, idx + i)
+        if ret == 1
+          break
+        end
+      end
+    end
+    memo[idx] = ret
+    ret
+  end
+
+  result = []
+  words.each do |word|
+    memo = Array.new(word.length).fill(-1)
+    if dfs.call(memo, word, 0) == 1
+      result << word
+    end
+  end
+  result
+end
 ```
 {% endtab %}
 
