@@ -34,12 +34,22 @@ date: 2023-01-17 17:22 +0900
 Example 1
 Input: preorder = [8,5,1,7,10,12]
 Output: [8,5,10,1,7,null,12]
+
+      8
+    /   \
+  5      10
+ / \       \
+1   7       12
 ```
 
 ```
 Example 2
 Input: preorder = [1,3]
 Output: [1,null,3]
+
+  1
+   \
+    3
 ```
 
 ## How to Solve
@@ -93,13 +103,69 @@ public:
 
 {% tab solution Java %}
 ```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class ConstructBinarySearchTreeFromPreorderTraversal {
+    private TreeNode helper(int[] preorder, int start, int end) {
+        if (start > end) { return null; }
+        TreeNode root = new TreeNode(preorder[start]);
+        int idx = start + 1;
+        while (idx <= end && preorder[idx] < preorder[start]) {
+            idx++;
+        }
+        root.left = helper(preorder, start + 1, idx - 1);
+        root.right = helper(preorder, idx, end);
+        return root;
+    }
 
+    public TreeNode bstFromPreorder(int[] preorder) {
+        return helper(preorder, 0, preorder.length - 1);
+    }
+}
 ```
 {% endtab %}
 
 {% tab solution JavaScript %}
 ```js
-
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {number[]} preorder
+ * @return {TreeNode}
+ */
+var bstFromPreorder = function(preorder) {
+    const func = function helper(start, end) {
+    if (start > end) { return null; }
+    let root = new TreeNode(preorder[start]);
+    let idx = start + 1;
+    while (idx <= end && preorder[idx] < preorder[start]) {
+      idx += 1;
+    }
+    root.left = helper(start + 1, idx - 1);
+    root.right = helper(idx, end);
+    return root;
+  };
+  return func(0, preorder.length - 1);
+};
 ```
 {% endtab %}
 
@@ -129,12 +195,37 @@ class ConstructBinarySearchTreeFromPreorderTraversal:
 
 {% tab solution Ruby %}
 ```ruby
-
+# Definition for a binary tree node.
+# class TreeNode
+#     attr_accessor :val, :left, :right
+#     def initialize(val = 0, left = nil, right = nil)
+#         @val = val
+#         @left = left
+#         @right = right
+#     end
+# end
+# @param {Integer[]} preorder
+# @return {TreeNode}
+def bst_from_preorder(preorder)
+  helper = lambda do |start, last|
+    if start > last
+      return nil
+    end
+    root = TreeNode.new(preorder[start])
+    idx = start + 1
+    while idx <= last && preorder[idx] < preorder[start]
+      idx += 1
+    end
+    root.left = helper.call(start + 1, idx - 1)
+    root.right = helper.call(idx, last)
+    root
+  end
+  helper.call(0, preorder.size - 1)
+end
 ```
 {% endtab %}
 
 {% endtabs %}
-
 
 
 ## Complexities
