@@ -9,10 +9,6 @@ tags:
 - String
 date: 2022-09-12 21:37 +0900
 ---
-## Introduction
-The problem asks substrings, which means sequential search is required.
-If we look at the problem closely, the key to solve problem is:
-how many same characters continues.
 
 ## Problem Description
 > Given a binary string `s`, return the number of non-empty substrings that
@@ -43,29 +39,126 @@ Output: 4
 Explanation: There are 4 substrings: "10", "01", "10", "01" that have equal number of consecutive 1's and 0's.
 ```
 
-## Analysis
-Count how many same characters continue in the given string.
-If the substring is `00111`, create a counts list of `[2, 3]`.
-The minimum of two pairs in the counts list are the number of patters to create.
+## How to Solve
+The problem asks substrings, which means a sequential search is required.
+If we look at the problem closely, the key to solve problem is that how many same characters continues.
+
+Count the number of consecutive same characters.
+When a different character comes in, compare previous and current counts.
+For example, when the substring is `00111`, the previous and current counts will be 2 and 3.
+Add up the minimum of previous and current counts to the result.
+When all characters in the given string are checked, we will get the answer.
+
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+#include <vector>
+
+using namespace std;
+
+class CountBinarySubstrings {
+public:
+    int countBinarySubstrings(string s) {
+        int prev = 0, cur = 1, result = 0;
+        for (int i = 1; i < s.size(); ++i) {
+            if (s[i - 1] == s[i]) {
+                cur++;
+            } else {
+                result += min(prev, cur);
+                prev = cur;
+                cur = 1;
+            }
+        }
+        return result + min(prev, cur);
+    }
+};
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+class CountBinarySubstrings {
+    public int countBinarySubstrings(String s) {
+        int prev = 0, cur = 1, result = 0;
+        for (int i = 1; i < s.length(); ++i) {
+            if (s.charAt(i - 1) == s.charAt(i)) {
+                cur++;
+            } else {
+                result += Math.min(prev, cur);
+                prev = cur;
+                cur = 1;
+            }
+        }
+        return result + Math.min(prev, cur);
+    }
+}
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var countBinarySubstrings = function(s) {
+    let prev = 0, cur = 1, result = 0;
+    for (let i = 1; i < s.length; i++) {
+        if (s[i - 1] == s[i]) {
+            cur++;
+        } else {
+            result += Math.min(prev, cur);
+            prev = cur;
+            cur = 1;
+        }
+    }
+    return result + Math.min(prev, cur);
+};
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class CountBinarySubstrings:
     def countBinarySubstrings(self, s: str) -> int:
-        n, counts = len(s), []
-        left, right = 0, 0
-        while left < n and right < n:
-            while right < n and s[left] == s[right]:
-                right += 1
-            counts.append(right - left)
-            left = right
-        counts.append(right - left)
-        result = 0
-        for i in range(len(counts) - 1):
-            result += min(counts[i], counts[i + 1])
-        return result
+        prev, cur, result = 0, 1, 0
+        for i in range(1, len(s)):
+            if s[i - 1] == s[i]:
+                cur += 1
+            else:
+                result += min(prev, cur)
+                prev, cur = cur, 1
+        return result + min(prev, cur)
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+# @param {String} s
+# @return {Integer}
+def count_binary_substrings(s)
+  prev, cur, result = 0, 1, 0
+  (1...s.size).each do |i|
+    if s[i - 1] == s[i]
+      cur += 1
+    else
+      result += [prev, cur].min
+      prev = cur
+      cur = 1
+    end
+  end
+  result + [prev, cur].min
+end
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
-- Time: `O(n + m)` -- n: length of string, m: length of count list
-- Space: `O(m)`
+- Time: `O(n)` -- n: length of string
+- Space: `O(1)`
