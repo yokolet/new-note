@@ -54,10 +54,19 @@ ab -> abc
 ```
 
 ## How to Solve
-This problem is an anagram comparison.
-Both start and target words should be sorted for comparison.
-The solution here took a string matching approach by creating a one letter shorter word from targets.
-If the matching word is found in start words, count up.
+This problem is an anagram comparison. The order of characters doesn't matter.
+Sorting words and creating one letter shorter word from target words would be a reasonable approach.
+However, it runs slow since it needs a lot of sorting and substring creation.
+
+Instead, the approach here uses the idea of bitmask.
+Each word is converted to an integer value by shifting and adding up.
+The comparison is done by the integer subtraction.
+If the integer for one letter shorter string is in the start word set, count up.
+
+The bitmask approach runs faster than sorting with substring match in general.
+However, as for Python, the sorting/substring match approach runs reasonably fast.
+So, Python has two solutions.
+
 
 ## Solution
 
@@ -65,19 +74,32 @@ If the matching word is found in start words, count up.
 
 {% tab solution C++ %}
 ```cpp
+#include <unordered_set>
+#include <vector>
+
+using namespace std;
+
 class CountWordsObtainedAfterAddingALetter {
+private:
+    int s2i(string &s) {
+        int ret = 0;
+        for (auto c : s) {
+            ret += 1 << c - 'a';
+        }
+        return ret;
+    }
+
 public:
     int wordCount(vector<string>& startWords, vector<string>& targetWords) {
-        unordered_set<string> starts;
+        unordered_set<int> starts;
         for (auto &word : startWords) {
-            sort(word.begin(), word.end());
-            starts.insert(word);
+            starts.insert(s2i(word));
         }
-        int result = 0;
+        int result = 0, wi;
         for (auto &word : targetWords) {
-            sort(word.begin(), word.end());
-            for (int i = 0; i < word.size(); ++i) {
-                if (starts.find(word.substr(0, i) + word.substr(i + 1)) != starts.end()) {
+            wi = s2i(word);
+            for (auto &c : word) {
+                if (starts.find(wi - (1 << c - 'a')) != starts.end()) {
                     result++;
                     break;
                 }
@@ -91,13 +113,69 @@ public:
 
 {% tab solution Java %}
 ```java
+import java.util.*;
 
+public class CountWordsObtainedAfterAddingALetter {
+    private int s2i(String s) {
+        int ret = 0;
+        for (char c : s.toCharArray()) {
+            ret += 1 << c - 'a';
+        }
+        return ret;
+    }
+
+    public int wordCount(String[] startWords, String[] targetWords) {
+        Set<Integer> starts = new HashSet<>();
+        for (String w : startWords) {
+            starts.add(s2i(w));
+        }
+        int result = 0;
+        for (String w : targetWords) {
+            int wi = s2i(w);
+            for (int i = 0; i < w.length(); ++i) {
+                if (starts.contains(wi - (1 << w.charAt(i) - 'a'))) {
+                    result++;
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+}
 ```
 {% endtab %}
 
 {% tab solution JavaScript %}
 ```js
-
+/**
+ * @param {string[]} startWords
+ * @param {string[]} targetWords
+ * @return {number}
+ */
+var wordCount = function(startWords, targetWords) {
+    const base = "a".charCodeAt(0), starts = new Set();
+    const s2i = (s) => {
+        let ret = 0;
+        for (let c of s) {
+            ret += 1 << (c.charCodeAt(0) - base);
+        }
+        return ret;
+    }
+    for (let word of startWords) {
+        starts.add(s2i(word));
+    }
+    let result = 0;
+    for (let word of targetWords) {
+        let wi = s2i(word);
+        for (let c of word) {
+            if (starts.has(wi - (1 << (c.charCodeAt(0) - base)))) {
+                result += 1;
+                break;
+            }
+        }
+    }
+    return result;
+};
 ```
 {% endtab %}
 
@@ -105,6 +183,24 @@ public:
 ```python
 class CountWordsObtainedAfterAddingALetter:
     def wordCount(self, startWords: List[str], targetWords: List[str]) -> int:
+        base, starts, result = ord('a'), set(), 0
+        def s2i(s):
+            ret = 0
+            for c in s:
+                ret += 1 << ord(c) - base
+            return ret
+
+        for word in startWords:
+            starts.add(s2i(word))
+        for word in targetWords:
+            wi = s2i(word)
+            for c in word:
+                if (wi - (1 << ord(c) - base)) in starts:
+                    result += 1
+                    break
+        return result
+
+    def wordCount2(self, startWords: List[str], targetWords: List[str]) -> int:
         starts = set()
         for word in startWords:
             word = "".join(sorted(word))
@@ -122,7 +218,34 @@ class CountWordsObtainedAfterAddingALetter:
 
 {% tab solution Ruby %}
 ```ruby
+require 'set'
 
+# @param {String[]} start_words
+# @param {String[]} target_words
+# @return {Integer}
+def word_count(start_words, target_words)
+  base, starts, result = 'a'.ord, Set.new, 0
+  s2i = lambda do |s|
+    ret = 0
+    (0...s.size).each do |i|
+      ret += (1 << s[i].ord - base)
+    end
+    ret
+  end
+  start_words.each do |word|
+    starts.add(s2i.call(word))
+  end
+  target_words.each do |word|
+    wi = s2i.call(word)
+    (0...word.size).each do |i|
+      if starts.include?(wi - (1 << (word[i].ord - base)))
+        result += 1;
+        break
+      end
+    end
+  end
+  result
+end
 ```
 {% endtab %}
 
@@ -131,5 +254,5 @@ class CountWordsObtainedAfterAddingALetter:
 
 
 ## Complexities
-- Time: `O(m + n)` -- m, n: number of start and target words. Sorting is constant since each word has at most 26 characters.
+- Time: `O(m + n)` -- m, n: number of start and target words. Sorting/looping word is constant since each word has at most 26 characters.
 - Space: `O(m)`
