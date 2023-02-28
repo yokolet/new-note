@@ -6,13 +6,6 @@ algo_menubar: algo_menu
 hero_height: is-small
 tags: [Medium, Binary Search, Array]
 ---
-## Introduction
-This is the seventh minimize-maximum algorithm problem.
-This problem has a variation compared to the basic, splitting array problem.
-If we look around other minimize maximum problems, it is very close to the balls in a bag problem.
-The problem looks almost the same idea as the balls in a bag problem.
-A difference is, the problem doesn't split elements in the given array.
-Again, the problem is the type of minimize-maximum.
 
 ## Problem Description
 > Koko loves to eat bananas. There are `n` piles of bananas, the i-th pile has `piles[i]` bananas.
@@ -55,14 +48,19 @@ Explanation: The optimal minimum eating speed is 23. At this speed, it will take
 Summing up the each hours, 2 + 1 + 1 + 1 + 1 = 6. All bananas can be eaten before a guard comes back in 6 hours.
 ```
 
-## Analysis
-Each element of the given piles array will be used to calculate eating speed based on a certain criteria.
-The criteria is middle value of the array.
+## How to Solve
+This is one of minimize-maximum algorithm problems.
+This problem has a variation compared to the basic problem of splitting array.
+If we look around other minimize maximum problems, it is very close to the balls in a bag problem.
+The problem looks almost the same idea as the balls in a bag problem.
+A difference is, the problem here doesn't split elements in the given array.
 
+In this problem, each element of the given piles array will be used to calculate eating speed based on a certain criteria.
+The criteria is the middle value of the array.
 So, we will count necessary hours to consume each elements when consume speed is the middle value.
 If a division leaves a reminder, it needs plus one hour for the pile.
 The smallest value (left) can be 1, and the largest (right) will be the maximum value in the given array.
-The middle value is set to `(left + right) / 2` as normal.
+The middle value is set to `(left + right) / 2` as normal binary search.
 
 Next step is to adjust the left or right values.
 If the total hours to consume bananas is less than the specified value,
@@ -71,14 +69,18 @@ If the total hours to consume bananas is greater than the specified value,
 the middle value should be greater to use less hours.
 The left and right value updates follow a common way:  `right = mid - 1`, `left = mid + 1`;
 
-When the binary search is over, we can find the answer.
-The answer from the binary search is the left value.
+When the binary search is over, we will get the answer.
+
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
 ```cpp
 #include <vector>
 #include <numeric>
-#include <iostream>
+
 using namespace std;
 
 class KokoEatingBananas
@@ -86,7 +88,7 @@ class KokoEatingBananas
 private:
   bool check(vector<int> &piles, int h, int mid)
   {
-    int count = 0;
+    long count = 0;
     for (int i = 0; i < piles.size(); ++i)
     {
       count += ceil((double)piles[i] / mid);
@@ -115,6 +117,120 @@ public:
   }
 };
 ```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+import java.util.Arrays;
+
+class KokoEatingBananas {
+    private boolean check(int[] piles, int h, int mid) {
+        long count = 0;
+        for (int v : piles) {
+            count += (long)Math.ceil((double)v / mid);
+        }
+        return count <= h;
+    }
+
+    public int minEatingSpeed(int[] piles, int h) {
+        int left = 1, right = Arrays.stream(piles).max().getAsInt();
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (check(piles, h, mid)) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return left;
+    }
+}
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+/**
+ * @param {number[]} piles
+ * @param {number} h
+ * @return {number}
+ */
+var minEatingSpeed = function(piles, h) {
+  const check = (mid) => {
+    let count = 0;
+    for (let v of piles) {
+      count += Math.ceil(v / mid);
+    }
+    return count <= h;
+  }
+
+  let left = 1, right = Math.max(...piles);
+  while (left <= right) {
+    let mid = Math.floor((left + right) / 2);
+    if (check(mid)) {
+      right = mid - 1;
+    } else {
+      left = mid + 1;
+    }
+  }
+  return left;
+};
+```
+{% endtab %}
+
+{% tab solution Python %}
+```python
+from math import ceil
+from typing import List
+
+class KokoEatingBananas:
+    def minEatingSpeed(self, piles: List[int], h: int) -> int:
+        def check(mid):
+            count = 0
+            for v in piles:
+                count += ceil(v / mid)
+            return count <= h
+
+        left, right = 1, max(piles)
+        while left <= right:
+            mid = (left + right) // 2
+            if (check(mid)):
+                right = mid - 1
+            else:
+                left = mid + 1
+        return left
+```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+# @param {Integer[]} piles
+# @param {Integer} h
+# @return {Integer}
+def min_eating_speed(piles, h)
+  check = lambda do |mid|
+    count = 0
+    piles.each do |v|
+      count += (v.to_f / mid).ceil
+    end
+    count <= h
+  end
+
+  left, right = 1, piles.max
+  while left <= right
+    mid = (left + right) / 2
+    if check.call(mid)
+      right = mid - 1
+    else
+      left = mid + 1
+    end
+  end
+  left
+end
+```
+{% endtab %}
+
+{% endtabs %}
 
 
 ## Complexities
