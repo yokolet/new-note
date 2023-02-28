@@ -91,7 +91,27 @@ public:
 
 {% tab solution Java %}
 ```java
-
+class Solution {
+    public String countAndSay(int n) {
+        String result = "1";
+        for (int k = 0; k < n - 1; ++k) {
+            char prev = 0;
+            String cur = "";
+            int cnt = 0;
+            for (int i = 0; i < result.length(); ++i) {
+                if (prev != 0 && prev != result.charAt(i)) {
+                    cur += (Integer.toString(cnt) + prev);
+                    cnt = 0;
+                }
+                prev = result.charAt(i);
+                cnt++;
+            }
+            cur += (Integer.toString(cnt) + prev);
+            result = cur;
+        }
+        return result;
+    }
+}
 ```
 {% endtab %}
 
@@ -142,7 +162,25 @@ class CountAndSay:
 
 {% tab solution Ruby %}
 ```ruby
-
+# @param {Integer} n
+# @return {String}
+def count_and_say(n)
+  result = "1"
+  (0...n - 1).each do|k|
+    prev, cur, cnt = "", "", 0
+    (0...result.size).each do |i|
+      if !prev.empty? && prev != result[i]
+        cur += cnt.to_s + prev
+        cnt = 0
+      end
+      prev = result[i]
+      cnt += 1
+    end
+    cur += cnt.to_s + prev
+    result = cur
+  end
+  result
+end
 ```
 {% endtab %}
 
