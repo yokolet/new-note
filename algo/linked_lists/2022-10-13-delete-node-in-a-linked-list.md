@@ -8,11 +8,6 @@ tags:
 - Linked List
 date: 2022-10-13 17:19 +0900
 ---
-## Introduction
-If it comes to the linked list problems, deleting a node is a common one.
-Normally, the head of the linked list is given, so the solution in general traverses the list.
-However, this problem doesn't give us the head, so we are unable to traverse the list.
-This problem tests our idea. Once it is figured out, the solution is fairly easy.
 
 ## Problem Description
 > There is a singly-linked list `head` and we want to delete a node `node` in it.
@@ -51,15 +46,81 @@ Explanation: You are given the third node with value 1,
 the linked list should become 4 -> 5 -> 9 after calling your function.
 ```
 
-## Analysis
-This problem doesn't give us the head of the linked list.
-We have just a node to be deleted.
-However, it is not a doubly linked list, so it's impossible to delete the given node.
-Instead, the next node of the given node can be deleted easily.
-Copy the value of the next node to the given node, then delete the next node.
-The result will be as if the given node is deleted.
+## How to Solve
+If it comes to the linked list problems, deleting a node is a common one.
+Normally, the head of the linked list is given, so the solution in general traverses the list.
+However, this problem doesn't give us the head, so we are unable to traverse the list.
+This problem tests our idea. Once it is figured out, the solution is fairly easy.
+
+Copy the value of the next node to the given node, then change the next to next of next.
+In fact, the solution deletes the next of the given node.
+However, the result is as if the given node is deleted.
+
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class DeleteNodeInALinkedList {
+public:
+    void deleteNode(ListNode* node) {
+        node->val = node->next->val;
+        node->next = node->next->next;
+    }
+};
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public void deleteNode(ListNode node) {
+        node.val = node.next.val;
+        node.next = node.next.next;
+    }
+}
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} node
+ * @return {void} Do not return anything, modify node in-place instead.
+ */
+var deleteNode = function(node) {
+    node.val = node.next.val;
+    node.next = node.next.next;
+};
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 # Definition for singly-linked list.
 # class ListNode:
@@ -76,6 +137,30 @@ class DeleteNodeInALinkedList:
         node.val = node.next.val
         node.next = node.next.next
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+# Definition for singly-linked list.
+# class ListNode
+#     attr_accessor :val, :next
+#     def initialize(val)
+#         @val = val
+#         @next = nil
+#     end
+# end
+
+# @param {ListNode} node
+# @return {Void} Do not return anything, modify node in-place instead.
+def delete_node(node)
+    node.val = node.next.val
+    node.next = node.next.next
+end
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
 - Time: `O(1)`
