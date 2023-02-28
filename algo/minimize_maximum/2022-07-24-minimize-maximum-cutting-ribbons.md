@@ -6,12 +6,6 @@ algo_menubar: algo_menu
 hero_height: is-small
 tags: [Medium, Binary Search, Array]
 ---
-## Introduction
-This is the fourth minimize-maximum algorithm problem.
-This problem has a variation compared to the basic, splitting array problem.
-If we look around other minimize maximum problems, it is very close to the divide chocolate problem.
-Even though this has another variation, we can solve using the same manner.
-Again, the problem is the type of minimize-maximum.
 
 ## Problem Description
 > You are given an integer array ribbons, where `ribbons[i]` represents the length of the i-th ribbon, and an integer k.
@@ -55,7 +49,12 @@ Explanation: sum of all ribbons are 21. Even the shortest length of 1 won't make
 ```
 
 
-## Analysis
+## How to Solve
+This is one of minimize-maximum algorithm problems.
+This problem has a variation compared to the basic, splitting array, problem.
+If we look around other minimize maximum problems, it is very close to the divide chocolate problem.
+Even though this has further variation, we can solve using the same approach.
+
 Each element of the given ribbons array should be divided into smaller lengths based on a certain criteria.
 The criteria is a total number of divided ribbons.
 It can be found by counting the number of ribbons in subarrays.
@@ -75,8 +74,16 @@ When it is updated, the left will have the middle value instead of middle + 1.
 
 When the binary search is over, we can find the answer.
 
+
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
 ```cpp
+#include <vector>
+using namespace std;
+
 class CuttingRibbons
 {
 private:
@@ -92,12 +99,10 @@ private:
 public:
   int maxLength(vector<int> &ribbons, int k)
   {
-    int n = ribbons.size();
     int left = 0, right = 100010;  // this is big enough to get a correct answer
     while (left < right)
     {
       int mid = (left + right + 1) / 2;
-      int count = 0;
       if (check(ribbons, k, mid))
       {
         right = mid - 1;
@@ -111,6 +116,118 @@ public:
   }
  };
 ```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+class CuttingRibbons {
+    private boolean check(int[] ribbons, int k, int mid) {
+        int count = 0;
+        for (int i = 0; i < ribbons.length; ++i) {
+            count += ribbons[i] / mid;
+        }
+        return count < k;
+    }
+
+    public int maxLength(int[] ribbons, int k) {
+        int left = 0, right = 100010;
+        while (left < right) {
+            int mid = (left + right + 1) / 2;
+            if (check(ribbons, k, mid)) {
+                right = mid - 1;
+            } else {
+                left = mid;
+            }
+        }
+        return left;
+    }
+}
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+/**
+ * @param {number[]} ribbons
+ * @param {number} k
+ * @return {number}
+ */
+var maxLength = function(ribbons, k) {
+  const check = (mid) => {
+    let count = 0;
+    for (let i = 0; i < ribbons.length; i++) {
+      count += Math.floor(ribbons[i] / mid);
+    }
+    return count < k;
+  };
+
+  let left = 0, right = 100010, mid;
+  while (left < right) {
+    mid = Math.floor((left + right + 1) / 2);
+    if (check(mid)) {
+      right = mid - 1;
+    } else {
+      left = mid;
+    }
+  }
+  return left;
+};
+```
+{% endtab %}
+
+{% tab solution Python %}
+```python
+from typing import List
+
+class CuttingRibbons:
+    def maxLength(self, ribbons: List[int], k: int) -> int:
+        def check(mid):
+            count = 0
+            for v in ribbons:
+                count += v // mid
+            return count < k
+
+        left, right = 0, 100010
+        while left < right:
+            mid = (left + right + 1) // 2
+            count = 0
+            if check(mid):
+                right = mid - 1
+            else:
+                left = mid
+        return left
+```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+# @param {Integer[]} ribbons
+# @param {Integer} k
+# @return {Integer}
+def max_length(ribbons, k)
+  check = lambda do |mid|
+    count = 0
+    ribbons.each do |v|
+      count += v / mid
+    end
+    count < k
+  end
+  left, right = 0, 100010
+  while left < right
+    mid = (left + right + 1) / 2
+    if check.call(mid)
+      right = mid - 1
+    else
+      left = mid
+    end
+  end
+  left
+end
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
 - Time: O(n log(s)) – s: difference between 1 and max value in the given array.
