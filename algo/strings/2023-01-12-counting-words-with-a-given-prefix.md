@@ -63,7 +63,15 @@ public:
 
 {% tab solution Java %}
 ```java
-
+class CountingWordsWithAGivenPrefix {
+    public int prefixCount(String[] words, String pref) {
+        int result = 0;
+        for (String word : words) {
+            if (word.startsWith(pref)) { result++; }
+        }
+        return result;
+    }
+}
 ```
 {% endtab %}
 
@@ -100,7 +108,18 @@ class CountingWordsWithAGivenPrefix:
 
 {% tab solution Ruby %}
 ```ruby
-
+# @param {String[]} words
+# @param {String} pref
+# @return {Integer}
+def prefix_count(words, pref)
+  result = 0
+  words.each do |word|
+    if word.start_with?(pref)
+      result += 1
+    end
+  end
+  result
+end
 ```
 {% endtab %}
 
