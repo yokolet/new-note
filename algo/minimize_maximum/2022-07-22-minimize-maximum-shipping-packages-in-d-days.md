@@ -6,11 +6,6 @@ algo_menubar: algo_menu
 hero_height: is-small
 tags: [Medium, Binary Search, Array]
 ---
-## Introduction
-This is the second minimize-maximum algorithm problem.
-This problem has a bit of disguise and looks not the minimize-maximum.
-However, if we carefully read the description, the problem is about the type of minimize-maximum.
-
 
 ## Problem Description
 > A conveyor belt has packages that must be shipped from one port to another within days days.
@@ -47,7 +42,10 @@ Explanation: weights to be shipped each day: [[1],[2],[3],[1,1]], sums: [1,2,3,2
 3 is the minimized largest sum when the array is splitted into 4 groups
 ```
 
-## Analysis
+## How to Solve
+This is one of minimize-maximum algorithm problems.
+This problem has a bit of disguise and looks not the minimize-maximum.
+However, if we carefully read the description, the problem is about the type of minimize-maximum.
 
 The given weight array should be divided into groups (days) based on a certain criteria.
 In this case, the criteria is the subarray sum.
@@ -63,63 +61,183 @@ This way, we can find the answer.
 
 From the analysis above, it's obvious, the problem is identical with splitting array problem.
 
+
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
 ```cpp
+#include <numeric>
 #include <vector>
+
 using namespace std;
 
-class CapacityToShipPackagesWithinDDays
-{
+class CapacityToShipPackagesWithinDDays {
 private:
-  bool check(vector<int> &weights, int days, int mid)
-  {
-    int count = 1, cur = 0;
-    for (int i = 0; i < weights.size(); ++i)
-    {
-      if (cur + weights[i] <= mid)
-      {
-        cur += weights[i];
-      }
-      else
-      {
-        ++count;
-        cur = weights[i];
-      }
+    bool check(vector<int> &weights, int days, int mid) {
+        int count = 1, cur = 0;
+        for (int w : weights) {
+            if (cur + w <= mid) {
+                cur += w;
+            } else {
+                count++;
+                cur = w;
+            }
+        }
+        return count <= days;
     }
-    if (count <= days)
-      return true;
-    else
-      return false;
-  }
 
 public:
-  int shipWithinDays(vector<int> &weights, int days)
-  {
-    int n = weights.size();
-    int sum = 0, max_elm = -1;
-    for (int i = 0; i < n; ++i)
-    {
-      sum += weights[i];
-      max_elm = max(max_elm, weights[i]);
+    int shipWithinDays(vector<int>& weights, int days) {
+        int left = *max_element(weights.begin(), weights.end());
+        int right = accumulate(weights.begin(), weights.end(), 0);
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (check(weights, days, mid)) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return left;
     }
-    int left = max_elm, right = sum;
-    while (left <= right)
-    {
-      int mid = (left + right) / 2;
-     if (check(weights, days, mid))
-     {
-      right = mid - 1;
-     }
-     else
-     {
-      left = mid + 1;
-     }
-    }
-    return left;
-  }
 };
-
 ```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+import java.util.Arrays;
+
+public class CapacityToShipPackagesWithinDDays {
+    private boolean check(int[] weights, int days, int mid) {
+        int count = 1, cur = 0;
+        for (int v : weights) {
+            if (cur + v <= mid) {
+                cur += v;
+            } else {
+                count++;
+                cur = v;
+            }
+        }
+        return count <= days;
+    }
+    public int shipWithinDays(int[] weights, int days) {
+        int left = Arrays.stream(weights).max().getAsInt();
+        int right = Arrays.stream(weights).sum();
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (check(weights, days, mid)) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return left;
+    }
+}
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+/**
+ * @param {number[]} weights
+ * @param {number} days
+ * @return {number}
+ */
+var shipWithinDays = function(weights, days) {
+  const check = (mid) => {
+    let count = 1, cur = 0;
+    for (let w of weights) {
+      if (cur + w <= mid) {
+        cur += w;
+      } else {
+        count += 1;
+        cur = w;
+      }
+    }
+    return count <= days;
+  }
+
+  let left = Math.max(...weights);
+  let right = weights.reduce((acc, v) => acc + v, 0);
+  while (left <= right) {
+    let mid = Math.floor((left + right) / 2);
+    if (check(mid)) {
+      right = mid - 1;
+    } else {
+      left = mid + 1;
+    }
+  }
+  return left;
+};
+```
+{% endtab %}
+
+{% tab solution Python %}
+```python
+from typing import List
+
+class CapacityToShipPackagesWithinDDays:
+    def shipWithinDays(self, weights: List[int], days: int) -> int:
+        def check(mid):
+            count, cur = 1, 0
+            for w in weights:
+                if cur + w <= mid:
+                    cur += w
+                else:
+                    count += 1
+                    cur = w
+            return count <= days
+
+        left, right = max(weights), sum(weights)
+        while left <= right:
+            mid = (left + right) // 2
+            if check(mid):
+                right = mid -1
+            else:
+                left = mid + 1
+        return left
+```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+# @param {Integer[]} weights
+# @param {Integer} days
+# @return {Integer}
+def ship_within_days(weights, days)
+  check = lambda do |mid|
+    count, cur = 1, 0
+    weights.each do |w|
+      if cur + w <= mid
+        cur += w
+      else
+        count += 1
+        cur = w
+      end
+    end
+    count <= days
+  end
+
+  left, right = weights.max, weights.sum
+  while left <= right
+    mid = (left + right) / 2
+    if check.call(mid)
+      right = mid - 1
+    else
+      left = mid + 1
+    end
+  end
+  left
+end
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
 - Time: O(n log(s)) – s: sum of elements in the array
