@@ -6,13 +6,6 @@ algo_menubar: algo_menu
 hero_height: is-small
 tags: [Medium, Binary Search, Array]
 ---
-## Introduction
-This is the sixth minimize-maximum algorithm problem.
-This problem has a variation compared to the basic, splitting array problem.
-If we look around other minimize maximum problems, it is very close to the candies allocation to k children problem.
-The problem might be as straightforward as the candies problem.
-A difference is, the problem gives a number of operations rather than the number of groups to be created.
-Again, the problem is the type of minimize-maximum.
 
 ## Problem Description
 > You are given an integer array nums where the i-th bag contains `nums[i]` balls.
@@ -53,66 +46,193 @@ Explanation: nums array goes: [7,17] -> [7,7,10] -> [7,7,3,7] by 2 operations.
 7 is the minimized largest penalty when the array elements are splitted.
 ```
 
-## Analysis
+## How to Solve
+This is one of minimize-maximum algorithm problems.
+This problem has a variation compared to the basic problem of splitting array.
+If we look around other minimize maximum problems, it is very close to the candies allocation to k children problem.
+The problem might be as straightforward as the candies problem.
+A difference is, the problem gives a number of operations rather than the number of groups to be created.
+
 Each element of the given nums array should be divided into smaller number of pair based on a certain criteria.
 The criteria is middle value of the array.
 
-So, we will count how many elements can be divided in to two based on the middle value.
+So, we will count how many elements can be divided in two based on the middle value.
 The smallest value (left) can be 1, and the largest (right) will be the maximum value in the given array.
-The middle value is set to `(left + right) / 2` as normal.
+The middle value is set to `(left + right) / 2` as common binary search does.
 
 Next step is to adjust the left or right values.
 If the number of operations is less than the specified value, the middle value should be smaller to do more operations.
 If the number of operations is greater than the specified value, the middle value should be greater to do less operations.
 The left and right value updates follow a common way:  `right = mid - 1`, `left = mid + 1`;
 
-When the binary search is over, we can find the answer.
+When the binary search is over, we will get the answer.
 The answer from the binary search is the left value.
 
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+
 ```cpp
 #include <vector>
 #include <numeric>
-#include <iostream>
+
 using namespace std;
 
-class MinimumLimitOfBallsInABag
-{
-private:
-  bool check(vector<int> &nums, int maxOperations, int mid)
-  {
-    int count = 0;
-    for (int i = 0; i < nums.size(); ++i)
-      {
-        if (nums[i] >= mid)
-        {
-          count += ceil((double)nums[i] / mid) - 1;
-        }
-      }
-      return count <= maxOperations;
-  }
+class MinimumLimitOfBallsInABag {
 public:
-  int minimumSize(vector<int> &nums, int maxOperations)
-  {
-    int n = nums.size();
-    int left = 1, right = *max_element(nums.begin(), nums.end());
-    while (left <= right)
-    {
-      int mid = (left + right) / 2;
-      if (check(nums, maxOperations, mid))
+    bool check(vector<int> &nums, int maxOperations, int mid)
       {
-        right = mid - 1;
+        int count = 0;
+        for (int i = 0; i < nums.size(); ++i)
+          {
+            if (nums[i] >= mid)
+            {
+              count += ceil((double)nums[i] / mid) - 1;
+            }
+          }
+          return count <= maxOperations;
       }
-      else
-      {
-        left = mid + 1;
-      }
+
+    int minimumSize(vector<int>& nums, int maxOperations) {
+        int left = 1, right = *max_element(nums.begin(), nums.end());
+        while (left <= right)
+        {
+          int mid = (left + right) / 2;
+          if (check(nums, maxOperations, mid))
+          {
+            right = mid - 1;
+          }
+          else
+          {
+            left = mid + 1;
+          }
+        }
+        return left;
     }
-    return left;
-  }
 };
 ```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+import java.util.Arrays;
+
+public class MinimumLimitOfBallsInABag {
+    private boolean check(int[] nums, int maxOperations, int mid) {
+        int count = 0;
+        for (int v : nums) {
+            if (v >= mid) {
+                count += Math.ceil((double)v / mid) - 1;
+            }
+        }
+        return count <= maxOperations;
+    }
+    public int minimumSize(int[] nums, int maxOperations) {
+        int left = 1, right = Arrays.stream(nums).max().getAsInt();
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (check(nums, maxOperations, mid)) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return left;
+    }
+}
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+/**
+ * @param {number[]} nums
+ * @param {number} maxOperations
+ * @return {number}
+ */
+var minimumSize = function(nums, maxOperations) {
+  const check = (mid) => {
+    let count = 0;
+    for (let v of nums) {
+      count += Math.ceil(v / mid) - 1
+    }
+    return count <= maxOperations;
+  }
+
+  let left = 1, right = Math.max(...nums);
+  while (left <= right) {
+    let mid = Math.floor((left + right) / 2);
+    if (check(mid)) {
+      right = mid - 1;
+    } else {
+      left = mid + 1;
+    }
+  }
+  return left;
+};
+```
+{% endtab %}
+
+{% tab solution Python %}
+```python
+from math import ceil
+from typing import List
+
+
+class MinimumLimitOfBallsInABag:
+    def minimumSize(self, nums: List[int], maxOperations: int) -> int:
+        def check(mid):
+            count = 0
+            for v in nums:
+                if v >= mid:
+                    count += ceil(v / mid) - 1
+            return count <= maxOperations
+
+        left, right = 1, max(nums)
+        while left <= right:
+            mid = (left + right) // 2
+            if check(mid):
+                right = mid - 1
+            else:
+                left = mid + 1
+        return left
+```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+# @param {Integer[]} nums
+# @param {Integer} max_operations
+# @return {Integer}
+def minimum_size(nums, max_operations)
+  check = lambda do |mid|
+    count = 0
+    nums.each do |v|
+      if v >= mid
+        count += (v.to_f / mid).ceil - 1
+      end
+    end
+    count <= max_operations
+  end
+
+  left, right = 1, nums.max
+  while left <= right
+    mid = (left + right) / 2
+    if check.call(mid)
+      right = mid - 1
+    else
+      left = mid + 1
+    end
+  end
+  left
+end
+```
+{% endtab %}
+
+{% endtabs %}
 
 
 ## Complexities
