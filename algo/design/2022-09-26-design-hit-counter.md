@@ -21,13 +21,13 @@ date: 2022-09-26 22:08 +0900
 > - `HitCounter()` Initializes the object of the hit counter system.
 > - `void hit(int timestamp)` Records a hit that happened at timestamp (in seconds). Several hits may happen at the same timestamp.
 > - `int getHits(int timestamp)` Returns the number of hits in the past 5 minutes from timestamp (i.e., the past 300 seconds).
-
+>
 >
 > Constraints:
 > - `1 <= timestamp <= 2 * 10**9`
 > - All the calls are being made to the system in chronological order (i.e., `timestamp` is monotonically increasing).
 > - At most 300 calls will be made to `hit` and `getHits`.
-
+>
 > [https://leetcode.com/problems/design-hit-counter/](https://leetcode.com/problems/design-hit-counter/)
 
 ## Examples
@@ -94,7 +94,27 @@ public:
 
 {% tab solution Java %}
 ```java
+import java.util.ArrayDeque;
+import java.util.Queue;
 
+public class HitCounter {
+    private Queue<Integer> q = new ArrayDeque<>();
+    public HitCounter() {}
+
+    public void hit(int timestamp) {
+        q.add(timestamp);
+        while (q.peek() <= timestamp - 300) {
+            q.poll();
+        }
+    }
+
+    public int getHits(int timestamp) {
+        while (!q.isEmpty() && q.peek() <= timestamp - 300) {
+            q.poll();
+        }
+        return q.size();
+    }
+}
 ```
 {% endtab %}
 
@@ -149,7 +169,37 @@ class HitCounter:
 
 {% tab solution Ruby %}
 ```ruby
+class HitCounter
+  def initialize()
+    @q = Array.new
+  end
 
+
+=begin
+    :type timestamp: Integer
+    :rtype: Void
+=end
+  def hit(timestamp)
+    @q << timestamp
+    while @q[0] <= timestamp - 300
+      @q.shift
+    end
+  end
+
+
+=begin
+    :type timestamp: Integer
+    :rtype: Integer
+=end
+  def get_hits(timestamp)
+    while !@q.empty? && @q[0] <= timestamp - 300
+      @q.shift
+    end
+    @q.size
+  end
+
+
+end
 ```
 {% endtab %}
 
@@ -157,5 +207,5 @@ class HitCounter:
 
 
 ## Complexities
-- Time: `O(1)`
-- Space: `O(n)`
+- Time: `O(n)` -- n: number of 300 or more older timestamps
+- Space: `O(m)` -- m: number of timestamps in a queue
