@@ -10,10 +10,6 @@ tags:
 - Array
 date: 2022-09-25 21:18 +0900
 ---
-## Introduction
-Basically, an array and pointer is all to implement the circular queue.
-It needs much consideration when the enqueue index comes back to the top.
-An additional parameter, size -- current size of the queue, will help to implement easily.
 
 ## Problem Description
 > Design your implementation of the circular queue.
@@ -75,8 +71,12 @@ Output
 [null,true,2,2,true,-1,false,-1,true,true,true,false]
 ```
 
-## Analysis
-As instance variables, the class has capacity k, queue array, head pointer and queue size.
+## How to Solve
+Basically, an array and pointer is all to implement the circular queue.
+However, it needs much consideration when the enqueue index comes back to the top.
+An additional parameter, the size -- current size of the queue, will help implementing this easily.
+
+The solution here has a capacity k, queue array, head pointer and queue size as instance variables.
 When the size is zero, the queue is empty.
 While the size is the same as the capacity k, the queue is full.
 Only when the queue is not full, a new value can be added.
@@ -84,7 +84,172 @@ The index is the current head plus size modulo capacity.
 Only when the queue is not empty, the deQueue operation is possible.
 Move the head to the current head plus one module capacity.
 
+
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+#include <vector>
+
+using namespace std;
+
+class MyCircularQueue {
+private:
+    int k_, head = 0, size = 0;
+    vector<int> q;
+
+public:
+    MyCircularQueue(int k) : k_(k) {
+        q.resize(k_);
+    }
+
+    bool enQueue(int value) {
+        if (isFull()) { return false; }
+        q[(head + size) % k_] = value;
+        size++;
+        return true;
+    }
+
+    bool deQueue() {
+        if (isEmpty()) { return false; }
+        head = (head + 1) % k_;
+        size--;
+        return true;
+    }
+
+    int Front() {
+        if (isEmpty()) { return -1; }
+        return q[head];
+    }
+
+    int Rear() {
+        if (isEmpty()) { return -1; }
+        return q[(head + size - 1) % k_];
+    }
+
+    bool isEmpty() {
+        return size == 0;
+    }
+
+    bool isFull() {
+        return size == k_;
+    }
+};
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+class MyCircularQueue {
+    private int k_, head = 0, size = 0;
+    private int[] q;
+
+    public MyCircularQueue(int k) {
+        this.k_ = k;
+        this.q = new int[k];
+    }
+
+    public boolean enQueue(int value) {
+        if (this.isFull()) { return false; }
+        this.q[(this.head + this.size) % this.k_] = value;
+        this.size++;
+        return true;
+    }
+
+    public boolean deQueue() {
+        if (this.isEmpty()) { return false; }
+        this.head = (this.head + 1) % this.k_;
+        this.size--;
+        return true;
+    }
+
+    public int Front() {
+        if (this.isEmpty()) { return -1; }
+        return this.q[this.head];
+    }
+
+    public int Rear() {
+        if (this.isEmpty()) { return -1; }
+        return this.q[(this.head + this.size - 1) % this.k_];
+    }
+
+    public boolean isEmpty() {
+        return this.size == 0;
+    }
+
+    public boolean isFull() {
+        return this.size == this.k_;
+    }
+}
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+/**
+ * @param {number} k
+ */
+var MyCircularQueue = function(k) {
+  this.k_ = k, this.head = 0, this.size = 0;
+  this.q = [];
+};
+
+/**
+ * @param {number} value
+ * @return {boolean}
+ */
+MyCircularQueue.prototype.enQueue = function(value) {
+  if (this.isFull()) { return false; }
+  this.q[(this.head + this.size) % this.k_] = value;
+  this.size += 1;
+  return true;
+};
+
+/**
+ * @return {boolean}
+ */
+MyCircularQueue.prototype.deQueue = function() {
+  if (this.isEmpty()) { return false; }
+  this.head = (this.head + 1) % this.k_;
+  this.size -= 1;
+  return true;
+};
+
+/**
+ * @return {number}
+ */
+MyCircularQueue.prototype.Front = function() {
+  if (this.isEmpty()) { return -1; }
+  return this.q[this.head];
+};
+
+/**
+ * @return {number}
+ */
+MyCircularQueue.prototype.Rear = function() {
+  if (this.isEmpty()) { return -1; }
+  return this.q[(this.head + this.size - 1) % this.k_]
+};
+
+/**
+ * @return {boolean}
+ */
+MyCircularQueue.prototype.isEmpty = function() {
+  return this.size == 0;
+};
+
+/**
+ * @return {boolean}
+ */
+MyCircularQueue.prototype.isFull = function() {
+  return this.size == this.k_;
+};
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class MyCircularQueue:
 
@@ -126,6 +291,86 @@ class MyCircularQueue:
     def isFull(self) -> bool:
         return self.size == self.k
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+class MyCircularQueue
+
+=begin
+    :type k: Integer
+=end
+  def initialize(k)
+    @k_ = k
+    @head = 0
+    @size = 0
+    @q = Array.new(k)
+  end
+
+
+=begin
+    :type value: Integer
+    :rtype: Boolean
+=end
+  def en_queue(value)
+    return false if is_full
+    @q[(@head + @size) % @k_] = value
+    @size += 1
+    true
+  end
+
+
+=begin
+    :rtype: Boolean
+=end
+  def de_queue()
+    return false if is_empty
+    @head = (@head + 1) % @k_
+    @size -= 1
+    true
+  end
+
+
+=begin
+    :rtype: Integer
+=end
+  def front()
+    return -1 if is_empty
+    @q[@head]
+  end
+
+
+=begin
+    :rtype: Integer
+=end
+  def rear()
+    return -1 if is_empty
+    @q[(@head + @size - 1) % @k_]
+  end
+
+
+=begin
+    :rtype: Boolean
+=end
+  def is_empty()
+    @size == 0
+  end
+
+
+=begin
+    :rtype: Boolean
+=end
+  def is_full()
+    @size == @k_
+  end
+
+
+end
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
 - Time: `O(1)`
