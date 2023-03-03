@@ -63,6 +63,16 @@ logSystem.retrieve("2016:01:01:01:01:01", "2017:01:01:23:00:00", "Year");
 logSystem.retrieve("2016:01:01:01:01:01", "2017:01:01:23:00:00", "Hour");
 ```
 
+```
+Example 2
+
+Input
+["LogSystem","put","put","retrieve"]
+[[],[1,"2017:01:01:23:59:59"],[2,"2017:01:02:23:59:59"],["2017:01:01:23:59:59","2017:01:02:23:59:59","Second"]]
+Output
+[null, null, null, [2, 1]]
+```
+
 ## How to Solve
 
 When a problem is related to logging, how to handle timestamp is a key to solve the problem.
@@ -120,13 +130,83 @@ public:
 
 {% tab solution Java %}
 ```java
+import java.util.*;
 
+public class LogSystem {
+    private List<Object[]> logs = new ArrayList<>();
+    private Map<String, Integer> indices = new HashMap<String, Integer>() {{
+        put("Year", 5);
+        put("Month", 8);
+        put("Day", 11);
+        put("Hour", 14);
+        put("Minute", 17);
+        put("Second", 19);
+    }};
+    public LogSystem() {}
+
+    public void put(int id, String timestamp) {
+        logs.add(new Object[]{id, timestamp});
+    }
+
+    public List<Integer> retrieve(String start, String end, String granularity) {
+        int idx = indices.get(granularity);
+        String s = start.substring(0, idx), e = end.substring(0, idx);
+        List<Integer> result = new ArrayList<>();
+        for (Object[] log : logs) {
+            int id_ = (Integer)log[0];
+            String timestamp = ((String)log[1]).substring(0, idx);
+            if (s.compareTo(timestamp) <= 0 && e.compareTo(timestamp) >= 0) {
+                result.add(id_);
+            }
+        }
+        return result;
+    }
+}
 ```
 {% endtab %}
 
 {% tab solution JavaScript %}
 ```js
+var LogSystem = function() {
+  this.logs = [];
+  this.indices = new Map([
+    ["Year", 5],
+    ["Month", 8],
+    ["Day", 11],
+    ["Hour", 14],
+    ["Minute", 17],
+    ["Second", 19]
+    ]
+  )
+};
 
+/**
+ * @param {number} id
+ * @param {string} timestamp
+ * @return {void}
+ */
+LogSystem.prototype.put = function(id, timestamp) {
+  this.logs.push([id, timestamp]);
+};
+
+/**
+ * @param {string} start
+ * @param {string} end
+ * @param {string} granularity
+ * @return {number[]}
+ */
+LogSystem.prototype.retrieve = function(start, end, granularity) {
+  const idx = this.indices.get(granularity);
+  const s = start.substring(0, idx), e = end.substring(0, idx);
+  let result = [];
+  this.logs.forEach(log => {
+    let id_ = log[0], timestamp = log[1].substring(0, idx);
+    if (s.localeCompare(timestamp) <= 0 && e.localeCompare(timestamp) >= 0) {
+      result.push(id_);
+    }
+  });
+  return result;
+};
 ```
 {% endtab %}
 
@@ -153,7 +233,48 @@ class LogSystem:
 
 {% tab solution Ruby %}
 ```ruby
+class LogSystem
 
+  def initialize()
+    @logs = Array.new
+    @lengths = {
+      'Year' => 4,
+      'Month' => 7,
+      'Day' => 10,
+      'Hour' => 13,
+      'Minute' => 16,
+      'Second' => 19
+    }
+  end
+
+
+=begin
+    :type id: Integer
+    :type timestamp: String
+    :rtype: Void
+=end
+  def put(id, timestamp)
+    @logs << [id, timestamp]
+  end
+
+
+=begin
+    :type start: String
+    :type end: String
+    :type granularity: String
+    :rtype: Integer[]
+=end
+  def retrieve(start, end_, granularity)
+    len = @lengths[granularity]
+    s, e = start[0, len], end_[0, len]
+    @logs.inject([]) do |acc, log|
+      tm = log[1][0, len]
+      s <= tm && tm <= e ? acc + [log[0]] : acc
+    end
+  end
+
+
+end
 ```
 {% endtab %}
 
