@@ -128,10 +128,10 @@ class CheapestFlightsWithinKStops {
         for (int i = 0; i < n; ++i) { graph.add(new ArrayList<>()); }
         for (int i = 0; i < flights.length; ++i) {
             int s = flights[i][0], d = flights[i][1], w = flights[i][2];
-            graph.get(s).add(new ArrayList<>(){{
+            graph.get(s).add(new ArrayList<>(){ {
                 add(d);
                 add(w);
-            }});
+            } });
         }
         int[] weights = new int[n];
         Arrays.fill(weights, Integer.MAX_VALUE);

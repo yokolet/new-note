@@ -134,14 +134,14 @@ import java.util.*;
 
 public class LogSystem {
     private List<Object[]> logs = new ArrayList<>();
-    private Map<String, Integer> indices = new HashMap<String, Integer>() {{
+    private Map<String, Integer> indices = new HashMap<String, Integer>() { {
         put("Year", 5);
         put("Month", 8);
         put("Day", 11);
         put("Hour", 14);
         put("Minute", 17);
         put("Second", 19);
-    }};
+    } };
     public LogSystem() {}
 
     public void put(int id, String timestamp) {
