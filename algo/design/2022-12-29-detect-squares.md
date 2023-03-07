@@ -107,13 +107,82 @@ public:
 
 {% tab solution Java %}
 ```java
+import java.util.HashMap;
+import java.util.Map;
 
+public class DetectSquares {
+    private Map<Integer, Map<Integer, Integer>> x_coord = new HashMap<>();
+
+    public DetectSquares() {}
+
+    public void add(int[] point) {
+        Map<Integer, Integer> y_coord = x_coord.getOrDefault(point[0], new HashMap<>());
+        int cnt = y_coord.getOrDefault(point[1], 0);
+        y_coord.put(point[1], cnt + 1);
+        x_coord.put(point[0], y_coord);
+    }
+
+    public int count(int[] point) {
+        int x0 = point[0], y0 = point[1], result = 0;
+        for (int y : x_coord.getOrDefault(x0, new HashMap<>()).keySet()) {
+            if (y == y0) { continue; }
+            int side = y - y0;
+            int cnt = x_coord.getOrDefault(x0, new HashMap<>()).getOrDefault(y, 0);
+            result += cnt *
+                    x_coord.getOrDefault(x0 + side, new HashMap<>()).getOrDefault(y0, 0) *
+                    x_coord.getOrDefault(x0 + side, new HashMap<>()).getOrDefault(y, 0);
+            result += cnt *
+                    x_coord.getOrDefault(x0 - side, new HashMap<>()).getOrDefault(y0, 0) *
+                    x_coord.getOrDefault(x0 - side, new HashMap<>()).getOrDefault(y, 0);
+        }
+        return result;
+    }
+}
 ```
 {% endtab %}
 
 {% tab solution JavaScript %}
 ```js
+var DetectSquares = function() {
+  this.x_coord = new Map();
+};
 
+/**
+ * @param {number[]} point
+ * @return {void}
+ */
+DetectSquares.prototype.add = function(point) {
+  const [x, y] = point;
+  let y_coord = this.x_coord.has(x) ? this.x_coord.get(x) : new Map();
+  let cnt = y_coord.has(y) ? y_coord.get(y) : 0;
+  y_coord.set(y, cnt + 1);
+  this.x_coord.set(x, y_coord);
+};
+
+/**
+ * @param {number[]} point
+ * @return {number}
+ */
+DetectSquares.prototype.count = function(point) {
+  const [x0, y0] = point;
+  let result = 0;
+  const y_coord = this.x_coord.has(x0) ? this.x_coord.get(x0) : new Map();
+  y_coord.forEach((cnt, y) => {
+    if (y == y0) { return; }
+    let side = y - y0;
+    if (this.x_coord.has(x0 + side)) {
+      let tmp1 = this.x_coord.get(x0 + side).has(y0) ? this.x_coord.get(x0 + side).get(y0) : 0;
+      let tmp2 = this.x_coord.get(x0 + side).has(y) ? this.x_coord.get(x0 + side).get(y) : 0;
+      result += cnt * tmp1 * tmp2;
+    }
+    if (this.x_coord.has(x0 - side)) {
+      let tmp1 = this.x_coord.get(x0 - side).has(y0) ? this.x_coord.get(x0 - side).get(y0) : 0;
+      let tmp2 = this.x_coord.get(x0 - side).has(y) ? this.x_coord.get(x0 - side).get(y) : 0;
+      result += cnt * tmp1 * tmp2;
+    }
+  });
+  return result;
+};
 ```
 {% endtab %}
 
@@ -142,7 +211,42 @@ class DetectSquares:
 
 {% tab solution Ruby %}
 ```ruby
+class DetectSquares
+  def initialize()
+    @x_coord = Hash.new {|h0, k0| h0[k0] = Hash.new {|h1, k1| h1[k1] = 0}}
+  end
 
+
+=begin
+    :type point: Integer[]
+    :rtype: Void
+=end
+  def add(point)
+    x, y = point
+    @x_coord[x][y] += 1
+  end
+
+
+=begin
+    :type point: Integer[]
+    :rtype: Integer
+=end
+  def count(point)
+    x0, y0 = point
+    result = 0
+    @x_coord[x0].each do |y, cnt|
+      if y == y0
+        next
+      end
+      side = y - y0
+      result += cnt * @x_coord[x0 + side][y0] * @x_coord[x0 + side][y]
+      result += cnt * @x_coord[x0 - side][y0] * @x_coord[x0 - side][y]
+    end
+    result
+  end
+
+
+end
 ```
 {% endtab %}
 
