@@ -81,6 +81,12 @@ The maximum count is the answer.
 
 {% tab solution C++ %}
 ```cpp
+#include <queue>
+#include <unordered_set>
+#include <vector>
+
+using namespace std;
+
 class DetonateTheMaximumBombs {
 public:
     int maximumDetonation(vector<vector<int>>& bombs) {
@@ -125,13 +131,89 @@ public:
 
 {% tab solution Java %}
 ```java
+import java.util.*;
 
+public class DetonateTheMaximumBombs {
+    private boolean isNeighbor(int[] a, int[] b) {
+        long dx = a[0] - b[0], dy = a[1] - b[1];
+        long r = a[2];
+        return r * r >= dx * dx + dy * dy;
+    }
+    public int maximumDetonation(int[][] bombs) {
+        int n = bombs.length;
+        List<List<Integer>> graph = new ArrayList<>();
+        for (int i = 0; i < n; ++i) { graph.add(new ArrayList<>()); }
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < n; ++j) {
+                if (i == j) { continue; }
+                if (isNeighbor(bombs[i], bombs[j])) {
+                    graph.get(i).add(j);
+                }
+            }
+        }
+        int[] counts = new int[n];
+        for (int i = 0; i < n; ++i) { counts[i] = 1; }
+        for (int i = 0; i < n; ++i) {
+            Queue<Integer> q = new ArrayDeque<>();
+            q.add(i);
+            Set<Integer> seen = new HashSet<>();
+            seen.add(i);
+            while (!q.isEmpty()) {
+                List<Integer> neighbors = graph.get(q.poll());
+                for (int neigh : neighbors) {
+                    if (!seen.contains(neigh)) {
+                        counts[i]++;
+                        seen.add(neigh);
+                        q.add(neigh);
+                    }
+                }
+
+            }
+        }
+        return Arrays.stream(counts).max().getAsInt();
+    }
+}
 ```
 {% endtab %}
 
 {% tab solution JavaScript %}
 ```js
-
+/**
+ * @param {number[][]} bombs
+ * @return {number}
+ */
+var maximumDetonation = function(bombs) {
+  const isNeighbor = (a, b) => {
+    let dx = a[0] - b[0], dy = a[1] - b[1], r = a[2];
+    return r * r >= dx * dx + dy * dy;
+  };
+  const n = bombs.length;
+  const graph = [...Array(n)].map(_ => []);
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < n; j++) {
+      if (i === j) { continue; }
+      if (isNeighbor(bombs[i], bombs[j])) {
+        graph[i].push(j);
+      }
+    }
+  }
+  const counts = new Array(n).fill(1);
+  for (let i = 0; i < n; i++) {
+    const q  = [i];
+    const seen = new Set([i]);
+    while (q.length > 0) {
+      const neighbors = graph[q.shift()];
+      for (let neigh of neighbors) {
+        if (!seen.has(neigh)) {
+          counts[i] += 1;
+          seen.add(neigh);
+          q.push(neigh);
+        }
+      }
+    }
+  }
+  return Math.max(...counts);
+};
 ```
 {% endtab %}
 
@@ -168,7 +250,44 @@ class DetonateTheMaximumBombs:
 
 {% tab solution Ruby %}
 ```ruby
+require 'set'
 
+# @param {Integer[][]} bombs
+# @return {Integer}
+def maximum_detonation(bombs)
+  is_neighbor = lambda do |a, b|
+    dx, dy, r = a[0] - b[0], a[1] - b[1], a[2]
+    r * r >= dx * dx + dy * dy
+  end
+  n = bombs.size
+  graph = Array.new(n){Array.new}
+  (0...n).each do |i|
+    (0...n).each do |j|
+      if i == j
+        next
+      end
+      if is_neighbor.call(bombs[i], bombs[j])
+        graph[i] << j
+      end
+    end
+  end
+  counts = Array.new(n).fill(1);
+  (0...n).each do |i|
+    q = [i]
+    seen = Set[i]
+    while !q.empty?
+      neighbors = graph[q.shift]
+      neighbors.each do |neigh|
+        if !seen.include?(neigh)
+          counts[i] += 1
+          seen.add(neigh)
+          q << neigh
+        end
+      end
+    end
+  end
+  counts.max
+end
 ```
 {% endtab %}
 
