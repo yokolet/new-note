@@ -5,16 +5,12 @@ algo_menubar: algo_menu
 hero_height: is-small
 tags:
 - Medium
+- Prefix Sum
 - Heap (Priority Queue)
 - Greedy
 - Array
 date: 2022-09-21 14:44 +0900
 ---
-## Introduction
-Interval problems almost always start from sorting the given array.
-Depending on the problem, the sorting is done by start time, end time or both.
-In many cases, the idea of merging the interval works.
-This problem doesn't need the merging, however, some sort of merging idea can be used.
 
 ## Problem Description
 > You are given a 2D integer array `intervals` where `intervals[i] = [left[i], right[i]]` represents
@@ -53,31 +49,152 @@ Output: 1
 Explanation: None of the intervals overlap, so we can put all of them in one group.
 ```
 
-## Analysis
-The first step is to sort the given array based on the start time.
-Then use heap to save the end time.
-If the next start time is greater than the heap's top value, in another word, the earliest end time,
-pop the earliest end time and replace it to the next end time.
-If not, push the next end time since the range overlaps.
-The number of final groups is the answer.
+## How to Solve
+Interval problems have two well-used approaches.
+One starts from sorting the given array and uses heap for comparison.
+This type of approach is common to merging intervals problems.
+Another counts plus/minus for start/end.
+This approach is often useful to solve meeting room usage problems.
+
+The solution here took the second, plus/minus, approach.
+To divide into groups, we should find the maximum duplicates.
+That will be the same as the minimum number of groups.
+To save memory space, room usage counts are saved in a Hash Table except Java and JavaScript solution.
+Java's sorted map, TreeMap, is not so fast compared to C++'s map.
+In JavaScript, sorting a map is not so fast.
+For those reasons, Java and JavaScript use int array of enough size.
+For each interval, count up start time and count down end + 1 time.
+Then, create a prefix sum ordered by the time.
+The maximum value in the prefix sum is the answer.
+
+For a reference, Python solution has the first approach, sorting and heap.
+
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+#include <map>
+#include <vector>
+
+using namespace std;
+
+
+class DivideIntervalsIntoMinimumNumberOfGroups {
+public:
+    int minGroups(vector<vector<int>>& intervals) {
+        map<int, int> rooms;
+        for (int i = 0; i < intervals.size(); ++i) {
+            rooms[intervals[i][0]]++;
+            rooms[intervals[i][1] + 1]--;
+        }
+        int result = 0, cur = 0;
+        for (auto &[key, value] : rooms) {
+            cur += value;
+            result = max(result, cur);
+        }
+        return result;
+    }
+};
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+import java.util.*;
+
+class DivideIntervalsIntoMinimumNumberOfGroups {
+    public int minGroups(int[][] intervals) {
+        int n = 1000002;
+        int[] rooms = new int[n];
+        for (int i = 0; i < intervals.length; ++i) {
+            rooms[intervals[i][0]]++;
+            rooms[intervals[i][1] + 1]--;
+        }
+        int result = 0;
+        for (int i = 1; i < n; ++i) {
+            rooms[i] += rooms[i - 1];
+            result = Math.max(result, rooms[i]);
+        }
+        return result;
+    }
+}
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+/**
+ * @param {number[][]} intervals
+ * @return {number}
+ */
+var minGroups = function(intervals) {
+  const n = 1000002;
+  let rooms = new Array(n).fill(0);
+  for (let [s, e] of intervals) {
+    rooms[s]++;
+    rooms[e + 1]--;
+  }
+  let result = 0;
+  for (let i = 1; i < n; i++) {
+    rooms[i] += rooms[i - 1];
+    result = Math.max(result, rooms[i]);
+  }
+  return result;
+};
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class DivideIntervalsIntoMinimumNumberOfGroups:
     def minGroups(self, intervals: List[List[int]]) -> int:
-        intervals.sort()
-        groups = []
+        rooms = collections.defaultdict(int)
         for s, e in intervals:
-            if not groups:
-                heapq.heappush(groups, e)
-            elif groups[0] < s:
-                heapq.heappop(groups)
-                heapq.heappush(groups, e)
-            else:
-                heapq.heappush(groups, e)
-        return len(groups)
+            rooms[s] += 1
+            rooms[e + 1] -= 1
+        result, cur = 0, 0
+        for t in sorted(rooms):
+            cur += rooms[t]
+            result = max(result, cur)
+        return result
+
+    def minGroupsByHeap(self, intervals: List[List[int]]) -> int:
+        intervals.sort()
+        q = []
+        for s, e in intervals:
+            if q and q[0] < s:
+                heapq.heappop(q)
+            heapq.heappush(q, e)
+        return len(q)
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+# @param {Integer[][]} intervals
+# @return {Integer}
+def min_groups(intervals)
+  rooms = {}
+  intervals.each do |s, e|
+    rooms[s] = (rooms[s] || 0) + 1
+    rooms[e + 1] = (rooms[e + 1] || 0) - 1
+  end
+  result, cur = 0, 0
+  rooms.sort.each do |_, value|
+    cur += value
+    result = [result, cur].max
+  end
+  result
+end
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
-- Time: `O(n*log(n))`
-- Space: `O(m)` -- m: number of groups
+- Time: `O(n + m)` -- n: number of intervals, m: number of unique start/end times
+- Space: `O(m)`
