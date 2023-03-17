@@ -53,16 +53,16 @@ Create `.railsrc` file with the content below:
 The default location of `.railsrc` is a home directory just like `.zshrc` or `.bashrc`.
 If it is created in another directory and/or another filename, use `--rc=RC` option to specify the file.
 
-Create the Rails app named "graphql-example", for example:
+Create the Rails app named "mini-blog", for example:
 
 ```bash
-$ rails new graphql-example --rc=./.railsrc
+$ rails new mini-blog --rc=./.railsrc
 ```
 
 Test the app is created correctly:
 
 ```bash
-$ cd graphql-example
+$ cd mini-blog
 $ rails s
 ```
 
@@ -95,6 +95,36 @@ end
 ```
 
 Lastly, the second command generates a default GraphQL controller, `app/controllers/graphql_controller.rb`.
+
+Now, `app` directory looks like:
+```
+app
+├── controllers
+│   ├── application_controller.rb
+│   ├── concerns
+│   └── graphql_controller.rb
+├── graphql
+│   ├── mini_blog_schema.rb
+│   ├── mutations
+│   │   └── base_mutation.rb
+│   └── types
+│       ├── base_argument.rb
+│       ├── base_connection.rb
+│       ├── base_edge.rb
+│       ├── base_enum.rb
+│       ├── base_field.rb
+│       ├── base_input_object.rb
+│       ├── base_interface.rb
+│       ├── base_object.rb
+│       ├── base_scalar.rb
+│       ├── base_union.rb
+│       ├── mutation_type.rb
+│       ├── node_type.rb
+│       └── query_type.rb
+└── models
+    ├── application_record.rb
+    └── concerns
+```
 
 
 #### Try How GraphQL Looks Like
@@ -159,35 +189,87 @@ GraphQL itself is independent from the active record world.
 However, API connects to a database to retrieve or update resources almost always.
 On Ruby on Rails, creating an active record model is the way to connect to the database.
 
-Whether a GraphQL type should be defined first or an active record model should be created before the GraphQL type?
-The GraphQL generator creates a type without a model definition.
+Well, a GraphQL type is the first? Or, an active record model should come before the GraphQL type?
+The GraphQL generator can create a type without a model definition.
 But, certainly, the type definition is almost empty.
-When the active record model exists already, GraphQL generator looks at the model definition and generates the type.
-Now, we see a usable type definition.
+When the active record model exists already, GraphQL generator looks at the database schema and generates the type.
+By this, we will get a usable GraphQL type definition.
 
 
 #### Define Models
 
 Let's imagine we will create a blog site.
 The minimum models would be users and posts whose relation is: a user has multiple posts.
+The user's email should be unique so that the same email user won't be created more than once.
 
 The first thing is to generate user and post models as in below:
 
 ```bash
-$ rails g model User email first_name last_name
+$ rails g model User email:string:uniq first_name:string last_name:string
 $ rails g model Post user:references title:string{50} content:text
 ```
 
-Edit `app/models/user.rb` to add a has_many association.
+We want to add some more constraints to models.
+The user model's email is implicitly non-null since it is an indexed unique value.
+However, for the graphql generator, it's better to have non-null constraint explicitly.
+Additionally, we want post model's title and content to be non-null fields also.
+No need to say, we need migrations.
+
+```bash
+$ rails g migration ChangeEmailNullOnUsers
+$ rails g migration ChangeTitleContentNullOnPosts
+```
+
+Then, edit migration files:
+```ruby
+#  db/migrate/[DATE TIME]_change_email_null_on_users.rb
+class ChangeEmailNullOnUsers < ActiveRecord::Migration[7.0]
+  def change
+    change_column_null :users, :email, false
+  end
+end
+
+#  db/migrate/[DATE TIME]_change_title_content_null_on_posts.rb
+class ChangeTitleContentNullOnPosts < ActiveRecord::Migration[7.0]
+  def change
+    change_column_null :posts, :title, false
+    change_column_null :posts, :content, false
+  end
+end
+```
+
+Create tables on the sqlite3 database.
+
+```bash
+$ rails db:create db:migrate
+```
+
+We should update models as well.
+
+Edit `app/models/user.rb` to add a has_many association and uniqueness validation.
 
 ```ruby
 # app/models/user.rb
 class User < ApplicationRecord
   has_many :posts, dependent: :destroy
+
+  validates :email, uniqueness: true
 end
 ```
 
-Add some seed data, so that we can see some results.
+Edit `app/models/post.rb` to add presence validations.
+
+```ruby
+# app/models/post.rb
+class Post < ApplicationRecord
+  belongs_to :user
+
+  validates :title, presence: true
+  validates :content, presence: true
+end
+```
+
+The model definitions are ready. It's time to add some seed data, so that we can see some results.
 
 ```ruby
 # db/seeds.rb
@@ -223,10 +305,10 @@ Post.create(
 )
 ```
 
-All are ready. Run the command below to create tables and insert seed data.
+Run the command below to add seed data to the database.
 
 ```bash
-$ rails db:create db:migrate db:seed
+$ rails db:seed
 ```
 
 To check above worked correctly, Rails console is one of ways to test it.
@@ -251,16 +333,18 @@ $ rails g graphql:object user
 $ rails g graphql:object post
 ```
 
-The generator captures active record definitions to create user and post types.
-Those two look like this:
+The generator captures the database schema definition in db/schema.rb to create user and post types.
+Mostly, we can use generated types as those are.
+
+The generated user_type.rb and post_type.rb look like this:
 ```ruby
 # app/graphql/types/user_type.rb
 module Types
   class UserType < Types::BaseObject
     field :id, ID, null: false
-    field :email, String
-    field :first_name, String
-    field :last_name, String
+    field :email, String, null: false
+    field :first_name, String, null: true
+    field :last_name, String, null: true
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
   end
@@ -273,8 +357,8 @@ module Types
   class PostType < Types::BaseObject
     field :id, ID, null: false
     field :user_id, Integer, null: false
-    field :title, String
-    field :content, String
+    field :title, String, null: false
+    field :content, String, null: false
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
   end
@@ -284,27 +368,28 @@ end
 ### Make GraphQL Queries
 
 So far, we have some seed data in the database.
-It's time to make GraphQL queries.
+The next step is to make GraphQL queries.
 
 GraphQL query schema is defined in `app/graphql/types/query_type.rb`, which has been generated when GraphQL Ruby gem was installed.
-As we see "testField" in the above section, all should be in the query_type.rb.
+As we see "testField" in the above section, all query definitions should be in the query_type.rb.
 
-GraphQL examples out there mostly write every query implementation in the query_type.rb.
-That might end up in adding bunch of methods in a single file in an actual development.
-A concern is, that would lead to poor code readability and/or maintainability.
+GraphQL examples out there often write every query implementation in the query_type.rb.
+It's OK if the API is as simple as examples.
+However, that might end up in adding bunch of methods in a single file in an actual application.
+A concern is, the code will have poor readability and/or maintainability.
 As far as I searched online, it looks no decisive solution exists for this.
 What I found is a GraphQL Ruby's Resolver ([https://graphql-ruby.org/fields/resolvers.html](https://graphql-ruby.org/fields/resolvers.html)).
 Although GraphQL Ruby team wants people to avoid Resolver, it is a good way to decouple each type's query implementation.
-So, this blog post uses the Resolver.
+For that reason, the Resolver is used here.
 
 #### Define Resolvers
 
-Queries to be implemented here are:
+Queries to be implemented are:
 - a single user query, parameter: user id
 - all users query, parameter: none
 - multiple posts query, parameter: none -- all posts, user id -- one user's all posts
 
-For those queries, three resolvers are defined:
+The implementations of resolvers for those queries are defined:
 
 ```ruby
 # app/graphql/resolvers/user_resolver.rb
@@ -327,7 +412,7 @@ module Resolvers
   class UserCollectionResolver < GraphQL::Schema::Resolver
     type [Types::UserType], null: false
 
-    def resolve(**args)
+    def resolve(**kwargs)
       User.all
     end
   end
@@ -342,9 +427,9 @@ module Resolvers
 
     argument :user_id, Int, required: false
 
-    def resolve(**args)
-      if args[:user_id]
-        Post.where(user: args[:user_id]).all
+    def resolve(**kwargs)
+      if kwargs[:user_id]
+        Post.where(user: kwargs[:user_id]).all
       else
         Post.all
       end
@@ -374,7 +459,7 @@ end
 
 #### Queries on GraphiQL
 
-Let's test newly defined queries.
+We are ready to test newly defined queries.
 On GraphiQL desktop app, Command + w will delete the tab and initialize UI.
 Input http://localhost:3000/graphql in the Endpoint text field and hit the return key.
 The updated schema is pulled, which is displayed in the Docs pane.
@@ -456,14 +541,10 @@ query posts($uid: Int) {
 <img src="{{ site.url }}/assets/img/graphiql-posts-query.jpeg" alt="graphiql posts query">
 
 
-### Create New Resource by Mutation
+### Create a New Resource by Mutation
 
 GraphQL calls "mutation" to create/update/delete operations over resources.
 Like queries, mutations need a definition for each types.
-
-The mutation definition inherits `GraphQL::Schema::RelayClassicMutation`.
-GraphQL Ruby generator creates `app/graphql/mutations/base_mutation.rb`, which is a subclass of `GraphQL::Schema::RelayClassicMutation`.
-So, our mutation definition will be a subclass of `Mutations::BaseMutation`.
 
 #### User and Post Mutations
 
@@ -484,8 +565,8 @@ module Mutations
     field :user, Types::UserType, null: false
 
     argument :email, String, required: true
-    argument :first_name, String
-    argument :last_name, String
+    argument :first_name, String, required: false
+    argument :last_name, String, required: false
 
     def resolve(**kwargs)
       user = ::User.new(**kwargs)
@@ -519,7 +600,7 @@ module Mutations
 end
 ```
 
-GraphQL Ruby generator updates `app/graphql/types/mutation_type.rb`, so we don't need to edit this file.
+GraphQL Ruby generator has already updated `app/graphql/types/mutation_type.rb`, so we don't need to edit this file.
 For now, mutation type definition is like this:
 
 ```ruby
@@ -570,6 +651,7 @@ mutation {
 }
 ```
 
-After executing user and post creations, check that by a query.
+After executing create user and post mutations, check the result by GraphQL queries we tried above.
 A new user, posts should be created.
+The Rails console is another way to test newly added user and post.
 
