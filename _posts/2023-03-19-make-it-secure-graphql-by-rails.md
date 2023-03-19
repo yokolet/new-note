@@ -22,15 +22,15 @@ Versions:
 ### Password Authentication
 
 The most primitive idea to protect web application is adding a password authentication.
-As we know, users who wants to access resources on the web site should register themselves and
+As we know, users who wants to modify resources on the web site should register themselves and
 complete a login process by sending an id and credential combination to the web site.
 The id and credential pair will be verified on the web application side.
-If the request is from a registered user with the correct credential, web application returns the result.
-If not, an error message should be sent back to the user who tried to log in.
+Then, the logged in state will be maintained between the user and the web site.
+With the logged in state, web application processes the resource update request and returns the result.
+If not, an error message should be sent back to the user who tried.
 
-If the application is a traditional type, the HTML login form, dropdown or sort will be shown up.
-Then, the web browser or application maintains the logged-in state after the id and credential combination is verified by the server.
-Such states are passed as a session, cookie or hidden field in the HTML form.
+The traditional web application would show the HTML login form, dropdown or sort for register and login.
+Then, the web browser and application maintains the logged-in state by a session, cookie or hidden field in the HTML form.
 
 The API only server should do what?
 In general, the API server uses HTTP headers or explicit token exchanges.
@@ -39,13 +39,12 @@ The returned token should be added to an HTTP header to make successive mutation
 
 At this moment, multiple techniques are out there, however, none is decisive for GraphQL API.
 Sometime, REST API is used for login and register user since Devise gem works better with REST API.
-Others do by GraphQL mutation API with the authentication part implementation.
+Others do by GraphQL mutation API with the authentication implementation from scratch.
 
-This memo mentions about a couple of ways to authenticate users.
+This memo mentions about a way to authenticate users by Global ID.
 
 #### Global ID
 
-The first one is by Global ID.
 The Global ID is "an app wide URI that uniquely identifies a model instance" as
 described in [https://github.com/rails/globalid](https://github.com/rails/globalid).
 The Global ID based authentication does two jobs below using Global ID as an uniquely identifiable value:
@@ -75,15 +74,15 @@ To add those two gems, do below:
 
 ##### Update User Model
 
-The User model should have `password_digest` column to save a password digest.
-The User model never ever saves a raw password in the database to avoid the actual password to be stolen.
+The User model should have a `password_digest` column to save a password digest.
+The User model should never ever save a raw password in the database which is to avoid the actual password to be stolen.
 This is a very basic security practice.
 
 The password digest is a hashed value of salt and given password.
 On Rails, the bcrypt gem is responsible to create the hashed value.
 The bcrypt gem is a Ruby implementation of [bcrypt](https://en.wikipedia.org/wiki/Bcrypt) password-hashing function.
-Precisely, the bcrypt function creates a concatenated string of a hashing algorithm, cost, salt and hash.
-The hashed value will be saved in the database instead of a raw password.
+Precisely, the bcrypt function creates a concatenated string of a hashing algorithm, cost, salt and checksum.
+That sort of hashed value will be saved in the database instead of a raw password.
 
 Let's create a migration to add password_digest column to user model.
 
@@ -123,15 +122,15 @@ Because of that, `attr_accessor :token`, is added.
 The `has_secure_password` is to signal that the user should be authenticated, which is a provided feature by bcrypt gem.
 The line, `validates :password, length: { minimum: 8 }, presence: true` is to require the password input.
 The database won't have the password column, but still the model creation needs password.
-For this reason, the user model requires the password.
+For this reason, the password constraint is in the user model.
 
 ##### Update GraphQL Controller, Types and Mutations
 
 The next step is GraphQL controller, type and mutation updates.
 The first one is a graphql_controller update.
 The changes in the controller are:
-- add a private method, current_user, to locate a user from token in thr HTTP header based on Global ID
-- add a current_user entry in graphql context
+- add a private method, current_user, to locate a user based on Global ID using the token in the HTTP header.
+- add a current_user entry in graphql context hash table.
 
 ```ruby
 # app/controllers/graphql_controller.rb
@@ -276,7 +275,7 @@ end
 ```
 
 The PostCreate class will have one line of addition.
-The resolve method will have authenticate! in its first line. That's it.
+The resolve method gets `authenticate!` in its first line. That's it.
 ```ruby
 # app/graphql/mutations/post_create.rb
 module Mutations
@@ -348,7 +347,7 @@ The login mutation also returns a tokenized signed Global ID.
 <img src="{{ site.url }}/assets/img/insomnia-login-query.jpeg" alt="img: insomnia user login query">
 
 The post create mutation needs HTTP header to complete successfully.
-So, the first try will be done without the token in the HTTP header to see it will fail.
+So, let's try without the token in the HTTP header to see it will fail.
 
 ```graphql
 mutation post {
@@ -380,3 +379,8 @@ Now, it succeeds.
 
 <img src="{{ site.url }}/assets/img/insomnia-post-with-header.jpeg" alt="img: insomnia post with header">
 
+
+### Code
+
+The example Rails app code is on the GitHub repo.
+Please see [https://github.com/yokolet/mini-blog](https://github.com/yokolet/mini-blog).
