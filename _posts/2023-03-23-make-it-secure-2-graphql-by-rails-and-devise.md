@@ -492,3 +492,7 @@ query posts {
 
 <img src="{{ site.url }}/assets/img/insomnia-devise-post-of-a-user.jpeg" alt="img: insomnia devise posts of a user">
 
+### Code
+
+The example Rails app code is on the GitHub repo.
+Please see [https://github.com/yokolet/mini-blog-2](https://github.com/yokolet/mini-blog-2).
