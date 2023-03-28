@@ -407,12 +407,20 @@ The issue is on-going and discussed at
 [https://github.com/heartcombo/devise/issues/5443](https://github.com/heartcombo/devise/issues/5443).
 
 The workaround is adding below three lines to config/application.rb.
+The session store's key is, in general, "_[APP NAME]_session_#{Rails.env}".
 ```ruby
 # config/application.rb
-
-    config.session_store :cookie_store, key: '_interslice_session'
+# ...
+# ...
+module MiniBlog2
+  class Application < Rails::Application
+    # ...
+    # ...
+    config.session_store :cookie_store, key: "_mini-blog-2_session_#{Rails.env}"
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use config.session_store, config.session_options
+  end
+end
 ```
 
 Everything is ready.
