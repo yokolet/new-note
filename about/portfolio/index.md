@@ -3,7 +3,7 @@ layout: page
 menubar: about_menu
 title: Portfolio
 subtitle: My projects
-hero_image: /assets/img/persimmon.jpeg
+hero_image: /assets/img/pink-camellia-2.jpeg
 show_sidebar: false
 toc: true
 ---

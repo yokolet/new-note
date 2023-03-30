@@ -2,7 +2,7 @@
 layout: page
 title: About
 menubar: about_menu
-hero_image: /assets/img/persimmon.jpeg
+hero_image: /assets/img/pink-camellia-2.jpeg
 show_sidebar: false
 ---
 
