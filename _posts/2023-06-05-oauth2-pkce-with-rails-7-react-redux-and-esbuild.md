@@ -170,7 +170,7 @@ Create another controller to mount the client app.
 ```
 
 Edit app/views/pages/home.html.erb to add the div tag with id=root as the mount point.
-```erbruby
+```erb
 <%# app/views/pages/home.html.erb %>
 
 <h1>Pages#home</h1>
@@ -287,7 +287,9 @@ Add javascripts directory in app/assets/config/manifest.js as in the last line b
 
 Lastly, add javascript tag in app/views/layouts/application.html.erb.
 The tag should come before application.js since the variables defined in settings.js will be referenced in application.js.
-```erbruby
+```erb
+<%# app/views/layouts/application.html.erb %>
+
 ...
 <head>
     <title>TwitterOauthPkceExample</title>
