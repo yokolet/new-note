@@ -266,5 +266,4 @@ The React app shows up.
 ### References
 - [https://bun.sh/docs](https://bun.sh/docs)
 - [How to use Bun with Ruby on Rails](https://webcrunch.com/posts/bun-with-ruby-on-rails)
-
-
+- Sample code: [https://github.com/yokolet/rails-bun-react](https://github.com/yokolet/rails-bun-react)
