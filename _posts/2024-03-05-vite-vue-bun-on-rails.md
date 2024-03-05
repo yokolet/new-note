@@ -2,8 +2,8 @@
 layout: post
 title: Vite + Vue + Bun on Rails
 hero_height: is-small
+date: 2024-03-05 21:18 +0900
 ---
-
 [Vue.js](https://vuejs.org/) is one of frontend frameworks gaining popularity among rapidly emerging JavaScript technologies.
 The combination of Vue.js and Rails is becoming more popular as well,
 however, Vue.js development on Rails is not so straightforward.
