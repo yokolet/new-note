@@ -29,6 +29,7 @@ explains well.
 At this moment, Vite on Bun is an effective combination.
 
 This blog post explains how Vue, Vite and Bun on Rails can be created.
+The source code is on the GitHub, [rails-vite-vue](https://github.com/yokolet/rails-vite-vue).
 
 ### Prerequisite
 
@@ -308,3 +309,4 @@ verify HMR (Hot Module Replacement) is working.
 - [Building a Rails App with a Vue.js Frontend](https://clouddevs.com/ruby-on-rails/building-app-with-vuejs-frontend/)
 - [Vue on Rails](https://medium.com/@oscarreciogonzalez/vue-on-rails-15686b85b1d3)
 - [Rails 7 + Vite + Vue 3 + Pinia starter pack](https://guillaume.barillot.me/2022/05/05/rails-vite-vue-3-pina-starter-pack/)
+- Source code: [https://github.com/yokolet/rails-vite-vue](https://github.com/yokolet/rails-vite-vue)
