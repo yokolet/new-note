@@ -54,37 +54,39 @@ or Download from [https://nodejs.org/en](https://nodejs.org/en)
 ### Create a Rails App Skipping JavaScript
 
 Rails supports importmap (default), bun, webpack, esbuild and rollup as JavaScript approaches.
-None of those will be used to transpile, bundle, or etc. to create this blog's frontend app.
+None of those will be used to transpile, bundle, or etc. to create a frontend by Vue.
 Bun will be used, but its role is a replacement of npm or yarn here.
-The best option is --skip-javascript.
-Also, --minimal option works if the app can be a simple one.
+The best option is `--skip-javascript`.
+Also, `--minimal` option works if the app can be a simple one.
 
 The command blow creates a Rails app without a JavaScript support.
 
 ```bash
-% rails new [APP NAME] --skip-javascript -T
+$ rails new [APP NAME] --skip-javascript -T
 ```
 
 ### Install Vite
 
 The next step is to install Vite.
-Change a directory to the application, then type the command below:
+Change a directory to the application, then type the command below.
 
 ```bash
-% bundle add vite_rails
+$ bundle add vite_rails
 ```
 
 The command above installs vite_rails gem along with a Ruby version of vite command.
 The Ruby version of vite command is used to install Vite and JavaScript version of vite command.
 
+Now, it's time to use the Ruby version of vite command. Type below.
+
 ```bash
-% bundle exec vite install
+$ bundle exec vite install
 ```
 
 Above command does a lot.
 It installs the vite JavaScript package which includes JavaScript version of vite command.
 Also, it installs the vite-plugin-ruby JavaScript package.
-During the package installation, npm is used. It looks no option to use yarn or bun.
+During the package installation, npm runs. It looks no option to switch to yarn or bun.
 
 Additionally, it creates files listed below.
 
@@ -99,14 +101,14 @@ Additionally, it creates files listed below.
 ### Switching from npm to bun
 
 Bun runs really fast, so this blog uses bun instead of npm.
-Since package-lock.json is no longer needed, let's begin with deleting the lock file.
+Since package-lock.json is no longer needed, delete the npm lock file.
 
 ```bash
-% rm package-lock.json
-% bun install
+$ rm package-lock.json
+$ bun install
 ```
 
-Once the installation is over,  Bun's lock file, `bun.lockb`, will be created.
+Once bun install is completed,  Bun's lock file, `bun.lockb`, will be created.
 After this, use bun command to install JavaScript packages.
 
 ### Install Vue and Vue Plugin
@@ -117,10 +119,10 @@ Vite is a framework independent development tool.
 To use Vite for Vue development, Vue plugin should be installed and set up.
 
 ```bash
-% bun add vue @vitejs/plugin-vue
+$ bun add vue @vitejs/plugin-vue
 ```
 
-After the installation above, edit `vite.config.ts` to set up Vue plugin.
+After the vue and plugin installation, edit `vite.config.ts` to set up Vue plugin.
 
 ```typescript
 import { defineConfig } from 'vite'
@@ -137,10 +139,11 @@ export default defineConfig({
 
 ### Set up Starter Command
 
-When the app is created, we skipped the JavaScript approaches.
-Because of that, the app doesn't have a handy command such as bin/dev.
-We need to type `foremen start...` to start the development server.
-This works, but it's better to have the same command, `bin/dev`.
+When the app was created, we skipped the JavaScript approaches.
+Because of that, the app doesn't have a handy command such as `bin/dev`.
+The vite_rails gem created `Profile,dev` configuration for a foreman.
+This works, but, still, we need to type `foreman start -f Procfile.dev` to start the development server.
+It's better to have the command, `bin/dev`.
 
 ##### package.json
 
@@ -175,7 +178,7 @@ web: env RUBY_DEBUG_OPEN=true bin/rails server
 js: bun run dev
 ```
 
-This setting is to start two servers -- one for Rails server and another for a frontend server.
+This setting is to start two servers -- one for Rails and another for a frontend.
 
 ##### bin/dev
 
@@ -206,7 +209,7 @@ For now, we can start the two development servers by just typing `bin/dev`.
 Since it is a Rails app, a controller is responsible to receive HTTP requests.
 
 ```bash
-% rails g controller pages index
+$ rails g controller pages index
 ```
 
 Edit `app/views/pages/index.html.erb` to add the mount point.
@@ -237,14 +240,14 @@ To make an app creation simple, the Vue app used here is the one create by `bun 
 During the app creation, Vue and JavaScript was selected as a framework and language.
 
 When vite_rails gem is used, an entrypoint file is `app/frontend/entrypoints/application.js`.
-The file is an equivalent to `main.js` of the Vue sample app.
+The file is equivalent to `main.js` of the Vue sample app.
 Replace whole content of application.js (Rails) by main.js (Vite + Vue)
 or add entire main.js (Vite + Vue) to application.js (Rails).
 
 Six files of Vite + Vue app below:
 
 ```bash
-% tree src public
+$ tree src public
 src
 ├── App.vue
 ├── assets
@@ -262,7 +265,7 @@ public
 should be mapped to below on Rails:
 
 ```bash
-% tree app/frontend
+$ tree app/frontend
 app/frontend
 ├── App.vue
 ├── assets
@@ -286,7 +289,7 @@ Above directory structure is just an example.
 Start the servers by:
 
 ```bash
-% bin/dev
+$ bin/dev
 ```
 
 Open http://localhost:3000/ on a browser.
