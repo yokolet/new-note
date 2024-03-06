@@ -2,7 +2,7 @@
 layout: page
 title: About
 menubar: about_menu
-hero_image: /assets/img/pink-camellia-2.jpeg
+hero_image: /assets/img/sunset-beach.jpeg
 show_sidebar: false
 ---
 
