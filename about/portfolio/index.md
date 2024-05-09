@@ -8,19 +8,18 @@ show_sidebar: false
 toc: true
 ---
 
-## Machine Learning
-
-#### Becoming Jane by Deep Learning
-- [https://github.com/yokolet/DeepLearning/tree/master/Jane](https://github.com/yokolet/DeepLearning/tree/master/Jane)
-- NLP
-- Designed and trained the NLP model using Jane Austen's novels as a training data.
-- Generated sentences which might look like Jane Austen.
-
-#### Small deep learning projects
-- [https://github.com/yokolet/DeepLearning](https://github.com/yokolet/DeepLearning)
-- CNN, DCGAN, RL, RNN etc.
-
 ## Web Application
+
+#### Rainy Day Blog
+- [https://gitlab.com/yokolet/rainy-day-blog](https://gitlab.com/yokolet/rainy-day-blog)
+- Blog site web application by Ruby on Rails with Vue 3
+- OAuth2 PKCE (Authorization Code Flow with Proof Key for Code Exchange) for a user authentication
+- GraphQL for a blog post API
+  - (backend) GraphQL Ruby, (frontend) Vue Apollo
+- Others on the backend
+  - PostgrSQL, Redis, RSpec, Vite Ruby
+- Others on the frontend
+  - Vite, Bun, Composition API, Vue Router, Pinia, Tailwind CSS, Daisy UI
 
 #### Transcript App
 - Web App: [https://github.com/yokolet/transcript-web](https://github.com/yokolet/transcript-web)
@@ -49,3 +48,15 @@ toc: true
 - [https://github.com/yokolet/traffic-simulation](https://github.com/yokolet/traffic-simulation)
 - Traffic simulation
 - Thread management
+
+## Machine Learning
+
+#### Becoming Jane by Deep Learning
+- [https://github.com/yokolet/DeepLearning/tree/master/Jane](https://github.com/yokolet/DeepLearning/tree/master/Jane)
+- NLP
+- Designed and trained the NLP model using Jane Austen's novels as a training data.
+- Generated sentences which might look like Jane Austen.
+
+#### Small deep learning projects
+- [https://github.com/yokolet/DeepLearning](https://github.com/yokolet/DeepLearning)
+- CNN, DCGAN, RL, RNN etc.
