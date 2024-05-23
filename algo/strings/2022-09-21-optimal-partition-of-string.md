@@ -53,6 +53,43 @@ If the same character appears, count up and clear the set.
 In the end, if the set is not empty, count up.
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+class OptimalPartitionString {
+private:
+  int count = 1;
+  set<char> seen;
+public:
+  int partitionString(string s) {
+    for (char& c : s) {
+      if (seen.count(c)) {
+        count++;
+        seen.clear();
+      }
+      seen.emplace(c);
+    }
+    return count;
+  }
+};
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class OptimalPartitionString:
     def partitionString(self, s: str) -> int:
@@ -64,6 +101,27 @@ class OptimalPartitionString:
             seen.add(c)
         return count + 1 if seen else count
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+# @param {String} s
+# @return {Integer}
+def partition_string(s)
+    count, seen = 1, Set.new
+    s.each_char do |c|
+      if seen.include?(c)
+        count += 1
+        seen.clear
+      end
+      seen.add(c)
+    end
+    count
+end
+```
+{% endtab %}
+
+{% endtabs %}
 
 ## Complexities
 - Time: `O(n)`
