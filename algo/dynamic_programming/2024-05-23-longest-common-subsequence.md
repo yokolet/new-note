@@ -23,7 +23,7 @@ date: 2024-05-23 21:16 +0900
 > - `1 <= text1.length, text2.length <= 1000`
 > - `text1` and `text2` consist of only lowercase English characters.
 >
-> [Longesst Common Subsequence](https://leetcode.com/problems/longest-common-subsequence/description/)
+> [https://leetcode.com/problems/longest-common-subsequence/description/](https://leetcode.com/problems/longest-common-subsequence/description/)
 
 ## Examples
 ```
