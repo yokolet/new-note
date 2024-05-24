@@ -55,14 +55,53 @@ Output: ["g1 act car","a8 act zoo","ab1 off key dog","a1 9 2 3 1","zo4 4 7"]
 ```
 
 ## Analysis
-This solution relies on Python's tuple sorting feature.
+The Python solution relies on a tuple sorting feature.
 While sorting the tuple, the first element, the second element if the first is the same
 will be used to compare.
 The custom comparator returns `(1,)` for digit logs so that digit logs come later.
 For letter logs, it returns `(0, string except id, id)` to comply with the condition.
 With this custom comparator, just soring the log gives us the answer.
 
+The C++ solution relies on the stable_sort function.
+The custom comparator logic is similar to the Python's.
+
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+class ReorderDataInLogFiles {
+public:
+    vector<string> reorderLogFiles(vector<string>& logs) {
+        stable_sort(logs.begin(), logs.end(),
+            [](const string &a, const string &b) {
+                if (isdigit(a.back())) return false;
+                if (isdigit(b.back())) return true;
+                const string aa = a.substr(a.find(' '));
+                const string bb = b.substr(b.find(' '));
+                if (aa == bb) return a < b;
+                return aa < bb;
+            });
+        return logs;
+    }
+};
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class ReorderDataInLogFiles:
     def reorderLogFiles(self, logs: List[str]) -> List[str]:
@@ -74,7 +113,16 @@ class ReorderDataInLogFiles:
                 return (0, rest, id_)
         return sorted(logs, key=comp)
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+
+```
+{% endtab %}
+
+{% endtabs %}
 
 ## Complexities
-- Time: `O(nlog(n))`
+- Time: `O(n * log(n))`
 - Space: `O(1)`
