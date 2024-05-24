@@ -10,12 +10,6 @@ tags:
 - Prefix Sum
 date: 2022-09-10 20:52 +0900
 ---
-## Introduction
-If the problem asks "number of ways," it might be a dynamic programming.
-Some state is there, and the next state depends on the previous state.
-In this problem, we'll count "101" or "010" sub sequence.
-When the character is '1', previous states should be '', '10', or '0'.
-Those are counted and lead to the answer.
 
 ## Problem Description
 > You are given a 0-indexed binary string `s` which represents the types of buildings along a street where:
@@ -56,13 +50,21 @@ Output: 0
 Explanation: It can be shown that there are no valid selections.
 ```
 
-## Analysis
+## How to Solve
+If the problem asks "number of ways," it might be a dynamic programming.
+Some state is there, and the next state depends on the previous state.
+In this problem, we'll count "101" or "010" sub sequence.
+When the character is '1', previous states should be '', '10', or '0'.
+Those are counted and lead to the answer.
+
 Only valid strings are "101" or "010".
-We should focus on '0', '1', '01', '10', then the result.
+We should focus on '0', '1', '01', '10', then the total.
+
 When a current character is '1':
 - count up '1' by 1
 - update '01' by adding the value of '0'
 - update the result by adding the value of '10'
+
 When a current character is '0':
 - count up '0' by 1
 - update '10' by adding the value of '1'
@@ -72,6 +74,45 @@ In the end, we can get the answer.
 
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+class NumberOfWaysToSelectBuildings {
+public:
+    long long numberOfWays(string s) {
+        unsigned long n0 = 0, n1 = 0, n01 = 0, n10 = 0, total = 0;
+        for (char &c : s) {
+            if (c == '1') {
+                n1++;
+                n01 += n0;
+                total += n10;
+            } else {
+                n0++;
+                n10 += n1;
+                total += n01;
+            }
+        }
+        return total;
+    }
+};
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class NumberOfWaysToSelectBuildings:
     def numberOfWays(self, s: str) -> int:
@@ -87,6 +128,16 @@ class NumberOfWaysToSelectBuildings:
                 total += n01
         return total
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
 - Time: `O(n)`
