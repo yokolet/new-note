@@ -65,6 +65,52 @@ It checks group id of up and left cells and updates current cell's group id.
 In the end, the number of groups is calculated going over the group id array.
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+class NumberOfIslandsDFS {
+public:
+    void dfs(vector<vector<char>>& grid, int r, int c) {
+        if (r < 0 || c < 0 || r >= grid.size() || c >= grid[0].size() || grid[r][c] == '0') return;
+        grid[r][c] = '0';
+        dfs(grid, r - 1, c);
+        dfs(grid, r, c - 1);
+        dfs(grid, r, c + 1);
+        dfs(grid, r + 1, c);
+    }
+
+    int numIslands(vector<vector<char>>& grid) {
+        if (grid.empty() || grid[0].empty()) return 0;
+        int count = 0;
+        for (int r = 0; r < grid.size(); ++r) {
+            for (int c = 0; c < grid[0].size(); ++c) {
+                if (grid[r][c] == '1') {
+                    dfs(grid, r, c);
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+};
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class NumberOfIslandsDFS:
     def numIslands(self, grid: List[List[str]]) -> int:
@@ -84,9 +130,8 @@ class NumberOfIslandsDFS:
                     count += 1
                     dfs(i, j)
         return count
-```
 
-```python
+
 class NumberOfIslandsUF:
     def numIslands(self, grid: List[List[str]]) -> int:
         if not grid or not grid[0]: return 0
@@ -124,7 +169,17 @@ class NumberOfIslandsUF:
                 count += 1
         return count
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
 - Time: `O(m * n)` -- m: rows, n: columns
-- Space: `O(m * n)` -- DFS, `O(m)` -- UF 
+- Space: `O(m * n)` -- Python DFS, `O(m)` -- Python UF, `O(1)` -- C++
