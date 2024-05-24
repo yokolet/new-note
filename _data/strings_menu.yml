@@ -1,5 +1,7 @@
 - label: Algorithm / Strings
   items:
+    - name: Append Characters to String to Make Subsequence
+      link: /algo/strings/2024-05-24-append-characters-to-string-to-make-subsequence
     - name: Concatenated Words
       link: /algo/strings/2022-09-14-concatenated-words
     - name: Count and Say
