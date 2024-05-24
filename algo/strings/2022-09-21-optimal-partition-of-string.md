@@ -10,10 +10,6 @@ tags:
 - Greedy
 date: 2022-09-21 15:07 +0900
 ---
-## Introduction
-To solve string partition problems, hash table or set is used to save a previous occurrence.
-If the problem asks a length, it needs hash table.
-However, this problem asks just a number of groups, set is a good data structure to solve.
 
 ## Problem Description
 > Given a string `s`, partition the string into one or more substrings
@@ -47,7 +43,11 @@ Explanation:
 The only valid partition is ("s","s","s","s","s","s").
 ```
 
-## Analysis
+## How to Solve
+To solve string partition problems, hash table or set is used to save a previous occurrence.
+If the problem asks a length, it needs hash table.
+However, this problem asks just a number of groups, so set is a good data structure.
+
 Use a set to save the previous occurrence of a same character.
 If the same character appears, count up and clear the set.
 In the end, if the set is not empty, count up.

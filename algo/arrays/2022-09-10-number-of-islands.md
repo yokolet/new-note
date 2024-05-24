@@ -10,12 +10,6 @@ tags:
 - Matrix
 date: 2022-09-10 14:57 +0900
 ---
-## Introduction
-This is a matrix search problem. Possible movements are four: up, right, down, and left.
-To get the answer, we should look at an area of `1`s.
-Given that, Depth-First or Breadth-First search are the typical algorithm to solve the problem.
-This type of problem can have one more way: union-find.
-The solution here has DFS and union-find.
 
 ## Problem Description
 > Given an `m x n` 2D binary grid `grid` which represents a map of '1's (land) and '0's (water),
@@ -55,10 +49,18 @@ Input: grid = [
 Output: 3
 ```
 
-## Analysis
+## How to Solve
+This is a matrix search problem. Possible movements are four: up, right, down, and left.
+To get the answer, we should look at an area of `1`s.
+Given that, Depth-First or Breadth-First searches are the typical algorithm to solve the problem.
+This type of problem can have one more way: union-find.
+The Python solution here has DFS and union-find.
+
 The solution by DFS is a common DFS search.
 Starting from all positions of `1`, check up, right, down, left if those are '1' and not yet visited.
-When the DSF starts, the counter is incremented since only one `1` is an island.
+The DFS loop starts at every cell where the value is `1`.
+When each loop completes, the counter is incremented.
+In the end, we can get the answer.
 
 On the other hand, the solution by union-find saves the group number in an auxiliary array.
 It checks group id of up and left cells and updates current cell's group id.
