@@ -10,11 +10,6 @@ tags:
 - String
 date: 2022-09-10 21:44 +0900
 ---
-## Introduction
-This problem tells us to focus on only indices of `'|'`.
-Then it's easy to think of a binary search solution.
-The tricky part is, candles might there continuously.
-Those should be subtracted.
 
 ## Problem Description
 > There is a long table with a line of plates and candles arranged on top of it.
@@ -60,7 +55,12 @@ Explanation:
 - The other queries have zero plates between candles.
 ```
 
-## Analysis
+## How to Solve
+This problem tells us to focus on only indices of `'|'`.
+Then it's easy to think of a binary search solution.
+The tricky part is, candles might there continuously.
+Those should be subtracted.
+
 Since only indicies of candles matter, create an array of candle indicies.
 Given left and right of a query, find left insertion point of left value.
 Also, find right insertion point of right value.
@@ -68,6 +68,42 @@ We'll see indicies of candles, so calculate the range length.
 However, the multiple candles might be there continuously, so subtract those.
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+class PlatesBetweenCandles {
+public:
+    vector<int> platesBetweenCandles(string s, vector<vector<int>>& queries) {
+        vector<int> nums, answer;
+        for (int i = 0; i < s.size(); ++i) {
+            if (s[i] == '|') nums.push_back(i);
+        }
+        for (int i = 0; i < queries.size(); ++i) {
+            int l = lower_bound(nums.begin(), nums.end(), queries[i][0]) - nums.begin();
+            int r = upper_bound(nums.begin(), nums.end(), queries[i][1]) - nums.begin();
+            answer.push_back(l != r ? nums[r - 1] - nums[l] - (r - l - 1) : 0);
+        }
+        return answer;
+    }
+};
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class PlatesBetweenCandles:
     def platesBetweenCandles(self, s: str, queries: List[List[int]]) -> List[int]:
@@ -84,7 +120,17 @@ class PlatesBetweenCandles:
             answer.append(idx_r - idx_l + 1 - candles)
         return answer
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
-- Time: `O(mlog(n))` -- m: number of queries, n: number of candles
+- Time: `O(m * log(n))` -- m: number of queries, n: number of candles
 - Space: `O(n)`
