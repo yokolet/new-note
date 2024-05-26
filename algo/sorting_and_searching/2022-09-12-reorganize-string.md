@@ -10,10 +10,6 @@ tags:
 - Greedy
 date: 2022-09-12 18:03 +0900
 ---
-## Introduction
-The problem asks to return a re-generated string, so, just count the character frequency is not enough.
-Since reorder is required, it needs some sorting as well.
-Using heap, generate a new string based on the character frequency is the way.
 
 ## Problem Description
 > Given a string `s`, rearrange the characters of `s` so that any two adjacent characters are not the same.
@@ -38,7 +34,11 @@ Input: s = "aaab"
 Output: ""
 ```
 
-## Analysis
+## How to Solve
+The problem asks to return a re-generated string, so, just count the character frequency is not enough.
+Since reorder is required, it needs some sorting as well.
+Using heap, generate a new string based on the character frequency is the way.
+
 The first step is to create a heap based on the character frequency.
 It is the max heap, so frequency values are negative for Python heap.
 Take the most frequent character and add it to the result and count down the number of the character.
@@ -48,6 +48,55 @@ Do the same, add to the result, get it back to heap if necessary.
 This way, the result string will be created.
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+class ReorganizeString {
+public:
+    string reorganizeString(string s) {
+        unordered_map<char, int> counter;
+        for (char c : s) counter[c]++;
+
+        priority_queue<pair<int, char>> heap;
+        for (auto c : counter) heap.push({c.second, c.first});
+
+        string result = "";
+        while (!heap.empty()) {
+            pair<int, char> h1 = heap.top();
+            heap.pop();
+            result.push_back(h1.second);
+            if (heap.empty()) {
+                if (h1.first - 1 > 0) heap.push({h1.first - 1, h1.second});
+                break;
+            }
+            pair<int, char> h2 = heap.top();
+            heap.pop();
+            result.push_back(h2.second);
+            if (h2.first - 1 > 0) heap.push({h2.first - 1, h2.second});
+            if (h1.first - 1 > 0) heap.push({h1.first - 1, h1.second});
+        }
+        if (!heap.empty()) return "";
+        return result;
+    }
+};
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class ReorganizeString:
     def reorganizeString(self, s: str) -> str:
@@ -73,7 +122,17 @@ class ReorganizeString:
                 heapq.heappush(heap, (cnt, c))
         return result
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
-- Time: `O(nlog(n))`
+- Time: `O(n * log(n))`
 - Space: `O(n)`
