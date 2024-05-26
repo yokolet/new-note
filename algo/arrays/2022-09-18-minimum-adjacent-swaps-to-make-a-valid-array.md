@@ -9,11 +9,6 @@ tags:
 - Greedy
 date: 2022-09-18 21:20 +0900
 ---
-## Introduction
-This is a minimum swaps to rearrange something problem.
-This would be an easier problem compared to other problems of this kind.
-The leftmost smallest and rightmost largest values move.
-Just looking at indices of those two values will lead to the answer.
 
 ## Problem Description
 > You are given a 0-indexed integer array `nums`.
@@ -54,7 +49,12 @@ Output: 0
 Explanation: The array is already valid, so we return 0.
 ```
 
-## Analysis
+## How to Solve
+This is a minimum swaps to rearrange something problem.
+This would be an easier problem compared to other problems of this kind.
+The leftmost smallest and rightmost largest values move.
+Just looking at indices of those two values will lead to the answer.
+
 Find the leftmost smallest value's index and rightmost largest value's index.
 The smallest value's swap count is the index of that value.
 The largest value's swap count is (n - 1 - largest value's index)
@@ -63,6 +63,53 @@ If smallest values index is bigger than largest index, a swap for the largest is
 done once. That's why n - 1 or n - 2.
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+class MinimumAdjacentSwapsToMakeAValidArray {
+public:
+    int minimumSwaps(vector<int>& nums) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL); cout.tie(NULL);
+
+        vector<int> smallest{INT_MAX, -1}, largest{0, -1};
+        for (int i = 0; i < nums.size(); ++i) {
+          if (smallest[0] > nums[i]) {
+            smallest[0] = nums[i];
+            smallest[1] = i;
+          }
+          if (largest[0] <= nums[i]) {
+            largest[0] = nums[i];
+            largest[1] = i;
+          }
+        }
+        if (smallest[1] < largest[1]) {
+          return smallest[1] + nums.size() - 1 - largest[1];
+        } else if (smallest[1] > largest[1]) {
+          return smallest[1] + nums.size() - 2 - largest[1];
+        } else {
+          return 0;
+        }
+    }
+};
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class MinimumAdjacentSwapsToMakeAValidArray:
     def minimumSwaps(self, nums: List[int]) -> int:
@@ -81,6 +128,16 @@ class MinimumAdjacentSwapsToMakeAValidArray:
         else:
             return s_idx + n - 2 - l_idx
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
 - Time: `O(n)`
