@@ -10,12 +10,6 @@ tags:
 - Array
 date: 2022-10-14 22:47 +0900
 ---
-## Introduction
-For this problem, a few of approaches exist.
-For example, two heaps, two pointers, or even sorting every subarray.
-To think an efficient solution, we should think how to avoid duplicated operations.
-The solution here took the binary search approach.
-Since the subarray (window) should be sorted, the binary search and binary search based insertion works.
 
 ## Problem Description
 > The median is the middle value in an ordered integer list. If the size of the list is even,
@@ -64,13 +58,60 @@ Input: nums = [1,4,2,3], k = 4
 Output: [2.50000]
 ```
 
-## Analysis
+## How to Solve
+For this problem, a few of approaches exist.
+For example, two heaps, two pointers, or even sorting every subarray.
+To think an efficient solution, we should think how to avoid duplicated operations.
+The solution here took the binary search approach.
+Since the subarray (window) should be sorted, the binary search and binary search based insertion works.
+
 Before starting the window shift, the solution here creates the window and find the first median value.
 In the loop, it finds the index to be removed by bisect search and pops it from the window.
 Next step is to insert a new value to the window using bisect insort.
 Now, it's easy to find the median value of the current window.
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+class SlidingWidnowMedian {
+public:
+    vector<double> medianSlidingWindow(vector<int>& nums, int k) {
+        vector<double> answer;
+        vector<int> window = {nums.begin(), nums.begin() + k - 1};
+        sort(window.begin(), window.end());
+        int i = k - 1;
+        while (i < nums.size()) {
+            window.insert(lower_bound(window.begin(), window.end(), nums[i]), nums[i]);
+            if (k % 2 == 1) {
+                answer.push_back((double)window[k / 2]);
+            } else {
+                answer.push_back(((double)window[k / 2] + (double)window[k / 2 - 1]) / 2);
+            }
+            window.erase(lower_bound(window.begin(), window.end(), nums[i - k + 1]));
+            i++;
+        }
+        return answer;
+    }
+};
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class SlidingWidnowMedian:
     def medianSlidingWindow(self, nums: List[int], k: int) -> List[float]:
@@ -83,7 +124,17 @@ class SlidingWidnowMedian:
             result.append(window[k // 2] if k & 1 else (window[k // 2] + window[k //2 - 1]) / 2.0)
         return result
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
-- Time: `O(nlog(n))`
+- Time: `O(n * log(k))`
 - Space: `O(k)`
