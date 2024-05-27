@@ -10,10 +10,6 @@ tags:
 - Array
 date: 2022-09-23 17:11 +0900
 ---
-## Introduction
-This is a typical backtracking problem. Normally, a depth-first search works well.
-For the backtracking problem, how to get the state back to previous one is important.
-The solution here uses a special character as visited status and set it back when the process goes back.
 
 ## Problem Description
 > Given an `m x n` grid of characters `board` and a string `word`, return true if word exists in the grid.
@@ -57,7 +53,11 @@ Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "
 Output: false
 ```
 
-## Analysis
+## How to Solve
+This is a typical backtracking problem. Normally, a depth-first search works well.
+For the backtracking problem, how to get the state back to previous one is important.
+The solution here uses a special character as visited status and set it back when the process goes back.
+
 Since it is a backtracking problem, the depth-first approach is used here.
 As a visited state management, a special character '#' is used. 
 Save the current character on the board to make it back later.
@@ -65,6 +65,58 @@ Set the special character to the cell and go deeper recursion with the suffix of
 When the suffix becomes empty, all character in the give word is found.
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+class WordSearch {
+public:
+    bool exist(vector<vector<char>>& board, string word) {
+        int m = board.size(), n = board[0].size();
+
+        function<bool(int, int, int)> dfs = [&](int row, int col, int idx) {
+            if (idx == word.size()) return true;
+            if (row < 0 || row >= m || col < 0 || col >= n || board[row][col] != word[idx]) return false;
+
+            char cur = board[row][col];
+            board[row][col] = '\0';
+
+            bool down = dfs(row + 1, col, idx + 1);
+            bool up = dfs(row - 1, col, idx + 1);
+            bool right = dfs(row, col + 1, idx + 1);
+            bool left = dfs(row, col - 1, idx + 1);
+            if (down || up || right || left) return true;
+
+            board[row][col] = cur;
+            return false;
+        };
+
+        for (int i = 0; i < m; ++i) {
+            for (int j = 0; j < n; ++j) {
+                if (dfs(i, j, 0)) return true;
+            }
+        }
+
+        return false;
+    }
+};
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class WordSearch:
     def exist(self, board: List[List[str]], word: str) -> bool:
@@ -89,6 +141,16 @@ class WordSearch:
                     return True
         return False
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
 - Time: `O(n * 3 ^ k)` -- n: number of cells, k: length of the word, 3: one of four directions is where it comes from
