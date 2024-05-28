@@ -2,6 +2,8 @@
   items:
     - name: Analyze User Website Visit Pattern
       link: /algo/sorting_and_searching/2022-09-09-analyze-user-website-visit-pattern
+    - name: Count Number of Rectangles Containing Each Point
+      link: /algo/sorting_and_searching/2024-05-28-count-number-of-rectangles-containing-each-point
     - name: Divide Intervals Into Minimum Number of Groups
       link: /algo/sorting_and_searching/2022-09-21-divide-intervals-into-minimum-number-of-groups
     - name: Earliest Possible Day of Full Bloom
