@@ -24,3 +24,7 @@ toc: true
 - SQL
 - JavaScript/TypeScript
 - C++
+
+## Resume
+
+[Resume]({{ site.url }}/assets/pdf/YokoHaradaResume.pdf)
