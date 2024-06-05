@@ -325,7 +325,7 @@ mutation register {
 ```
 If the user is successfully registered, a tokenized signed Global ID will be returned.
 
-<img src="{{ site.url }}/assets/img/insomnia-register-query.jpeg" alt="img: insomnia user register query">
+<img src="/assets/img/insomnia-register-query.jpeg" alt="img: insomnia user register query">
 
 The next is a login mutation.
 ```graphql
@@ -344,7 +344,7 @@ mutation login {
 ```
 The login mutation also returns a tokenized signed Global ID.
 
-<img src="{{ site.url }}/assets/img/insomnia-login-query.jpeg" alt="img: insomnia user login query">
+<img src="/assets/img/insomnia-login-query.jpeg" alt="img: insomnia user login query">
 
 The post create mutation needs HTTP header to complete successfully.
 So, let's try without the token in the HTTP header to see it will fail.
@@ -367,7 +367,7 @@ mutation post {
 
 As expected, it failed without the token in the HTTP header
 
-<img src="{{ site.url }}/assets/img/insomnia-post-failed.jpeg" alt="img: insomnia failed post query">
+<img src="/assets/img/insomnia-post-failed.jpeg" alt="img: insomnia failed post query">
 
 Then, set Authorization HTTP request header with the token returned from register or login mutation.
 
@@ -377,7 +377,7 @@ Authorization: Token BAh7CEkiCGdpZAY6BkVUSSIsZ2lk.......
 
 Now, it succeeds.
 
-<img src="{{ site.url }}/assets/img/insomnia-post-with-header.jpeg" alt="img: insomnia post with header">
+<img src="/assets/img/insomnia-post-with-header.jpeg" alt="img: insomnia post with header">
 
 
 ### Code

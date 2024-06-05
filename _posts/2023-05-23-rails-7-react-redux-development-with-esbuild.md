@@ -280,7 +280,7 @@ As defined in `Procfile.dev`, we need Rails server and esbuild with watch option
 The `bin/dev` command does that.
 If everything goes well, the counter app below shows up at http://localhost:3000/ .
 
-<img src="{{ site.url }}/assets/img/react-redux-counter-app.jpeg" alt="img: react redux counter app">
+<img src="/assets/img/react-redux-counter-app.jpeg" alt="img: react redux counter app">
 
 
 ### Code

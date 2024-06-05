@@ -232,8 +232,8 @@ At the same time, the cookie and session are returned.
 If we look at the terminal where Rails is running, "Can't verify CSRF token authenticity." should be spotted among the
 bunch of outputs.
 
-<img src="{{ site.url }}/assets/img/postman-schema-fetch.jpeg" alt="img: postman schema fetch">
-<img src="{{ site.url }}/assets/img/postman-schema-fetch-cookie-session.jpeg" alt="img: postman schema fetch cookie session">
+<img src="/assets/img/postman-schema-fetch.jpeg" alt="img: postman schema fetch">
+<img src="/assets/img/postman-schema-fetch-cookie-session.jpeg" alt="img: postman schema fetch cookie session">
 
 The userLogin mutation looks like below:
 ```graphql
@@ -255,8 +255,8 @@ Write the mutation and click "Send" button.
 Again, we'll see "Can't verify CSRF token authenticity." on the terminal, but get the CSRF-TOKEN cookie and session
 in the HTTP response header.
 
-<img src="{{ site.url }}/assets/img/postman-login-query.jpeg" alt="img: postman login query">
-<img src="{{ site.url }}/assets/img/postman-login-query-cookie-session.jpeg" alt="img: postman login query cookie session">
+<img src="/assets/img/postman-login-query.jpeg" alt="img: postman login query">
+<img src="/assets/img/postman-login-query-cookie-session.jpeg" alt="img: postman login query cookie session">
 
 The next step is to make posts or users query.
 For example, posts query looks like below:
@@ -276,9 +276,9 @@ The token can be seen in the login response's header, so copy and paste it to th
 Also, make sure the session is set in the cookie.
 Write the query and click "Send" button.
 
-<img src="{{ site.url }}/assets/img/postman-posts-query-x-csrf-token.jpeg" alt="img: postman posts query x-csrf token">
-<img src="{{ site.url }}/assets/img/postman-posts-query-session.jpeg" alt="img: postman posts query session">
-<img src="{{ site.url }}/assets/img/postman-posts-query.jpeg" alt="img: postman posts query">
+<img src="/assets/img/postman-posts-query-x-csrf-token.jpeg" alt="img: postman posts query x-csrf token">
+<img src="/assets/img/postman-posts-query-session.jpeg" alt="img: postman posts query session">
+<img src="/assets/img/postman-posts-query.jpeg" alt="img: postman posts query">
 
 Let's see CSRF verification failure.
 Click check box on the left of X-CSRF-TOKEN to deactivate. The header won't be sent.
@@ -286,7 +286,7 @@ Now we see ActionController::InvalidAuthenticityToken exception.
 On the terminal where Rails is running, "Can't verify CSRF token authenticity." appears again.
 That means the exception strategy is working.
 
-<img src="{{ site.url }}/assets/img/postman-posts-query-failure.jpeg" alt="img: postman posts query failure">
+<img src="/assets/img/postman-posts-query-failure.jpeg" alt="img: postman posts query failure">
 
 Lastly, let's try postCreate mutation.
 The mutation looks like below:
@@ -311,11 +311,11 @@ in addition to X-CSRF-TOKEN and session.
 Previously tried userLogin mutation gave us those three values already. Set those to the request header.
 Make sure the session is attached in the cookie if the GraphQL client is not Postman.
 
-<img src="{{ site.url }}/assets/img/postman-create-post-headers.jpeg" alt="img: postman create post headers">
+<img src="/assets/img/postman-create-post-headers.jpeg" alt="img: postman create post headers">
 
 Write the mutation query and click "Send" button.
 
-<img src="{{ site.url }}/assets/img/postman-create-post-query.jpeg" alt="img: postman create post query">
+<img src="/assets/img/postman-create-post-query.jpeg" alt="img: postman create post query">
 
 The new post was successfully created.
 

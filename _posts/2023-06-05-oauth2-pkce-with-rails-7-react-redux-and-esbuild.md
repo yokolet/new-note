@@ -379,16 +379,16 @@ export const getTwitterOauthUrl = (): string => {
 
 The button looks like below:
 
-<img src="{{ site.url }}/assets/img/oauth-pkce-login-button.jpeg" alt="img: oauth pkce login button">
+<img src="/assets/img/oauth-pkce-login-button.jpeg" alt="img: oauth pkce login button">
 
 When a user (human) clicks the button, Twitter navigates to the login page if the user has not yet logged in.
 If the user is already logged in, this step is skipped.
 
-<img src="{{ site.url }}/assets/img/oauth-pkce-twitter-login-page.jpeg" alt="img: oauth pkce twitter login page">
+<img src="/assets/img/oauth-pkce-twitter-login-page.jpeg" alt="img: oauth pkce twitter login page">
 
 After the successful login, Twitter shows the authorize app page.
 
-<img src="{{ site.url }}/assets/img/oauth-pkce-twitter-authorize-app-page.jpeg" alt="img: oauth pkce twitter authorize app page">
+<img src="/assets/img/oauth-pkce-twitter-authorize-app-page.jpeg" alt="img: oauth pkce twitter authorize app page">
 
 When the user clicks the Authorize app button, Twitter redirects to the given redirect URI with the code as the URL parameter.
 
@@ -498,7 +498,7 @@ export function TwitterProfile() {
 ...
 ```
 
-<img src="{{ site.url }}/assets/img/oauth-pkce-user-profile.jpeg" alt="img: oauth pkce user profile">
+<img src="/assets/img/oauth-pkce-user-profile.jpeg" alt="img: oauth pkce user profile">
 
 #### Core Logic on the Server Side App
 

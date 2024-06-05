@@ -261,7 +261,7 @@ $ bin/dev
 Then go to http://localhost:3000/pages/index on the browser.
 The React app shows up.
 
-<img width="300px" src="{{ site.url }}/assets/img/rails-bun-react.jpeg" alt="img: bun + react on rails">
+<img width="300px" src="/assets/img/rails-bun-react.jpeg" alt="img: bun + react on rails">
 
 ### References
 - [https://bun.sh/docs](https://bun.sh/docs)

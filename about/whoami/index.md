@@ -27,4 +27,4 @@ toc: true
 
 ## Resume
 
-[Resume]({{ site.url }}/assets/pdf/YokoHaradaResume.pdf)
+[Resume](/assets/pdf/YokoHaradaResume.pdf)

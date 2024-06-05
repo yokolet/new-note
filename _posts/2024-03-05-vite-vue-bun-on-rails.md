@@ -295,7 +295,7 @@ $ bin/dev
 Open http://localhost:3000/ on a browser.
 The webpage below should show up.
 
-<img width="500px" src="{{ site.url }}/assets/img/vite_vue_rails.jpeg" alt="img: vite + vue on rails">
+<img width="500px" src="/assets/img/vite_vue_rails.jpeg" alt="img: vite + vue on rails">
 
 Try editing `app/frontend/App.vue` and `app/frontend/components/HelloWorld.vue` and
 verify HMR (Hot Module Replacement) is working.
