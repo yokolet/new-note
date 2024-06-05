@@ -19,10 +19,11 @@ description: >- # this means to ignore newlines until "baseurl:"
   Blog site mostly for programming topics.
 baseurl: "" # the subpath of your site, e.g. /blog
 domain: yokolet.com
-url: https://yokolet.github.io
+url: https://yokolet.com
 twitter_username: yokolet
 github_username:  yokolet
-google_analytics: UA-761764-8
+#google_analytics: UA-761764-8
+google_analytics: G-WWDGEJ9Y9L
 
 # Build settings
 markdown: kramdown
