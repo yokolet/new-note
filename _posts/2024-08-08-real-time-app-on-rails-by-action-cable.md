@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Real-time App on Rails by Active Cable
+title: Real-time App on Rails by Action Cable
 hero_height: is-small
 date: 2024-08-08 23:27 +0900
 ---
