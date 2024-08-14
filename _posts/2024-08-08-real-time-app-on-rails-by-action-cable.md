@@ -4,7 +4,7 @@ title: Real-time App on Rails by Action Cable
 hero_height: is-small
 date: 2024-08-08 23:27 +0900
 ---
-The previous blog post, [WebSocket on Rails by Action Cable](/2024/08/03/websocket-on-rails-by-activecable.html),
+The previous blog post, [WebSocket on Rails by Action Cable](/2024/08/03/websocket-on-rails-by-action-cable.html),
 focused on WebSocket as a protocol. As in the previous post, by default, Rails app responds to WebSocket connection
 requests without any hassle. However, other than connecting and sending ping frames, it doesn't do anything.
 This blog post focuses on an application side and explains how we can create a full-duplex, bidirectional app.
