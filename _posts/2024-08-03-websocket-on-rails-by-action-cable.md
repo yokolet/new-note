@@ -1,6 +1,6 @@
 ---
 layout: post
-title: WebSocket on Rails by Active Cable
+title: WebSocket on Rails by Action Cable
 hero_height: is-small
 date: 2024-08-03 00:10 +0900
 ---

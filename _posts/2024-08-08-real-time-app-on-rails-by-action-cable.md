@@ -73,6 +73,7 @@ $ rails new action-cable-chat --rc=./.railsrc
 So that the root path shows Vue.js page, create a mount point.
 
 ```bash
+$ cd action-cable-chat
 $ bin/rails g controller home index
 ```
 
@@ -98,7 +99,6 @@ Since the app uses Vue.js on the frontend side, `vite_rails` gem should be insta
 Try below:
 
 ```bash
-$ cd action-cable-chat
 $ bundle add vite_rails
 $ bundle exec vite install
 ```
@@ -254,7 +254,7 @@ Everything of frontend is here. The above Vue component does:
 - Creates a consumer using `createConsumer` function provided by Rails' actioncable package. \
   By default, WebSocket is mounted on `/cable`, so the URL to WebSocket is used to an argument of `createConsumer`.
 - Creates a channel by subscribing to the channel, `ChatChannel`. \
-  The channel name on Rails side is a snake case of `chat_channel`, while a camel case of `ChatChannel` on JavaScript side.
+  The channel name is a channel class name on Rails side, so it is a camel case of ChatChannel.
 - At the same time, implements `received` function to update the `messages` value when a new message comes in.
 - Calls `addNewMessage` function when something is typed in the input box and hit enter. \
   The function hits channel's perform function to send the message to `speak` method defined in ChatChannel class on the server side.
@@ -368,4 +368,4 @@ We can create more interesting real-time applications by Action Cable.
 - Action Cable Hello World With Rails 7: [https://blog.dennisokeeffe.com/blog/2022-02-28-action-cable-hello-world-with-rails-7](https://blog.dennisokeeffe.com/blog/2022-02-28-action-cable-hello-world-with-rails-7)
 - Creating a Chat Using Rails' Action Cable: [https://www.pluralsight.com/resources/blog/guides/creating-a-chat-using-rails-action-cable](https://www.pluralsight.com/resources/blog/guides/creating-a-chat-using-rails-action-cable)
 - Getting more comfortable with Action Cable: [https://medium.com/craft-academy/getting-more-comfortable-with-action-cable-2b4bc758c57f](https://medium.com/craft-academy/getting-more-comfortable-with-action-cable-2b4bc758c57f)
-
+- Deconstructing Action Cable: [https://stanko.io/deconstructing-action-cable-DC7F33OsjGmK](https://stanko.io/deconstructing-action-cable-DC7F33OsjGmK)
