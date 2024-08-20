@@ -4,7 +4,7 @@ title: Real-time App on Rails by Action Cable
 hero_height: is-small
 date: 2024-08-08 23:27 +0900
 ---
-The previous blog post, [WebSocket on Rails by Action Cable](/2024/08/03/websocket-on-rails-by-action-cable.html),
+The previous blog post, [WebSocket on Rails by Action Cable](/2024/08/02/websocket-on-rails-by-action-cable.html),
 focused on WebSocket as a protocol. As in the previous post, by default, Rails app responds to WebSocket connection
 requests without any hassle. However, other than connecting and sending ping frames, it doesn't do anything.
 This blog post focuses on an application side and explains how we can create a full-duplex, bidirectional app.
@@ -357,8 +357,11 @@ WebSocket and Action Cable are not easy ideas to understand.
 However, once we do, an implementation using Rails Action Cable is not difficult.
 We can create more interesting real-time applications by Action Cable.
 
+### Comments and Discussions
 
-### references
+GitHub Discussions: [Real-time App on Rails by Action Cable #9](https://github.com/yokolet/new-note/discussions/9)
+
+### References
 - GitHub Repo: [https://github.com/yokolet/action-cable-chat](https://github.com/yokolet/action-cable-chat)
 - Publisher-Subscriber Model: [https://www.baeldung.com/cs/publisher-subscriber-model](https://www.baeldung.com/cs/publisher-subscriber-model)
 - Akka: [https://akka.io/](https://akka.io/)

@@ -182,6 +182,9 @@ The risk of data breach or session hijacking would be almost zero, however, DoS 
 
 It's a good practice to specify --skip-action-cable option if the app doesn't need WebSocket.
 
+### Comments and Discussions
+
+GitHub Discussions: [WebSocket on Rails by Action Cable #10](https://github.com/yokolet/new-note/discussions/10)
 
 ### References
 
