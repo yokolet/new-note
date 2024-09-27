@@ -10,6 +10,14 @@ toc: true
 
 ## Web Application
 
+#### Tailwind Website Projects
+- [https://gitlab.com/yokolet/tailwind-website-projects](https://gitlab.com/yokolet/tailwind-website-projects)
+- Live: [https://yokolet.gitlab.io/tailwind-website-projects/](https://yokolet.gitlab.io/tailwind-website-projects/)
+- Six static websites for Tailwind CSS study
+- Vue 3, TypeScript, Vite, Tailwind CSS
+- Other technologies: Bun, Vue Router, VueUse, Google Fonts, Responsive Design
+- GitLab CI/CD
+
 #### Rainy Day Blog
 - [https://gitlab.com/yokolet/rainy-day-blog](https://gitlab.com/yokolet/rainy-day-blog)
 - Blog site web application by Ruby on Rails with Vue 3
