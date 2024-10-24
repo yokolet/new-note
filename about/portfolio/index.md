@@ -10,6 +10,14 @@ toc: true
 
 ## Web Application
 
+#### Action Cable Tic-Tac-Toe
+- [https://gitlab.com/yokolet/action-cable-tictactoe](https://gitlab.com/yokolet/action-cable-tictactoe)
+- Multi-player, multi-board, realtime Tic-Tac-Toe game application
+- Ruby on Rails, Action Cable (WebSocket), RSpec, Rails low-level caching
+- Vue 3, Pinia, TypeScript, Vite, Tailwind CSS
+- Other technologies: Responsive Design, Bun, Vue Router, VueUse, Google Fonts
+- GitLab CI/CD
+
 #### Tailwind Website Projects
 - [https://gitlab.com/yokolet/tailwind-website-projects](https://gitlab.com/yokolet/tailwind-website-projects)
 - Live: [https://yokolet.gitlab.io/tailwind-website-projects/](https://yokolet.gitlab.io/tailwind-website-projects/)
