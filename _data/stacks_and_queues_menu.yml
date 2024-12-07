@@ -2,8 +2,6 @@
   items:
     - name: Basic Calculator II
       link: /algo/stacks_and_queues/2022-09-08-basic-calculator-ii
-    - name: Buildings With an Ocean View
-      link: /algo/stacks_and_queues/2022-09-07-buildings-with-an-ocean-view
     - name: Largest Rectangle in Histogram
       link: /algo/stacks_and_queues/2022-09-07-largest-rectangle-in-histogram
     - name: Make The String Great

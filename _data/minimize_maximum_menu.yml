@@ -1,9 +1,5 @@
 - label: Algorithm / Minimize Maximum
   items:
-    - name: Cutting Ribbons
-      link: /algo/minimize_maximum/2022-07-24-minimize-maximum-cutting-ribbons
-    - name: Divide Chocolate
-      link: /algo/minimize_maximum/2022-07-22-minimize-maximum-divide-chocolate
     - name: Koko Eating Bananas
       link: /algo/minimize_maximum/2022-07-25-minimize-maximum-koko-eating-bananas
     - name: Maximum Candies Allocated to K Children
