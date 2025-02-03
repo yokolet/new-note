@@ -19,6 +19,14 @@ toc: true
 - Other technologies: Responsive Design, Bun, Vue Router, VueUse, Google Fonts
 - GitLab CI/CD
 
+#### Option Selector
+- [https://gitlab.com/yokolet/option-selector](https://gitlab.com/yokolet/option-selector)
+- Live: [https://yokolet.gitlab.io/option-selector/](https://yokolet.gitlab.io/option-selector/)
+- A complicated nested state update example. A single option change affects other options' state.
+- Vue3, TypeScript, Vite, Tailwind CSS
+- Other technologies: Vitest, Pinia, Vue Router, Responsive Design, Light/Dark mode
+- GitLab CI/CD
+
 #### Tailwind Website Projects
 - [https://gitlab.com/yokolet/tailwind-website-projects](https://gitlab.com/yokolet/tailwind-website-projects)
 - Live: [https://yokolet.gitlab.io/tailwind-website-projects/](https://yokolet.gitlab.io/tailwind-website-projects/)
