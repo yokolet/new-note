@@ -168,6 +168,11 @@ $ rake secret
 a2b30cf4d702a........
 ```
 
+> __Update__:\
+> Rails version 7.0 had the command `rake secret`. However, since Rails version 7.1,
+> the command has been changed to:\
+> `$ rails secret`
+
 Open the production.yml.enc file and copy/paste the generated secret as the value of secret_key_base.
 
 ```yaml
