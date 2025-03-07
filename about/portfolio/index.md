@@ -10,8 +10,23 @@ toc: true
 
 ## Web Application
 
+#### Rainy Days
+- GitLab: [https://gitlab.com/yokolet/rainy-days](https://gitlab.com/yokolet/rainy-days)
+- GitHub: [https://github.com/yokolet/rainy-days](https://github.com/yokolet/rainy-days)
+- Multi-user, microblog application by Ruby on Rails and Vue.js, revised version of Rainy Day Blog
+- OAuth2 Authorization Code Flow or PKCE(Proof Key for Code Exchange) by Google, GitHub and GitLab for a user authentication
+- GraphQL API for blog posts and comments
+    - (backend) GraphQL Ruby, (frontend) Vue Apollo
+- Technologies on the backend
+    - Rails 8, PostgreSQL, RSpec, Vite Ruby, nested comments
+- Technologies on the frontend
+    - Vue.js 3, Composition API, Vite, Bun, TypeScript, Vue Router, Pinia, Tailwind CSS, Responsive Design, Light/Dark mode
+- GitLab CI/CD
+- Docker
+
 #### Action Cable Tic-Tac-Toe
-- [https://gitlab.com/yokolet/action-cable-tictactoe](https://gitlab.com/yokolet/action-cable-tictactoe)
+- GitLab: [https://gitlab.com/yokolet/action-cable-tictactoe](https://gitlab.com/yokolet/action-cable-tictactoe)
+- GitHub: [https://github.com/yokolet/action-cable-tictactoe](https://github.com/yokolet/action-cable-tictactoe)
 - Live: [https://action-cable-tictactoe-2fbbd874419e.herokuapp.com/](https://action-cable-tictactoe-2fbbd874419e.herokuapp.com/)
 - Multi-player, multi-board, realtime Tic-Tac-Toe game application
 - Ruby on Rails, Action Cable (WebSocket), RSpec, Rails low-level caching
@@ -20,7 +35,8 @@ toc: true
 - GitLab CI/CD
 
 #### Option Selector
-- [https://gitlab.com/yokolet/option-selector](https://gitlab.com/yokolet/option-selector)
+- GitLab: [https://gitlab.com/yokolet/option-selector](https://gitlab.com/yokolet/option-selector)
+- GitHub: [https://github.com/yokolet/option-selector](https://github.com/yokolet/option-selector)
 - Live: [https://yokolet.gitlab.io/option-selector/](https://yokolet.gitlab.io/option-selector/)
 - A complicated nested state update example. A single option change affects other options' state.
 - Vue3, TypeScript, Vite, Tailwind CSS
@@ -28,7 +44,8 @@ toc: true
 - GitLab CI/CD
 
 #### Tailwind Website Projects
-- [https://gitlab.com/yokolet/tailwind-website-projects](https://gitlab.com/yokolet/tailwind-website-projects)
+- GitLab: [https://gitlab.com/yokolet/tailwind-website-projects](https://gitlab.com/yokolet/tailwind-website-projects)
+- GitHub: [https://github.com/yokolet/tailwind-website-projects](https://github.com/yokolet/tailwind-website-projects)
 - Live: [https://yokolet.gitlab.io/tailwind-website-projects/](https://yokolet.gitlab.io/tailwind-website-projects/)
 - Six static websites for Tailwind CSS study
 - Vue 3, TypeScript, Vite, Tailwind CSS
@@ -36,13 +53,14 @@ toc: true
 - GitLab CI/CD
 
 #### Rainy Day Blog
-- [https://gitlab.com/yokolet/rainy-day-blog](https://gitlab.com/yokolet/rainy-day-blog)
+- GitLab: [https://gitlab.com/yokolet/rainy-day-blog](https://gitlab.com/yokolet/rainy-day-blog)
+- GitHub: [https://github.com/yokolet/rainy-day-blog](https://github.com/yokolet/rainy-day-blog)
 - Blog site web application by Ruby on Rails with Vue 3
 - OAuth2 PKCE (Authorization Code Flow with Proof Key for Code Exchange) for a user authentication
 - GraphQL for a blog post API
   - (backend) GraphQL Ruby, (frontend) Vue Apollo
 - Others on the backend
-  - PostgrSQL, Redis, RSpec, Vite Ruby
+  - PostgreSQL, Redis, RSpec, Vite Ruby
 - Others on the frontend
   - Vite, Bun, Composition API, Vue Router, Pinia, Tailwind CSS, Daisy UI
 
