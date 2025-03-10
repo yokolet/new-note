@@ -22,8 +22,7 @@ date: 2024-05-24 22:31 +0900
 > Constraints:
 > - `1 <= s.length, t.length <= 10**5`
 > - `s` and `t` consist only of lowercase English letters.
->
-> [https://leetcode.com/problems/append-characters-to-string-to-make-subsequence/](https://leetcode.com/problems/append-characters-to-string-to-make-subsequence/)
+
 
 ## Examples
 ```
@@ -102,7 +101,19 @@ public:
 
 {% tab solution Ruby %}
 ```ruby
-
+# @param {String} s
+# @param {String} t
+# @return {Integer}
+def append_characters(s, t)
+    m, n, i, j = s.length, t.length, 0, 0
+    while i < m && j < n
+      if s[i] == t[j]
+        j += 1
+      end
+      i += 1
+    end
+    n - j
+end
 ```
 {% endtab %}
 
