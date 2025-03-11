@@ -31,8 +31,7 @@ date: 2023-01-20 11:48 +0900
 > - `recipes[i], ingredients[i][j], and supplies[k]` consist only of lowercase English letters.
 > - All the values of `recipes` and `supplies` combined are unique.
 > - Each `ingredients[i]` does not contain any duplicate values.
->
-> [https://leetcode.com/problems/find-all-possible-recipes-from-given-supplies/](https://leetcode.com/problems/find-all-possible-recipes-from-given-supplies/)
+
 
 ## Examples
 ```
@@ -156,7 +155,48 @@ class FindAllPossibleRecipesFromGivenSupplies:
 
 {% tab solution Ruby %}
 ```ruby
+# @param {String[]} recipes
+# @param {String[][]} ingredients
+# @param {String[]} supplies
+# @return {String[]}
+def find_all_recipes(recipes, ingredients, supplies)
+  graph, indegrees = build_graph(recipes, ingredients)
+  indegrees = search(graph, indegrees, supplies)
+  indegrees.filter {|child, v| recipes.include?(child) && v == 0}.keys
+end
 
+def build_graph(recipes, ingredients)
+  graph, indegrees = {}, {}
+  recipes.zip(ingredients).each do |child, parents|
+    indegrees[child] ||= 0
+    parents.each do |parent|
+      graph[parent] ||= Set.new
+      graph[parent] << child
+      indegrees[child] += 1
+    end
+  end
+  [graph, indegrees]
+end
+
+def search(graph, indegrees, supplies)
+  queue = []
+  supplies.each do |supply|
+    if indegrees[supply] == nil
+      queue << supply
+      indegrees[supply] ||= 0
+      graph[supply] ||= Set.new
+    end
+  end
+  while queue.any?
+    cur = queue.shift
+    next if !graph.has_key?(cur)
+    graph[cur].each do |child|
+      indegrees[child] -= 1
+      queue << child if indegrees[child] == 0
+    end
+  end
+  indegrees
+end
 ```
 {% endtab %}
 
