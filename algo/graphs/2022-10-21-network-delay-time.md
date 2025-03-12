@@ -11,11 +11,6 @@ tags:
 - Graph
 date: 2022-10-21 20:59 +0900
 ---
-## Introduction
-This problem can be solved using simple DFS or BFS.
-However, Dijkstra works well.
-Additionally, the problem needs a data structure to save a sum of weight (delay time) to each node.
-Among those weight, maximum is the answer since Dijkstra finds shortest paths.
 
 ## Problem Description
 > You are given a network of `n` nodes, labeled from `1 to n`. You are also given `times`, a list of travel times as
@@ -33,8 +28,7 @@ Among those weight, maximum is the answer since Dijkstra finds shortest paths.
 > - `u[i] != v[i]`
 > - `0 <= w[i] <= 100`
 > - All the pairs `(u[i], v[i])` are unique. (i.e., no multiple edges.)
->
-> [https://leetcode.com/problems/network-delay-time/](https://leetcode.com/problems/network-delay-time/)
+
 
 ## Examples
 ```
@@ -56,13 +50,42 @@ Output: -1
 ```
 
 ## Analysis
+
+Typically, this kind of problem is solved by Dijkstra since it asks the shortest path with positive weights.
+Additionally, the problem needs a data structure to save a sum of weight (delay time) to each node.
+
 The first step is to create a graph with edge weights.
-The second step is to traverse a graph using Dijkstra algorithm.
+The second step is to traverse a graph using Dijkstra algorithm for Python.
 The edge weight sum is a sorting key. The queue (heap) has tuples of weight sum and node.
 While traversing, it saves the shortest path's sum of weights to each node.
 In the end, the maximum of weights is the minimum time delay.
 
+Ruby solution takes a Bellman-Ford approach since Ruby doesn't have heap (or priority queue) in the standard library.
+
+
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class NetworkDelayTime:
     def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
@@ -87,6 +110,52 @@ class NetworkDelayTime:
         traverse()
         return max(path.values()) if len(path) == n else -1
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+# @param {Integer[][]} times
+# @param {Integer} n
+# @param {Integer} k
+# @return {Integer}
+def network_delay_time(times, n, k)
+  graph = build_graph(times, n)
+  traverse(graph, n, k)
+end
+
+def build_graph(times, n)
+  graph = {}
+  (1..n).each do |i|
+    graph[i] = []
+  end
+  times.each do |(s, d, w)|
+    graph[s] << [d, w]
+  end
+  graph
+end
+
+def traverse(graph, n, k)
+  infinity = (1 << 64) - 1
+  distance = Array.new(n + 1, infinity)
+  distance[k] = 0
+  distance[0] = 0
+  queue = [[k, 0]]
+  while queue.any?
+    cur_n, cur_w = queue.shift
+    graph[cur_n].each do |(d, w)|
+      if cur_w + w < distance[d]
+        distance[d] = cur_w + w
+        queue << [d, cur_w + w]
+      end
+    end
+  end
+  distance.any?(infinity) ? -1 : distance.max
+end
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
 - Time: `O(n + e * log(n))` -- n: number of vertices, e: number of edges
