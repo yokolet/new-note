@@ -9,11 +9,6 @@ tags:
 - String
 date: 2022-11-04 14:20 +0900
 ---
-## Introduction
-Since the problem asks reversing vowels only, the two pointers approach works well.
-Starting from leftmost and rightmost characters, increment or decrement indices until those come to the vowel.
-Swap two vowels, then increment the left pointer and decrement the right pointer.
-When the left exceeds the right, we can get the answer.
 
 ## Problem Description
 > Given a string `s`, reverse only all the vowels in the string and return it.
@@ -23,8 +18,7 @@ When the left exceeds the right, we can get the answer.
 > Constraints:
 > - `1 <= s.length <= 3 * 10**5`
 > - `s` consist of printable ASCII characters.
->
-> [https://leetcode.com/problems/reverse-vowels-of-a-string/](https://leetcode.com/problems/reverse-vowels-of-a-string/)
+
 
 ## Examples
 ```
@@ -40,14 +34,35 @@ Output: "leotcede"
 ```
 
 ## Analysis
-The solution here took the two pointers approach.
-Initialize left and right pointers with leftmost and rightmost indices.
-Python doesn't allow assigning the character in a string, so the input string is converted to an array.
-Increment the left and decrement the right until those point vowels.
-Swap vowel characters and increment/decrement indicies.
-When the left exceeds the right, the character array holds the answer.
+Since the problem asks reversing vowels only, the two pointers approach works well.
+Starting from leftmost and rightmost characters, increment or decrement indices until those hit the vowel.
+Swap two vowels, then increment the left pointer and decrement the right pointer.
+When the left exceeds the right, we can get the answer.
+
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class ReverseVowelsOfAString:
     def reverseVowels(self, s: str) -> str:
@@ -64,6 +79,35 @@ class ReverseVowelsOfAString:
                 right -= 1
         return ''.join(ss)
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+# @param {String} s
+# @return {String}
+def reverse_vowels(s)
+  chars, sz = s.chars, s.size
+    left, right = 0, chars.length - 1
+    while left < right
+      while left < sz && !"aeiouAEIOU".include?(chars[left])
+        left += 1
+      end
+      while right >= 0 && !"aeiouAEIOU".include?(chars[right])
+        right -= 1
+      end
+      if left < right
+        chars[left], chars[right] = chars[right], chars[left]
+        left += 1
+        right -= 1
+      end
+    end
+    chars.join
+end
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
 - Time: `O(n)`
