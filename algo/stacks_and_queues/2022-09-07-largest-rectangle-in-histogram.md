@@ -8,11 +8,6 @@ tags:
 - Monotonic Stack
 date: 2022-09-07 22:21 +0900
 ---
-## Introduction
-
-A couple of approaches exist to solve this problem such as two pointers or divide and conquer.
-The monotonically increasing stack is another solution.
-Using stack, this problem can be solved by `O(n)` performance.
 
 ## Problem Description
 > Given an array of integers `heights` representing the histogram's bar height
@@ -21,8 +16,7 @@ Using stack, this problem can be solved by `O(n)` performance.
 > Constraints:
 > - `1 <= heights.length <= 10**5`
 > - `0 <= heights[i] <= 10**4`
->
-> [https://leetcode.com/problems/largest-rectangle-in-histogram/](https://leetcode.com/problems/largest-rectangle-in-histogram/)
+
 
 ## Examples
 ```
@@ -61,13 +55,38 @@ Explanation: one of below.
 
 ## Analysis
 
-The monotonically increasing stack is a good data structure here.
-The stack will save indices.
+A couple of approaches exist to solve this problem such as two pointers or divide and conquer.
+The monotonically increasing stack is another approach.
+Using stack, this problem can be solved by `O(n)` performance.
+
+The monotonic stack saves indices.
 If a smaller height comes in, indices of taller heights are popped out.
-While popping out, calculate the area and update max area.
+While popping out, calculate the area and update the max area.
 At the end, process remaining indices in the stack.
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class LargestRectangleInHistogram:
     def largestRectangleArea(self, heights: List[int]) -> int:
@@ -85,6 +104,34 @@ class LargestRectangleInHistogram:
             max_area = max(max_area, w * h)
         return max_area
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+# @param {Integer[]} heights
+# @return {Integer}
+def largest_rectangle_area(heights)
+  max_area, stack, n = 0, [], heights.size
+  n.times do |i|
+    while stack.any? && heights[stack[-1]] > heights[i]
+      h = heights[stack.pop]
+      w = stack.size == 0 ? i : i - stack[-1] -1
+      max_area = [max_area, w * h].max
+    end
+    stack.append(i)
+  end
+  while stack.any?
+    h = heights[stack.pop]
+    w = stack.empty? ? n : n - stack[-1] - 1
+    max_area = [max_area, w * h].max
+  end
+  max_area
+end
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
 - Time: `O(n)`
