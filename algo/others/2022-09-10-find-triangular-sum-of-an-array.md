@@ -9,10 +9,6 @@ tags:
 - Array
 date: 2022-09-10 23:16 +0900
 ---
-## Introduction
-This is a math problem.
-The brute force solution barely passes all tests, however, it is very slow.
-To fins an optimal solution, some mathematical insight is required.
 
 ## Problem Description
 > You are given a 0-indexed integer array `nums,` where `nums[i]` is a digit between 0 and 9 (inclusive).
@@ -29,8 +25,7 @@ To fins an optimal solution, some mathematical insight is required.
 > Constraints:
 > - `1 <= nums.length <= 1000`
 > - `0 <= nums[i] <= 9`
->
-> [https://leetcode.com/problems/find-triangular-sum-of-an-array/](https://leetcode.com/problems/find-triangular-sum-of-an-array/)
+
 
 ## Examples
 ```
@@ -52,14 +47,40 @@ Output: 5
 ```
 
 ## Analysis
+This is a math problem.
+The brute force solution in Python barely passes all tests, however, it is very slow.
+To finds an optimal solution, some mathematical insight is required.
 
-Here, the mathematical, optimal solution and brute force solutions are.
 The mathematical solution is from combination idea:
 each number is multiplied by the number of routes to the top.
 In the solution, this number is "`cnk`".
 Additionally, the calculation uses: `(a % 10 + b % 10) % 10 = (a + b) % 10`.
 
+For a reference, Python has a brute force solution as well.
+
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class FindTriangularSumOfAnArrayMath:
     def triangularSum(self, nums: List[int]) -> int:
@@ -82,6 +103,26 @@ class FindTriangularSumOfAnArrayBF:
             prev = cur
         return prev[0]
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+# @param {Integer[]} nums
+# @return {Integer}
+def triangular_sum(nums)
+  n = nums.length - 1
+  total, cnk = 0, 1
+  nums.each_with_index do |num, i|
+    total += num * cnk
+    total %= 10
+    cnk = cnk * (n - i) / (i + 1)
+  end
+  total
+end
+```
+{% endtab %}
+
+{% endtabs %}
 
 ## Complexities
 - Time: `O(n)` -- math solution, `O(n^2)` -- brute force solution
