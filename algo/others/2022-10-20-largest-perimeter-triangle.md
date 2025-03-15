@@ -10,10 +10,6 @@ tags:
 - Greedy
 date: 2022-10-20 15:12 +0900
 ---
-## Introduction
-This problem requires a bit of trigonometry knowledge.
-To form a triangle, 3 sides a, b, c should have the length, a + b > c, where c is the longest side.
-Sort the given array, then find 3 largest values which satisfy the condition.
 
 ## Problem Description
 > Given an integer array `nums`, return the largest perimeter of a triangle with a non-zero area, formed from three of
@@ -22,8 +18,7 @@ Sort the given array, then find 3 largest values which satisfy the condition.
 > Constraints:
 > - `3 <= nums.length <= 10**4`
 > - `1 <= nums[i] <= 10**6`
->
-> [https://leetcode.com/problems/largest-perimeter-triangle/](https://leetcode.com/problems/largest-perimeter-triangle/)
+
 
 ## Examples
 ```
@@ -34,20 +29,43 @@ Output: 5
 
 ```
 Example 2
-Input: nums = [1,2,1]
+Input: nums = [1,2,1,10]
 Output: 0
 ```
 
 ## Analysis
-The first step is to sort the given array.
-The examples show an array of just 3 elements, but as in the constraints, the array is much longer.
-To find 3 sides, shift 3 values one by one.
-This is because `a + b > c` is a condition.
-If the current longest doesn't satisfy the condition, the longest should be switched to the next longest.
-Without changing the longest c, changing a or b might work.
-However, a + b + c must be the largest. So, shifting values one by one gives us the answer.
+
+This problem requires trigonometry knowledge.
+To form a triangle, 3 sides a, b, c should have the length, a + b > c, where c is the longest side.
+The first step is to sort the given array, and test three elements from the biggest ones as `c`, `b`, `a`.
+If the condition, `a + b > c`, satisfies, the perimeter is `a + b + c`.
+If not, shift the values to take the next biggest ones since the biggest value is too big to form a triangle.
+After repeating this, we'll get the answer.
+
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class LargestPerimeterTriangle:
     def largestPerimeter(self, nums: List[int]) -> int:
@@ -57,6 +75,26 @@ class LargestPerimeterTriangle:
                 return nums[i] + nums[i + 1] + nums[i + 2]
         return 0
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+# @param {Integer[]} nums
+# @return {Integer}
+def largest_perimeter(nums)
+  nums.sort!
+  (nums.length-3).downto(0) do |i|
+    if nums[i] + nums[i+1] > nums[i+2]
+      return [nums[i], nums[i+1], nums[i+2]].sum
+    end
+  end
+  0
+end
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
 - Time: `O(nlog(n))`
