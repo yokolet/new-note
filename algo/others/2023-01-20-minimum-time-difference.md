@@ -17,8 +17,7 @@ date: 2023-01-20 16:33 +0900
 > Constraints:
 > - `2 <= timePoints.length <= 2 * 10**4`
 > - `timePoints[i]` is in the format "HH:MM".
->
-> [https://leetcode.com/problems/minimum-time-difference/](https://leetcode.com/problems/minimum-time-difference/)
+
 
 ## Examples
 ```
@@ -101,7 +100,21 @@ class MinimumTimeDifference:
 
 {% tab solution Ruby %}
 ```ruby
+# @param {String[]} time_points
+# @return {Integer}
+def find_min_difference(time_points)
+  points = time_points.map {|time| time_to_mins(time)}.sort
+  points << points[0] + 24 * 60
+  min_diff = 24 * 60 + 1
+  (1...points.size).each do |i|
+    min_diff = [min_diff, points[i] - points[i - 1]].min
+  end
+  min_diff
+end
 
+def time_to_mins(s)
+  s[0, 2].to_i * 60 + s[3, 2].to_i
+end
 ```
 {% endtab %}
 
