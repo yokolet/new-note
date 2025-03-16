@@ -10,14 +10,6 @@ tags:
 - Matrix
 date: 2022-11-01 22:03 +0900
 ---
-## Introduction
-At a glance, this problem looks weird.
-However, it is relatively simple problem solved by the depth-first search.
-When two adjacent cell has the same value (same direction of slanted boards), the ball goes through.
-Otherwise, the ball gets stuck.
-From row to row, the ball goes left and right by the value of the cell.
-When the value is negative, the ball goes to left. If it is positive, the ball goes to right.
-When the row comes to the bottom, return the column where the ball is located.
 
 ## Problem Description
 > You have a 2-D grid of size `m x n` representing a box, and you have `n` balls. The box is open on the top and
@@ -40,8 +32,7 @@ When the row comes to the bottom, return the column where the ball is located.
 > - `n == grid[i].length`
 > - `1 <= m, n <= 100`
 > - `grid[i][j]` is 1 or -1.
->
-> [https://leetcode.com/problems/where-will-the-ball-fall/](https://leetcode.com/problems/where-will-the-ball-fall/)
+
 
 ## Examples
 ```
@@ -70,17 +61,39 @@ Output: [0,1,2,3,4,-1]
 ```
 
 ## Analysis
-To make the ball to go through all rows, the grid needs 2 columns at least.
-So, if the grid column size is 1, return an array of -1.
-In the dfs function, the base case is the current row becomes the grid size.
-Return column when it hits the base case.
-If not, get the new column value by simply adding the grid value.
-Conveniently, the grid values are defined like that.
-If the new column goes outside of the grid or adjacent grid values are not the same, return -1.
-If all are ok, go deeper with the next row and new column.
+
+At a glance, this problem looks weird.
+However, it is a relatively simple problem solved by the depth-first search.
+When two adjacent cells have the same value (same direction of slanted boards), the ball goes through.
+Otherwise, the ball gets stuck. Also, if the grid column size is 1, the ball gets stuck.
+From row to row, the ball goes left and right by the value of the cell.
+When the value is negative, the ball goes to left. If it is positive, the ball goes to right.
+When the row comes to the bottom, return the column where the ball is located as a result of DFS.
 
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class WhereWillTheBallFall:
     def findBall(self, grid: List[List[int]]) -> List[int]:
@@ -99,6 +112,35 @@ class WhereWillTheBallFall:
             result.append(dfs(0, i))
         return result
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+# @param {Integer[][]} grid
+# @return {Integer[]}
+def find_ball(grid)
+  rows, cols = grid.size, grid[0].size
+  return [-1] if cols == 1
+  result = []
+  cols.times.each do |col|
+    result << dfs(grid, rows, cols, 0, col)
+  end
+  result
+end
+
+def dfs(grid, rows, cols, row, col)
+  return col if row == rows
+  new_col = col + grid[row][col]
+  if new_col < 0 || new_col >= cols || grid[row][col] != grid[row][new_col]
+    return -1
+  end
+  return dfs(grid, rows, cols, row + 1, new_col)
+end
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
 - Time: `O(m*n)`
