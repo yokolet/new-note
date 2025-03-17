@@ -24,8 +24,7 @@ date: 2023-01-13 22:17 +0900
 >
 > Constraints:
 > - `1 <= n <= 10**5`
->
-> [https://leetcode.com/problems/student-attendance-record-ii/](https://leetcode.com/problems/student-attendance-record-ii/)
+
 
 ## Examples
 ```
@@ -138,7 +137,22 @@ class StudentAttendanceRecordTwo:
 
 {% tab solution Ruby %}
 ```ruby
+MOD = 10 ** 9 + 7
 
+# @param {Integer} n
+# @return {Integer}
+def check_record(n)
+  a_no_l, a_1_l, a_2_l, no_a_no_l, no_a_1_l, no_a_2_l = 1, 0, 0, 1, 1, 0
+  (1...n).each do |i|
+    tmp = [a_no_l, a_1_l, a_2_l, no_a_no_l, no_a_1_l, no_a_2_l].sum % MOD
+    a_1_l, a_2_l = a_no_l, a_1_l
+    a_no_l = tmp
+    tmp = [no_a_no_l, no_a_1_l, no_a_2_l].sum % MOD
+    no_a_1_l, no_a_2_l = no_a_no_l, no_a_1_l
+    no_a_no_l = tmp
+  end
+  [a_no_l, a_1_l, a_2_l, no_a_no_l, no_a_1_l, no_a_2_l].sum % MOD
+end
 ```
 {% endtab %}
 
