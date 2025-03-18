@@ -23,8 +23,7 @@ date: 2022-09-23 17:11 +0900
 > - `1 <= m, n <= 6`
 > - `1 <= word.length <= 15`
 > - `board` and `word` consists of only lowercase and uppercase English letters.
->
-> [https://leetcode.com/problems/word-search/](https://leetcode.com/problems/word-search/)
+
 
 ## Examples
 ```
@@ -56,13 +55,12 @@ Output: false
 ## How to Solve
 This is a typical backtracking problem. Normally, a depth-first search works well.
 For the backtracking problem, how to get the state back to previous one is important.
-The solution here uses a special character as visited status and set it back when the process goes back.
+The solution here uses a special character "#" as visited status and set it back when the process goes back.
 
-Since it is a backtracking problem, the depth-first approach is used here.
-As a visited state management, a special character '#' is used. 
-Save the current character on the board to make it back later.
-Set the special character to the cell and go deeper recursion with the suffix of the given word.
-When the suffix becomes empty, all character in the give word is found.
+The loop goes the given word one by one. When the process reaches the last character of the given word, the loop finishes.
+
+Ruby solution has two tweaks since the same Ruby solution as C++ or Python gets TLE.
+Especially, the character frequency based word reversing preprocess works well to cut down DFS loops.
 
 ## Solution
 
@@ -145,7 +143,51 @@ class WordSearch:
 
 {% tab solution Ruby %}
 ```ruby
+# @param {Character[][]} board
+# @param {String} word
+# @return {Boolean}
+def exist(board, word)
+  return false unless word.chars.all? { |char| board.flatten.include?(char) }
+  word = preprocess(board, word)
+  return false if word.nil?
+  m, n, l = board.size, board[0].size, word.size
+  board.size.times do |row|
+    board[0].size.times do |col|
+      return true if dfs(board, m, n, l, word, row, col, 0)
+    end
+  end
+  false
+end
 
+def preprocess(board, word)
+  board_freq = Hash.new(0)
+  board.each do |row|
+    row.each do |c|
+      board_freq[c] += 1
+    end
+  end
+  word_freq = word.chars.tally
+  word_freq.each do |c, count|
+    return nil if board_freq[c] < count
+  end
+  board_freq[word[0]] > board_freq[word[-1]] ? word.reverse : word
+end
+
+def dfs(board, m, n, l, word, row, col, idx)
+  return true if idx == l
+  return false if row < 0 || col < 0 || row >= m || col >= n || board[row][col] != word[idx]
+
+  cur = board[row][col]
+  board[row][col] = "#"
+
+  up = dfs(board, m, n, l, word, row - 1, col, idx + 1)
+  left = dfs(board, m, n, l, word, row, col - 1, idx + 1)
+  right = dfs(board, m, n, l, word, row, col + 1, idx + 1)
+  down = dfs(board, m, n, l, word, row + 1, col, idx + 1)
+
+  board[row][col] = cur
+  up || left || right || down
+end
 ```
 {% endtab %}
 
