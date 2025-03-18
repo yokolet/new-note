@@ -24,8 +24,7 @@ date: 2022-09-10 20:52 +0900
 > Constraints:
 > - `3 <= s.length <= 10**5`
 > - `s[i]` is either `'0'` or `'1'`.
->
-> [https://leetcode.com/problems/number-of-ways-to-select-buildings/](https://leetcode.com/problems/number-of-ways-to-select-buildings/)
+
 
 ## Examples
 ```
@@ -132,7 +131,23 @@ class NumberOfWaysToSelectBuildings:
 
 {% tab solution Ruby %}
 ```ruby
-
+# @param {String} s
+# @return {Integer}
+def number_of_ways(s)
+  n0, n1, n01, n10, total = 0, 0, 0, 0, 0
+  s.each_char do |c|
+    if c == "1"
+      n1 += 1
+      n01 += n0
+      total += n10
+    else
+      n0 += 1
+      n10 += n1
+      total += n01
+    end
+  end
+  total
+end
 ```
 {% endtab %}
 
