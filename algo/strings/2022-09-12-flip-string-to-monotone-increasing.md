@@ -9,9 +9,6 @@ tags:
 - Dynamic Programming
 date: 2022-09-12 20:57 +0900
 ---
-## Introduction
-The string related problems often need much consideration to figure out how to solve.
-Once it becomes clear, the solution might be very simple.
 
 ## Problem Description
 > A binary string is monotone increasing if it consists of some number of 0's (possibly none),
@@ -23,8 +20,7 @@ Once it becomes clear, the solution might be very simple.
 > Constraints:
 > - `1 <= s.length <= 10**5`
 > - `s[i]` is either '0' or '1'
->
-> [https://leetcode.com/problems/flip-string-to-monotone-increasing/](https://leetcode.com/problems/flip-string-to-monotone-increasing/)
+
 
 ## Examples
 ```
@@ -49,6 +45,9 @@ Explanation: We flip to get 00000000.
 ```
 
 ## Analysis
+The string related problems often need much consideration to figure out how to solve.
+Once it becomes clear, the solution might be very simple.
+
 Let's start from a length 2. Valid patters are:
 ```
 2: 00, 01, 11
@@ -57,11 +56,48 @@ Let's start from a length 2. Valid patters are:
 ...
 ```
 How many ones are there -- this is a key to solve the problem.
-While going over the string one by one, count up ones if the character is '1'.
+While going over the string one by one, count up ones.
 Count up flips and count down ones if the character is '0' and ones are not 0.
 That's all to find the answer.
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var minFlipsMonoIncr = function(s) {
+    let flips = 0, ones = 0
+    for (const c of s) {
+        if (c === "1") {
+            ones++
+        } else if (ones > 0) {
+            flips++
+            ones--
+        }
+    }
+    return flips
+}
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class FlipStringToMonotoneIncreasing:
     def minFlipsMonoIncr(self, s: str) -> int:
@@ -75,6 +111,29 @@ class FlipStringToMonotoneIncreasing:
                 ones -= 1
         return flips
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+# @param {String} s
+# @return {Integer}
+def min_flips_mono_incr(s)
+  flips, ones = 0, 0
+  s.each_char do |c|
+    if c == "1"
+      ones += 1
+    elsif ones > 0
+      flips += 1
+      ones -= 1
+    end
+  end
+  flips
+end
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
 - Time: `O(n)`
