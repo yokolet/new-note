@@ -9,12 +9,6 @@ tags:
 - String
 date: 2022-10-20 13:43 +0900
 ---
-## Introduction
-The problems, "Integer to Roman" and "Roman to Integer," are well-known pair.
-Both, tricky conversions are one less to the next order.
-In this case, the problem is a conversion from integer to string.
-Defining the mapping is a key to solve the problem.
-The keys include one less numbers such that 900, 400, 90 ... etc as well.
 
 ## Problem Description
 > Roman numerals are represented by seven different symbols: `I, V, X, L, C, D and M`.
@@ -45,8 +39,7 @@ The keys include one less numbers such that 900, 400, 90 ... etc as well.
 >
 > Constraints:
 > - `1 <= num <= 3999`
->
-> [https://leetcode.com/problems/integer-to-roman/](https://leetcode.com/problems/integer-to-roman/)
+
 
 ## Examples
 ```
@@ -71,37 +64,91 @@ Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 ```
 
 ## Analysis
-The solution here defines the integer to string mapping.
-To handle one less to the next order numbers such as 900 or 400, the mapping includes those mappings as well.
-Then, divide the number by a key from bigger to smaller. In the next iteration, the number is a reminder.
+The problems, "Integer to Roman" and "Roman to Integer," are well-known pair.
+Both, tricky conversions are one less to the next order.
+In this case, the problem is a conversion from integer to string.
+Defining the mapping is a key to solve the problem.
+The keys include one less numbers such that 900, 400, 90 ... etc as well.
+
+Divide the number by a factor from bigger to smaller. In the next iteration, the number is a reminder.
 The quotient times mapped string should be added to the result, which gives us the answer.
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+/**
+ * @param {number} num
+ * @return {string}
+ */
+var intToRoman = function(num) {
+  const factors = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
+  const romans = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
+  let result = ""
+  factors.forEach((f, i) => {
+    if (num < f) {
+      return
+    }
+    let q = (num - num % f) / f
+    num %= f
+    result += romans[i].repeat(q)
+  })
+  return result
+}
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class IntegerToRoman:
     def intToRoman(self, num: int) -> str:
-        i2s = {
-            1000: 'M',
-            900: 'CM',
-            500: 'D',
-            400: 'CD',
-            100: 'C',
-            90: 'XC',
-            50: 'L',
-            40: 'XL',
-            10: 'X',
-            9: 'IX',
-            5: 'V',
-            4: 'IV',
-            1: 'I',
-        }
+        factors = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
+        romans = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
         result = ''
-        for o in sorted(i2s.keys(), reverse=True):
-            q, num = divmod(num, o)
-            result += i2s[o] * q
+        for i, f in enumerate(factors):
+            if num < f:
+                continue
+            q, num = divmod(num, f)
+            result += romans[i] * q
         return result
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+# @param {Integer} num
+# @return {String}
+def int_to_roman(num)
+  factors = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
+  romans = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
+  result = ''
+  factors.each_with_index do |f, i|
+    next if num < f
+    q, num = num.divmod(f)
+    result += romans[i] * q
+  end
+  result
+end
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
-- Time: `O(n)` -- n: the number of keys in the mapping table
+- Time: `O(1)` -- the number of iteration is 13, constant
 - Space: `O(1)`
