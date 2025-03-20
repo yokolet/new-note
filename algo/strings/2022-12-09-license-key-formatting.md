@@ -22,8 +22,7 @@ date: 2022-12-09 14:11 +0900
 > - `1 <= s.length <= 10**5`
 > - `s` consists of English letters, digits, and dashes '-'.
 > - `1 <= k <= 10**4`
->
-> [https://leetcode.com/problems/license-key-formatting/](https://leetcode.com/problems/license-key-formatting/)
+
 
 ## Examples
 ```
@@ -88,7 +87,25 @@ public:
 
 {% tab solution JavaScript %}
 ```js
-
+/**
+ * @param {string} s
+ * @param {number} k
+ * @return {string}
+ */
+var licenseKeyFormatting = function(s, k) {
+    const chars = s.replaceAll("-", "")
+    let result = ""
+    let count = 0
+    for (let i = chars.length - 1; i >= 0; --i) {
+        result = chars[i].toUpperCase() + result
+        count++
+        if (count == k) {
+            result = "-" + result
+            count = 0
+        }
+    }
+    return result[0] === "-" ? result.slice(1) : result
+}
 ```
 {% endtab %}
 
@@ -112,7 +129,24 @@ class LicenseKeyFormatting:
 
 {% tab solution Ruby %}
 ```ruby
-
+# @param {String} s
+# @param {Integer} k
+# @return {String}
+def license_key_formatting(s, k)
+  result = ""
+  count = 0
+  (s.length - 1).downto(0) do |i|
+    if s[i] != "-"
+      result = s[i].upcase + result
+      count += 1
+    end
+    if count == k
+      result = "-" + result
+      count = 0
+    end
+  end
+  result[0] == "-" ? result[1..-1] : result
+end
 ```
 {% endtab %}
 
