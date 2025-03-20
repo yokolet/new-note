@@ -25,8 +25,7 @@ date: 2024-05-25 12:25 +0900
 > - `1 <= forbidden.length <= 10**5`
 > - `1 <= forbidden[i].length <= 10`
 > - `forbidden[i]` consists only of lowercase English letters.
->
-> [https://leetcode.com/problems/length-of-the-longest-valid-substring/](https://leetcode.com/problems/length-of-the-longest-valid-substring/)
+
 
 ## Examples
 ```
@@ -60,7 +59,7 @@ Also, it limits the loop by `min(i + 9, right)` to avoid the time limit error.
 
 {% tab solution C++ %}
 ```cpp
-class LengthOfLongestValidSubstring {
+class LengthOfTheLongestValidSubstring {
 public:
     int longestValidSubstring(string word, vector<string>& forbidden) {
         unordered_set<string> seen(forbidden.begin(), forbidden.end());
@@ -90,7 +89,27 @@ public:
 
 {% tab solution JavaScript %}
 ```js
-
+/**
+ * @param {string} word
+ * @param {string[]} forbidden
+ * @return {number}
+ */
+var longestValidSubstring = function(word, forbidden) {
+    const seen = new Set(forbidden)
+    let maxLen = 0
+    let right = word.length
+    for (let i = word.length - 1; i >= 0; --i) {
+        for (let j = i; j <= Math.min(i + 9, right); ++j) {
+            let cur = word.substring(i, j + 1)
+            if (seen.has(cur)) {
+                right = j
+                break
+            }
+        }
+        maxLen = Math.max(maxLen, right - i)
+    }
+    return maxLen
+}
 ```
 {% endtab %}
 
@@ -102,7 +121,25 @@ public:
 
 {% tab solution Ruby %}
 ```ruby
-
+# @param {String} word
+# @param {String[]} forbidden
+# @return {Integer}
+def longest_valid_substring(word, forbidden)
+  seen = Set.new(forbidden)
+  max_len = 0
+  right = word.length
+  (word.length - 1).downto(0) do |idx|
+    idx.upto([idx + 9, right].min) do |j|
+      cur = word.slice(idx, j - idx + 1)
+      if seen.include?(cur)
+        right = j
+        break
+      end
+    end
+    max_len = [max_len, right - idx].max
+  end
+  max_len
+end
 ```
 {% endtab %}
 
