@@ -10,12 +10,6 @@ tags:
 - Hash Table
 date: 2022-09-08 22:14 +0900
 ---
-## Introduction
-The given dictionary letters' order matters.
-Hash table is a good data structure to save the letter order.
-However, in case of Python, string's index or find method can do the same,
-so Python doesn't need Hash table.
-Other than that, this problem is a simple string traversal of a pair.
 
 ## Problem Description
 > In an alien language, surprisingly, they also use English lowercase letters,
@@ -30,8 +24,7 @@ Other than that, this problem is a simple string traversal of a pair.
 > - `1 <= words[i].length <= 20`
 > - `order.length == 26`
 > - All characters in `words[i]` and `order` are English lowercase letters.
->
-> [https://leetcode.com/problems/verifying-an-alien-dictionary/](https://leetcode.com/problems/verifying-an-alien-dictionary/)
+
 
 ## Examples
 ```
@@ -53,14 +46,66 @@ Output: false
 ```
 
 ## Analysis
+This problem is a simple string traversal of a pair.
 Take two words pair one by one.
 Find the index of the first mismatch characters.
-The previous word's mismatch character index should be smaller if the string is valid.
-We should consider one more case.
-If one is a substring of another, the previous word's length should be shorter.
-If the conditions don't meet, given word list is invalid.
+The given character order matters.
+The previous word's mismatch character index should be smaller in the given order string to be valid.
+The edge case is: one is a substring of another.
+In this case, the previous word's length should be shorter.
+
+If all conditions meet, the dictionary is valid.
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+/**
+ * @param {string[]} words
+ * @param {string} order
+ * @return {boolean}
+ */
+var isAlienSorted = function(words, order) {
+    let prev = words.shift()
+    for (let i = 0; i < words.length; ++i) {
+        cur = words[i]
+        if (compareTwoWords(prev, cur, order) < 0) return false
+        prev = cur
+    }
+    return true
+};
+
+const compareTwoWords = (prev, cur, order) => {
+    let idx = 0
+    while (idx < Math.min(prev.length, cur.length)) {
+        if (prev.charAt(idx) !== cur.charAt(idx)) {
+            break
+        }
+        if (idx === Math.min(prev.length, cur.length) - 1) {
+            return cur.length - prev.length
+        }
+        idx++
+    }
+    return order.indexOf(cur[idx]) - order.indexOf(prev[idx])
+}
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class VerifyingAnAlianDictionary:
     def isAlienSorted(self, words: List[str], order: str) -> bool:
@@ -78,6 +123,40 @@ class VerifyingAnAlianDictionary:
             prev = cur
         return True
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+# @param {String[]} words
+# @param {String} order
+# @return {Boolean}
+def is_alien_sorted(words, order)
+  prev = words.shift
+  words.each do |cur|
+    if compare_two_words(prev, cur, order) < 0
+      return false
+    end
+    prev = cur
+  end
+  true
+end
+
+def compare_two_words(prev, cur, order)
+  idx = 0
+  while idx < [prev.size, cur.size].min
+    break if prev[idx] != cur[idx]
+    if idx == [prev.size, cur.size].min - 1
+      return cur.size - prev.size
+    end
+    idx += 1
+  end
+  order.index(cur[idx]) - order.index(prev[idx])
+end
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
 - Time: `O(n)` -- n is a total number of characters in words
