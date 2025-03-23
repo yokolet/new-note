@@ -10,15 +10,6 @@ tags:
 - String
 date: 2022-10-24 16:18 +0900
 ---
-## Introduction
-As the title says, this is a sliding window problem.
-What makes this problem difficult is, the result substring is not just an anagram of the given pattern.
-There might be extra characters between necessary characters.
-The result substring length might be much longer than the pattern string.
-The solution here uses Hash table to check exactly what characters are in the substring.
-Also, the missing number of characters to form the pattern.
-When the window slides to the right, make it increment for the leftmost character of the window.
-At the same time, start and end indices are updated.
 
 ## Problem Description
 > Given two strings `s` and `t` of lengths `m` and `n` respectively, return the minimum window substring of `s`
@@ -34,8 +25,7 @@ At the same time, start and end indices are updated.
 > - `n == t.length`
 > - `1 <= m, n <= 10**5`
 > - `s` and `t` consist of uppercase and lowercase English letters.
->
-> [https://leetcode.com/problems/minimum-window-substring/](https://leetcode.com/problems/minimum-window-substring/)
+
 
 ## Examples
 ```
@@ -60,22 +50,84 @@ Explanation: Both 'a's from t must be included in the window.
 Since the largest window of s only has one 'a', return empty string.
 ```
 
-## Analysis
-The solution starts from counting the pattern character and save it to the hash table.
+## How to Solve
+
+As the title says, this is a sliding window problem.
+What makes this problem difficult is, the result substring is not just an anagram of the given pattern.
+There might be extra characters between pattern characters.
+Because of that, the result substring length might be much longer than the pattern.
+The solution here uses a Hash table to save character counts of the given pattern, and a
+missing number of characters to form the pattern.
+
 While sliding the window, if the pattern table has enough characters of the current character,
 missing count is decremented.
-At this point, here's a tweak -- decrement the character in the hash table.
-Python's collections.Counter is behave like collections.defaultdict(int).
-If the character doesn't exist in the table, still it can be decremented.
+At this point, a tweak is added -- decrement the character in the hash table.
+The character count table might have a negative count.
+
 When the missing becomes zero, all necessary characters are found.
 It's time to find the start index.
 For this purpose, negative counts in the table is used.
-While the counts in the table is negative, the start index can be shift to the right.
+While the counts in the table is negative, the start index is shift to the right.
 Again, the counts are incremented as the pointer shifts.
 When the start index is found, update the start and end indicies.
 The answer is the substring from start to end indicies.
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {string}
+ */
+var minWindow = function(s, t) {
+    const counts = [...t].reduce((acc, c) => {
+        acc[c] = (acc[c] || 0) + 1
+        return acc
+    }, {})
+    let missing = t.length
+    let left = 0, right = 0
+    let k = 0
+    for (let i = 0; i < s.length; ++i) {
+        let c = s[i]
+        let j = i + 1
+        counts[c] |= 0
+        if (counts[c] > 0) missing--
+        counts[c]--
+        if (missing === 0) {
+            while (k < j && (counts[s[k]] || 0) < 0) {
+                counts[s[k]]++
+                k++
+            }
+            counts[s[k]]++
+            missing++
+            if (right == 0 || right -left > j - k) {
+                [left, right] = [k, j]
+            }
+            k++
+        }
+    }
+    return s.substring(left, right)
+};
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class MinimumWindowSubstring:
     def minWindow(self, s: str, t: str) -> str:
@@ -97,6 +149,43 @@ class MinimumWindowSubstring:
                 i += 1
         return s[start:end]
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+# @param {String} s
+# @param {String} t
+# @return {String}
+def min_window(s, t)
+  counts = t.chars.tally
+  missing = t.length
+  left, right = 0, 0
+  i = 0
+  s.each_char.each_with_index do |c, idx|
+    counts[c] ||= 0
+    missing -= 1 if counts[c] > 0
+    counts[c] -= 1
+    if missing == 0
+      j = idx + 1
+      while i < j && (counts[s[i]] || 0) < 0
+        counts[s[i]] += 1
+        i += 1
+      end
+      counts[s[i]] += 1
+      missing += 1
+      if right == 0 || right - left > j - i
+        left, right = i, j
+      end
+      i += 1
+    end
+  end
+  s[left...right]
+end
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
 - Time: `O(m + n)` -- m: length of s, n: length of t
