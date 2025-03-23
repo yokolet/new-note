@@ -44,7 +44,8 @@ Output: 2
 Explanation: We flip to get 00000000.
 ```
 
-## Analysis
+## How to Solve
+
 The string related problems often need much consideration to figure out how to solve.
 Once it becomes clear, the solution might be very simple.
 

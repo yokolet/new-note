@@ -46,7 +46,8 @@ Input: nums = [5]
 Output: 5
 ```
 
-## Analysis
+## How to Solve
+
 This is a math problem.
 The brute force solution in Python barely passes all tests, however, it is very slow.
 To finds an optimal solution, some mathematical insight is required.

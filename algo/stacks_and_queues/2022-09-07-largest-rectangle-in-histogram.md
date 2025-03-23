@@ -53,7 +53,7 @@ Explanation: one of below.
     0 1          0 1
 ```
 
-## Analysis
+## How to Solve
 
 A couple of approaches exist to solve this problem such as two pointers or divide and conquer.
 The monotonically increasing stack is another approach.

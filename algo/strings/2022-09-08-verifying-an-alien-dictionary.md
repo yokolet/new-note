@@ -45,7 +45,8 @@ Input: words = ["apple","app"], order = "abcdefghijklmnopqrstuvwxyz"
 Output: false
 ```
 
-## Analysis
+## How to Solve
+
 This problem is a simple string traversal of a pair.
 Take two words pair one by one.
 Find the index of the first mismatch characters.

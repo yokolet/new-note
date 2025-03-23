@@ -60,7 +60,7 @@ Input: grid = [[1,1,1,1,1,1],[-1,-1,-1,-1,-1,-1],[1,1,1,1,1,1],[-1,-1,-1,-1,-1,-
 Output: [0,1,2,3,4,-1]
 ```
 
-## Analysis
+## How to Solve
 
 At a glance, this problem looks weird.
 However, it is a relatively simple problem solved by the depth-first search.

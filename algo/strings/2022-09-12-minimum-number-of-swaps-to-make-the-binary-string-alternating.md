@@ -46,7 +46,7 @@ Input: s = "1110"
 Output: -1
 ```
 
-## Analysis
+## How to Solve
 
 This problem has only two kinds of letters, so greedy approach would work.
 At first, count zeros and ones.

@@ -37,7 +37,8 @@ Output: 10
 Explanation: The strings that can be formed are "hello" and "world" so the answer is 5 + 5 = 10.
 ```
 
-## Analysis
+## How to Solve
+
 This is a kind of anagram problem.
 A hash table is a good data structure to solve this problem.
 Two types of hash tables are necessary: one for the given chars, another for each word.

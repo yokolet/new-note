@@ -45,7 +45,8 @@ Input: boxTypes = [[5,10],[2,5],[4,7],[3,9]], truckSize = 10
 Output: 91
 ```
 
-## Analysis
+## How to Solve
+
 This problem might look like dynamic programming.
 However, the input array's order does not  matter.
 Sorting and greedy approach works.

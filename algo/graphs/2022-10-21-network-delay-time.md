@@ -49,7 +49,7 @@ Input: times = [[1,2,1]], n = 2, k = 2
 Output: -1
 ```
 
-## Analysis
+## How to Solve
 
 Typically, this kind of problem is solved by Dijkstra since it asks the shortest path with positive weights.
 Additionally, the problem needs a data structure to save a sum of weight (delay time) to each node.

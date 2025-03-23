@@ -33,7 +33,8 @@ Input: s = "leetcode"
 Output: "leotcede"
 ```
 
-## Analysis
+## How to Solve
+
 Since the problem asks reversing vowels only, the two pointers approach works well.
 Starting from leftmost and rightmost characters, increment or decrement indices until those hit the vowel.
 Swap two vowels, then increment the left pointer and decrement the right pointer.
