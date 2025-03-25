@@ -29,8 +29,7 @@ date: 2022-10-06 14:33 +0900
 > - `1 <= timestamp <= 10**7`
 > - All the timestamps `timestamp` of `set` are strictly increasing.
 > - At most `2 * 10**5` calls will be made to `set` and `get`.
->
-> [https://leetcode.com/problems/time-based-key-value-store/](https://leetcode.com/problems/time-based-key-value-store/)
+
 
 ## Examples
 ```

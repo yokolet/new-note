@@ -26,8 +26,7 @@ date: 2023-01-22 21:49 +0900
 > - `0 <= val <= 10**9`
 > - `0 <= snap_id <` (the total number of times we call snap())
 > - At most 5 * 10**4 calls will be made to `set`, `snap`, and `get`.
->
-> [https://leetcode.com/problems/snapshot-array/](https://leetcode.com/problems/snapshot-array/)
+
 
 ## Examples
 ```
@@ -95,7 +94,57 @@ public:
 
 {% tab solution JavaScript %}
 ```js
+/**
+ * @param {number} length
+ */
+var SnapshotArray = function(length) {
+    this.values = Array.from({ length }).map((_) => new Object())
+    this._id = 0
+}
 
+/**
+ * @param {number} index
+ * @param {number} val
+ * @return {void}
+ */
+SnapshotArray.prototype.set = function(index, val) {
+    this.values[index][this._id] = val
+}
+
+/**
+ * @return {number}
+ */
+SnapshotArray.prototype.snap = function() {
+    this._id++
+    return this._id - 1
+}
+
+/**
+ * @param {number} index
+ * @param {number} snap_id
+ * @return {number}
+ */
+SnapshotArray.prototype.get = function(index, snap_id) {
+    const search = (ary, value) => {
+        let left = 0, right = ary.length - 1
+        while (left <= right) {
+            let mid = Math.floor((left + right) / 2)
+            if (ary[mid] > value) {
+                right = mid - 1
+            } else if (ary[mid] < value) {
+                left = mid + 1
+            } else {
+                return mid + 1
+            }
+        }
+        return left
+    }
+
+    if (this.values[index][snap_id]) return this.values[index][snap_id]
+    const ids = Object.keys(this.values[index]).toSorted((a, b) => a - b)
+    const idx = search(ids, snap_id)
+    return idx === 0 ? 0 : this.values[index][ids[idx - 1]]
+}
 ```
 {% endtab %}
 
@@ -125,7 +174,66 @@ class SnapshotArray:
 
 {% tab solution Ruby %}
 ```ruby
+class SnapshotArray
 
+=begin
+    :type length: Integer
+=end
+    def initialize(length)
+        @values = Array.new(length).map {|e| Hash.new }
+        @_id = 0
+    end
+
+
+=begin
+    :type index: Integer
+    :type val: Integer
+    :rtype: Void
+=end
+    def set(index, val)
+        @values[index][@_id] = val
+        nil
+    end
+
+
+=begin
+    :rtype: Integer
+=end
+    def snap()
+        @_id += 1
+        @_id - 1
+    end
+
+
+=begin
+    :type index: Integer
+    :type snap_id: Integer
+    :rtype: Integer
+=end
+    def get(index, snap_id)
+        return @values[index][snap_id] if @values[index][snap_id]
+        ids = @values[index].keys.sort
+        idx = search(ids, snap_id)
+        idx == 0 ? 0 : @values[index][ids[idx - 1]]
+    end
+
+    private
+
+    def search(ary, value)
+        left, right = 0, ary.length - 1
+        while left <= right
+            mid = (left + right) / 2
+            if ary[mid] > value
+                right = mid - 1
+            elsif ary[mid] < value
+                left = mid + 1
+            else
+                return mid + 1
+            end
+        end
+        left
+    end
+end
 ```
 {% endtab %}
 
