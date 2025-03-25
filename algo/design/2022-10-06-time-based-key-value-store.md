@@ -111,7 +111,51 @@ public:
 
 {% tab solution JavaScript %}
 ```js
+var TimeMap = function() {
+    this.values = {}
+    this.timestamps = {}
+}
 
+/**
+ * @param {string} key
+ * @param {string} value
+ * @param {number} timestamp
+ * @return {void}
+ */
+TimeMap.prototype.set = function(key, value, timestamp) {
+    if (!this.values[key]) this.values[key] = []
+    this.values[key].push(value)
+    if (!this.timestamps[key]) this.timestamps[key] = []
+    this.timestamps[key].push(timestamp)
+}
+
+/**
+ * @param {string} key
+ * @param {number} timestamp
+ * @return {string}
+ */
+TimeMap.prototype.get = function(key, timestamp) {
+    const search = (ary, value) => {
+        let left = 0, right = ary.length - 1
+        while (left <= right) {
+            let mid = Math.floor((left + right) / 2)
+            if (ary[mid] > value) {
+                right = mid - 1
+            } else if (ary[mid] < value) {
+                left = mid + 1
+            } else {
+                return mid + 1
+            }
+        }
+        return left
+    }
+
+    if (!(key in this.values)) return ""
+    const ts = this.timestamps[key]
+    if (!ts || timestamp < ts[0]) return ""
+    const idx = search(ts, timestamp)
+    return idx < 1 ? "" : this.values[key][idx - 1]
+}
 ```
 {% endtab %}
 
@@ -142,7 +186,56 @@ class TimeMap:
 
 {% tab solution Ruby %}
 ```ruby
+class TimeMap
+    def initialize()
+        @values = {}
+        @timestamps = {}
+    end
 
+
+=begin
+    :type key: String
+    :type value: String
+    :type timestamp: Integer
+    :rtype: Void
+=end
+    def set(key, value, timestamp)
+        @values[key] ||= []
+        @values[key] << value
+        @timestamps[key] ||= []
+        @timestamps[key] << timestamp
+        nil
+    end
+
+
+=begin
+    :type key: String
+    :type timestamp: Integer
+    :rtype: String
+=end
+    def get(key, timestamp)
+        return "" if !@timestamps.include?(key)
+        ts = @timestamps[key]
+        return "" if ts.nil? || timestamp < ts[0]
+        idx = search(ts, timestamp)
+        idx < 1 ? "" : @values[key][idx - 1]
+    end
+
+    def search(ary, value)
+        left, right = 0, ary.length - 1
+        while left <= right
+            mid = (left + right) / 2
+            if ary[mid] > value
+                right = mid - 1
+            elsif ary[mid] < value
+                left = mid + 1
+            else
+                return mid + 1
+            end
+        end
+        left
+    end
+end
 ```
 {% endtab %}
 
