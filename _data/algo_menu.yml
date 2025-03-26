@@ -39,3 +39,6 @@
     - name: Minimize Maximum
       path: /algo/minimize_maximum
       list: minimize_maximum_menu
+    - name: Games
+      path: /algo/games
+      list: games_menu
