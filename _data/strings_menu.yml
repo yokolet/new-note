@@ -48,6 +48,8 @@
       link: /algo/strings/2022-09-27-push-dominoes
     - name: Reverse Vowels of a String
       link: /algo/strings/2022-11-04-reverse-vowels-of-a-string
+    - name: Reverse Words in a String
+      link: /algo/strings/2024-07-20-reverse-words-in-a-string
     - name: Subdomain Visit Count
       link: /algo/strings/2022-09-24-subdomain-visit-count
     - name: Sum of Prefix Scores of Strings
@@ -58,6 +60,10 @@
       link: /algo/strings/2022-09-14-total-appeal-of-a-string
     - name: Unique Email Addresses
       link: /algo/strings/2022-12-07-unique-email-addresses
+    - name: Valid Palindrome
+      link: /algo/strings/2024-07-20-valid-palindrome
+    - name: Valid Parentheses
+      link: /algo/strings/2024-08-17-valid-parentheses
     - name: Verifying an Alien Dictionary
       link: /algo/strings/2022-09-08-verifying-an-alien-dictionary
     - name: Word Ladder

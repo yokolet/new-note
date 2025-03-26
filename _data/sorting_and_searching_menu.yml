@@ -1,5 +1,7 @@
 - label: Algorithm / Sorting and Searching
   items:
+    - name: Contains Duplicate III
+      link: /algo/sorting_and_searching/2024-07-13-contains-duplicate-iii
     - name: Count Number of Rectangles Containing Each Point
       link: /algo/sorting_and_searching/2024-05-28-count-number-of-rectangles-containing-each-point
     - name: Divide Intervals Into Minimum Number of Groups
@@ -24,6 +26,8 @@
       link: /algo/sorting_and_searching/2024-05-24-merge-intervals
     - name: Minimum Cost to Connect Sticks
       link: /algo/sorting_and_searching/2022-09-13-minimum-cost-to-connect-sticks
+    - name: Number of Flowers in Full Bloom
+      link: /algo/sorting_and_searching/2024-07-14-number-of-flowers-in-full-bloom
     - name: Plates Between Candles
       link: /algo/sorting_and_searching/2022-09-10-plates-between-candles
     - name: Race Car
