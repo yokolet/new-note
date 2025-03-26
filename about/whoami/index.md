@@ -3,24 +3,28 @@ layout: page
 menubar: about_menu
 title: Who am I
 subtitle: Software Developer
-hero_image: /assets/img/sunset-beach.jpeg
+hero_image: /assets/img/frosted-pebbles.jpeg
 show_sidebar: false
 toc: true
 ---
 
 ## What I Do
-- Polyglot
+
 - Full Stack Web Development
+- Ruby on Rails
+- Vue.js / React / Tailwind CSS
 - Machine Learning
 - XML processing
 - Backend System Development & Deployment
+- Polyglot
   
 ## Languages I Use
+
+- Ruby
+- JavaScript/TypeScript
 - Python
 - Clojure/ClojureScript
-- Ruby
 - Java
 - Bash
 - SQL
-- JavaScript/TypeScript
 - C++
