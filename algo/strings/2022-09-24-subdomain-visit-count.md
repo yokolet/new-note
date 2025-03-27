@@ -10,11 +10,6 @@ tags:
 - Hash Table
 date: 2022-09-24 21:48 +0900
 ---
-## Introduction
-As the title shows, this is a counting problem.
-The hash table is a good data structure to save subdomain name and count pairs.
-While counting, the given domain name should be divided first, then concatenate next in reverse order.
-How to concatenate might need a bit of consideration.
 
 ## Problem Description
 > A website domain `"discuss.leetcode.com"` consists of various subdomains.
@@ -37,8 +32,7 @@ How to concatenate might need a bit of consideration.
 > - `cpdomain[i]` follows either the `"repi d1i.d2i.d3i"` format or the `"repi d1i.d2i"` format.
 > - `rep[i]` is an integer in the range `[1, 104]`.
 > - `d1[i], d2[i], and d3[i]` consist of lowercase English letters.
->
-> [https://leetcode.com/problems/subdomain-visit-count/](https://leetcode.com/problems/subdomain-visit-count/)
+
 
 ## Examples
 ```
@@ -53,13 +47,58 @@ Input: cpdomains = ["900 google.mail.com", "50 yahoo.com", "1 intel.mail.com", "
 Output: ["901 mail.com","50 yahoo.com","900 google.mail.com","5 wiki.org","5 org","1 intel.mail.com","951 com"]
 ```
 
-## Analysis
-Each string should be divided by a space, then dot.
-The subdomain fragments will be concatenated in reverse order: com, leetcode.com, discuss.leetcode.com.
+## How to Solve
+
+As the title shows, this is a counting problem.
+The hash table is a good data structure to save subdomain name and count pairs.
+
+The first step is to divide each string by a space, which gives us a count and domain name.
+While counting, each domain should be divided by a dot, then iterate in reverse order:
+`com, leetcode.com, discuss.leetcode.com`.
 Add count in all of concatenated subdomains.
 Finally, hash table key-value pairs should be converted to strings.
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+/**
+ * @param {string[]} cpdomains
+ * @return {string[]}
+ */
+var subdomainVisits = function(cpdomains) {
+    const domains = {}
+    cpdomains.forEach((cpdomain) => {
+        [cnt, domain] = cpdomain.split(" ")
+        cnt = parseInt(cnt)
+        const names = domain.split(".").reverse()
+        let prev = names[0]
+        for (let i = 1; i < names.length; ++i) {
+            domains[prev] = (domains[prev] || 0) + cnt
+            prev = [names[i], prev].join(".")
+        }
+        domains[prev] = (domains[prev] || 0) + cnt
+    })
+    return Object.keys(domains).map((k) => `${domains[k]} ${k}`)
+}
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class SubdomainVisitCount:
     def subdomainVisits(self, cpdomains: List[str]) -> List[str]:
@@ -75,6 +114,32 @@ class SubdomainVisitCount:
             domains[ns] += cnt
         return ['%s %s' % (v, k) for k, v in domains.items()]
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+# @param {String[]} cpdomains
+# @return {String[]}
+def subdomain_visits(cpdomains)
+  domains = Hash.new(0)
+  cpdomains.each do |cpdomain|
+    cnt, domain = cpdomain.split(" ")
+    cnt = cnt.to_i
+    names = domain.split(".").reverse
+    prev = names.shift
+    names.each do |part|
+      domains[prev] += cnt
+      prev = [part, prev].join(".")
+    end
+    domains[prev] += cnt
+  end
+  domains.map {|k, v| "#{v} #{k}"}
+end
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
 - Time: `O(n)`
