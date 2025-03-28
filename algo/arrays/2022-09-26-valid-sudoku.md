@@ -9,10 +9,6 @@ tags:
 - Matrix
 date: 2022-09-26 17:04 +0900
 ---
-## Introduction
-The idea to solve this problem is not difficult.
-Going over each horizontal, vertical and box to check values are all.
-The improvement would be how to eliminate loops and run faster.
 
 ## Problem Description
 > Determine if a `9 x 9` Sudoku board is valid.
@@ -29,8 +25,7 @@ The improvement would be how to eliminate loops and run faster.
 > - `board.length == 9`
 > - `board[i].length == 9`
 > - `board[i][j]` is a digit 1-9 or '.'.
->
-> [https://leetcode.com/problems/valid-sudoku/](https://leetcode.com/problems/valid-sudoku/)
+
 
 ## Examples
 ```
@@ -63,7 +58,11 @@ Input: board =
 Output: false
 ```
 
-## Analysis
+## How to Solve
+
+The idea to solve this problem is not difficult.
+Going over each horizontal, vertical and box while check values are all.
+
 Prepare two arrays of set for verticals and boxes, and a set for horizontal.
 The horizontal check is easy. Clear the horizontal set every time row increments.
 The vertical check is easy as well.
@@ -77,6 +76,53 @@ if duplicates are found return False immediately.
 When all could be checked, the board is valid.
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+/**
+ * @param {character[][]} board
+ * @return {boolean}
+ */
+var isValidSudoku = function(board) {
+    const vertical = Array.from({ length: 9}).map((_) => new Set())
+    const horizontal = new Set()
+    const boxes = Array.from({ length: 9}).map((_) => new Set())
+    let box_row = -1
+    for (let i = 0; i < 9; ++i) {
+        horizontal.clear()
+        if (i % 3 === 0) box_row++
+        for (let j = 0; j < 9; ++j) {
+            let c = board[i][j]
+            if (c === ".") continue
+            if (horizontal.has(c)) return false
+            horizontal.add(c)
+            if (vertical[j].has(c)) return false
+            vertical[j].add(c)
+            box_idx = box_row * 3 + Math.floor(j / 3)
+            if (boxes[box_idx].has(c)) return false
+            boxes[box_idx].add(c)
+        }
+    }
+    return true
+}
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class ValidSudoku:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
@@ -103,6 +149,38 @@ class ValidSudoku:
                 boxes[idx_box].add(c)
         return True
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+# @param {Character[][]} board
+# @return {Boolean}
+def is_valid_sudoku(board)
+  vertical = Array.new(9).map {|_| Set.new }
+  horizontal = Set.new
+  boxes, box_row = Array.new(9).map {|_| Set.new }, -1
+  9.times do |i|
+    horizontal.clear
+    box_row += 1 if i % 3 == 0
+    9.times do |j|
+      c = board[i][j]
+      next if c == "."
+      return false if horizontal.include?(c)
+      horizontal << c
+      return false if vertical[j].include?(c)
+      vertical[j] << c
+      box_idx = box_row * 3 + j / 3
+      return false if boxes[box_idx].include?(c)
+      boxes[box_idx] << c
+    end
+  end
+  true
+end
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
 - Time: `O(1)` -- double loop is 9 x 9, constant
