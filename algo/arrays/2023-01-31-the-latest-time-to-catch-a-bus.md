@@ -36,8 +36,7 @@ date: 2023-01-31 15:11 +0900
 > - `2 <= buses[i], passengers[i] <= 10**9`
 > - Each element in buses is unique.
 > - Each element in passengers is unique.
->
-> [https://leetcode.com/problems/the-latest-time-to-catch-a-bus/](https://leetcode.com/problems/the-latest-time-to-catch-a-bus/)
+
 
 ## Examples
 ```
@@ -65,7 +64,7 @@ Notice if you had arrived any later, then the 6th passenger would have taken you
 ## How to Solve
 The combination of two pointers and greedy approach is used here.
 As the problem mentions, the given arrays are not always sorted.
-The solution starts from sorting both buses and passengers arrays in an ascending order.
+The solution starts from sorting both buses and passengers arrays in the ascending order.
 Then, use one pointer for a bus and another pointer for a passenger.
 A number of passengers can be incremented as far as the count is less than the given capacity.
 The counting stops whether the passenger time becomes greater than the current bus time or the count exceeds the capacity.
@@ -76,6 +75,10 @@ It might be duplicated time to the existing passenger, but it will be checked an
 Repeat counting and setting the tentative result for all buses and passengers.
 Once all are checked, test the current result time is not the duplicated to the passengers.
 When the result time becomes unique, we find the answer.
+
+For C++ and Python, searching a value in the array function runs fast enough.
+However, Ruby and JavaScript get Time Limit Exceeded (TLE) error.
+To avoid TLE, those use a binary search.
 
 ## Solution
 
@@ -114,7 +117,44 @@ public:
 
 {% tab solution JavaScript %}
 ```js
+/**
+ * @param {number[]} buses
+ * @param {number[]} passengers
+ * @param {number} capacity
+ * @return {number}
+ */
+var latestTimeCatchTheBus = function(buses, passengers, capacity) {
+    const search = (ary, value) => {
+        let left = 0, right = ary.length - 1
+        while (left <= right) {
+            let mid = Math.floor((left + right) / 2)
+            if (ary[mid] > value) {
+                right = mid - 1
+            } else if (ary[mid] < value) {
+                left = mid + 1
+            } else {
+                return true
+            }
+        }
+        return false
+    }
 
+    buses.sort((a, b) => a - b)
+    passengers.sort((a, b) => a - b)
+    let result = 0, idx = 0
+    for (const bus of buses) {
+        let count = 0
+        while (idx < passengers.length && passengers[idx] <= bus && count < capacity) {
+            idx++
+            count++
+        }
+        result = count < capacity ? bus : passengers[idx - 1] - 1
+    }
+    while (search(passengers, result)) {
+        result--
+    }
+    return result
+}
 ```
 {% endtab %}
 
@@ -139,7 +179,41 @@ class TheLatestTimeToCatchABus:
 
 {% tab solution Ruby %}
 ```ruby
+# @param {Integer[]} buses
+# @param {Integer[]} passengers
+# @param {Integer} capacity
+# @return {Integer}
+def latest_time_catch_the_bus(buses, passengers, capacity)
+    passengers.sort!
+    result, idx = 0, 0
+    buses.sort.each do |bus|
+      count = 0
+      while idx < passengers.size && passengers[idx] <= bus && count < capacity
+        idx += 1
+        count += 1
+      end
+      result = count < capacity ? bus : passengers[idx - 1] - 1
+    end
+    while search(passengers, result)
+      result -= 1
+    end
+    result
+end
 
+def search(ary, value)
+  left, right = 0, ary.length - 1
+  while left <= right
+    mid = (left + right) / 2
+    if ary[mid] > value
+      right = mid - 1
+    elsif ary[mid] < value
+      left = mid + 1
+    else
+      return true
+    end
+  end
+  false
+end
 ```
 {% endtab %}
 
