@@ -9,10 +9,6 @@ tags:
 - Simulation
 date: 2022-09-21 14:16 +0900
 ---
-## Introduction
-This problem asks to save all calculation results after queries are performed.
-This means a simulation is the way to solve the problem.
-Considering the input array and queries might be very large, how to effectively calculate is a key.
 
 ## Problem Description
 > You are given an integer array `nums` and an array `queries` where `queries[i] = [val[i], index[i]]`.
@@ -27,8 +23,7 @@ Considering the input array and queries might be very large, how to effectively 
 > - `-10**4 <= nums[i] <= 10**4`
 > - `1 <= queries.length <= 10**4`
 > - `-10**4 <= val[i] <= 10**4`
->
-> [https://leetcode.com/problems/sum-of-even-numbers-after-queries/](https://leetcode.com/problems/sum-of-even-numbers-after-queries/)
+
 
 ## Examples
 ```
@@ -48,15 +43,58 @@ Input: nums = [1], queries = [[4,0]]
 Output: [0]
 ```
 
-## Analysis
+## How to Solve
+
+This problem asks to save all calculation results after queries are performed.
+This means a simulation is the way to solve the problem.
+Considering the input array and queries might be very large, how to effectively calculate is a key.
+
 The first step is to get input array's even number sum.
 After that, we should calculate only difference portion.
 If the value at the query index is even, subtract it from the sum since updated value might be an odd.
 If the value at the query index becomes even after operation, add it up to the sum.
 Also, update the value at index and add the sum to answer list.
-This way, we get get the answer.
+This way, we get the answer.
 
 ## Solution
+
+{% tabs solution is-boxed %}
+
+{% tab solution C++ %}
+```cpp
+
+```
+{% endtab %}
+
+{% tab solution Java %}
+```java
+
+```
+{% endtab %}
+
+{% tab solution JavaScript %}
+```js
+/**
+ * @param {number[]} nums
+ * @param {number[][]} queries
+ * @return {number[]}
+ */
+var sumEvenAfterQueries = function(nums, queries) {
+    let even_sum = nums.reduce((acc, v) => (v & 1) === 0 ? acc + v : acc, 0)
+    const result = []
+    queries.forEach(([v, idx]) => {
+        let cur_v = nums[idx], new_v = nums[idx] + v
+        if ((cur_v & 1) === 0) even_sum -= cur_v
+        if ((new_v & 1) === 0) even_sum += new_v
+        nums[idx] = new_v
+        result.push(even_sum)
+    })
+    return result
+}
+```
+{% endtab %}
+
+{% tab solution Python %}
 ```python
 class SumOfEvenNumbersAfterQueries:
     def sumEvenAfterQueries(self, nums: List[int], queries: List[List[int]]) -> List[int]:
@@ -75,6 +113,34 @@ class SumOfEvenNumbersAfterQueries:
             answer.append(even_sum)
         return answer
 ```
+{% endtab %}
+
+{% tab solution Ruby %}
+```ruby
+# @param {Integer[]} nums
+# @param {Integer[][]} queries
+# @return {Integer[]}
+def sum_even_after_queries(nums, queries)
+  even_sum = nums.reduce(0) {|acc, v| v & 1 == 0 ? acc + v : acc}
+  result = []
+  queries.each do |(v, idx)|
+    cur_v, new_v = nums[idx], nums[idx] + v
+    if cur_v & 1 == 0
+      even_sum -= cur_v
+    end
+    if new_v & 1 == 0
+      even_sum += new_v
+    end
+    nums[idx] = new_v
+    result << even_sum
+  end
+  result
+end
+```
+{% endtab %}
+
+{% endtabs %}
+
 
 ## Complexities
 - Time: `O(n)`
