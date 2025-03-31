@@ -65,7 +65,7 @@ In the end, replace '***' to the original 'R.L'.
 
 ## Solution
 ```python
-lass PushDominoes:
+class PushDominoes:
     def pushDominoes(self, dominoes: str) -> str:
         nochange = '***'
         result = ''
